@@ -5,7 +5,7 @@ export function HomePage() {
   return (
     <>
       <Helmet>
-        <title>Home Page !!!!</title>
+        <title>Home Page</title>
         <meta name="description" content="A Boilerplate application homepage" />
       </Helmet>
       <span>HomePage container</span>

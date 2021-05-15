@@ -21,11 +21,11 @@ export function App() {
   return (
     <BrowserRouter>
       <Helmet
-        titleTemplate="%s - React Boilerplate"
-        defaultTitle="React Boilerplate"
+        titleTemplate="%s - Food Arena (On-journey)"
+        defaultTitle="Food Arena (On-journey)"
         htmlAttributes={{ lang: i18n.language }}
       >
-        <meta name="description" content="A React Boilerplate application" />
+        <meta name="description" content="2020 KAIST CS374 - Design Project - Team On-journey" />
       </Helmet>
 
       <Switch>
