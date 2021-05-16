@@ -96,9 +96,7 @@ const BottomContent = styled.div`
     }
 `;
 
-export default function Card({
-
-}) {
+export default function Card() {
 
     return (
         <>
