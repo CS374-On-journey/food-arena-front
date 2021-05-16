@@ -12,6 +12,16 @@ interface MenuButtonProps {
 const Box = styled.div`
     width: 100%;
     display: flex;
+    background: transparent;
+`;
+
+const SearchBox = styled.div`
+    width: 100%;
+    display: flex;
+    background: white;
+    box-shadow: 0px 0px 40px 25px rgba(0, 0, 0, 0.16);
+    border-radius: 0 0 15px 15px;
+    align-content: center;
 `;
 
 const MenuButton = styled.div<MenuButtonProps>`
@@ -21,9 +31,9 @@ const MenuButton = styled.div<MenuButtonProps>`
     background-color: ${props => props.selected ? '#FF3061' : '#A3A3A3'};
     text-align: center;
     color: white;
-    
     & > svg {
         margin-right: 5px;
+        fill: white;
     }
 `;
 
@@ -35,12 +45,36 @@ const PartyButton = styled(MenuButton)`
     border-radius: 0 20px 0 0;
 `;
 
+const SearchInput = styled.input`
+    width: 80%;
+    border: none;
+    padding: 15px 0 15px 15px;
+    border-radius: 0 0 15px 15px;
+
+    &::placeholder {
+        color: #8a8a8a;
+    }
+`;
+
+const SearchButton = styled.button`
+    background: transparent;
+    border: none;
+    background-image: url('./icon_search.svg');
+    background-position: center;
+    background-size: 40%;
+    background-repeat: no-repeat;
+    width: 20%;
+    height: 54px;
+    
+`;
+
 export default function Tab() {
 
     const dispatch = useDispatch();
     const history = useHistory();
 
     const [menu, setMenu] = React.useState(0);
+    const [searchContent, setSearchContent] = React.useState('');
 
     return (
         <>
@@ -65,6 +99,17 @@ export default function Tab() {
                 Party
             </PartyButton>
         </Box>
+        <SearchBox>
+            <SearchInput
+                type='text'
+                value={searchContent}
+                onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                    setSearchContent(e.currentTarget.value);
+                }}
+                placeholder='Search'
+            />
+            <SearchButton/>
+        </SearchBox>
         </>
     );
 }   

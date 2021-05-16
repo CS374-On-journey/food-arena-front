@@ -13,7 +13,7 @@ const Box = styled.div`
     width: 20vw;
     height: 100vh;
     min-width: 400px;
-    padding: 15px 25px;
+    padding: 25px;
     padding-right: 75px;
     overflow: scroll;
     &::-webkit-scrollbar {
