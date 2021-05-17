@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 
 import Tab from './Tab';
 import PlaceCardList from './PlaceCardList';
+import RestaurantPopupList from './RestaurantPopupList';
 
 const Box = styled.div`
     background: transparent;
@@ -25,6 +26,7 @@ export default function LeftMenu() {
         <Box>
              <Tab/>
              <PlaceCardList/>
+             <RestaurantPopupList/>
         </Box>
         </>
     );
