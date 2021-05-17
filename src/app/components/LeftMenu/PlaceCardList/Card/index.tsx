@@ -6,6 +6,9 @@ import 'swiper/swiper.scss';
 import "swiper/components/pagination/pagination.min.css"
 import './index.css';
 
+import AiPickIndicator from 'app/components/Indicators/AiPickIndicator'
+import StarsIndicator from 'app/components/Indicators/StarsIndicator'
+
 interface PhotoProps {
     image: string;
 }
@@ -16,15 +19,16 @@ const Box = styled.div`
     flex-direction: column;
     background: white;
     box-shadow: 0px 0px 40px 25px rgba(0, 0, 0, 0.16);
-    border-radius: 15px;
-    margin-bottom: 25px;
+    border-radius: 20px;
+    margin-bottom: 15px;
 `;
 
 const Header = styled.div`
     width: 100%;
-    padding: 15px 15px 10px 15px;
+    padding: 15px 25px 5px 25px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 `;
 
 const TagList = styled.div`
@@ -34,44 +38,23 @@ const TagList = styled.div`
 const Tag = styled.div`
     color: #FF3061;
     margin-right: 15px;
-    font-size: 1rem;
-`;
-
-const AiPick = styled.div`
-    color: #CF00F1;
-    font-size: 1rem;
-    flex: display;
-    align-content: center;
-
-    & > svg {
-        margin-right: 5px;
-    }
-`;
-
-const StarRating = styled.div`
-    color: #FFB800;
-    font-size: 1rem;
-    flex: display;
-    align-content: center;
-    margin-left: 10px;
-    & > svg {
-        margin-right: 5px;
-    }
+    font-size: 9pt;
 `;
 
 const Title = styled.h3`
-    margin: 0 0 0 15px;
+    margin: 0 25px 0 25px;
 `;
 
 const SubTitle = styled.h4`
     font-weight: 400;
-    margin: 0 0 0 15px;
+    margin: 0 25px 0 25px;
+    font-size: 10pt;
 `;
 
 const Photo = styled.div<PhotoProps>`
     width: 145px;
     height: 90px;
-    border-radius: 10px;
+    border-radius: 5px;
     background-image: url(${props => props.image});
     background-size: cover;
     background-position: center;
@@ -79,16 +62,16 @@ const Photo = styled.div<PhotoProps>`
 
 const Bottom = styled.div`
     width: 100%;
-    padding: 15px;
+    padding: 10px 25px 15px 0;
     display: flex;
     justify-content: flex-end;
 `;
 
 const BottomContent = styled.div`
     color: #FF3061;
-    font-size: 0.9rem;
-    flex: display;
-    align-content: center;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
     margin-left: 15px;
     & > svg {
         fill: #FF3061;
@@ -107,18 +90,9 @@ export default function Card() {
                         <Tag>#luxury</Tag>
                     </TagList>
                     <div style={{display: 'flex', alignContent: 'center'}}>
-                        <AiPick>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="11" viewBox="0 0 17 11" fill="none">
-                            <path d="M17 0.215686L13.2222 11H8.68889H8.31111H3.77778L0 0.215686L5.7375 5.17647L8.5 0L11.2625 5.17647L17 0.215686Z" fill="#CF00F1"/>
-                        </svg>
-                            AI Pick!
-                        </AiPick>
-                        <StarRating>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="13" viewBox="0 0 14 13" fill="none">
-                            <path d="M7 0L8.5716 4.83688H13.6574L9.5429 7.82624L11.1145 12.6631L7 9.67376L2.8855 12.6631L4.4571 7.82624L0.342604 4.83688H5.4284L7 0Z" fill="#FFB800"/>
-                        </svg>
-                            4.8
-                        </StarRating>
+                        <AiPickIndicator/>
+                        <div style={{marginLeft:'5px'}}/>
+                        <StarsIndicator rating={4.8} view_number/>
                     </div>
                 </Header>
                 <Title>Wolfgang's Steakhouse</Title>
