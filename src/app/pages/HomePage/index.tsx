@@ -3,7 +3,12 @@ import { Helmet } from 'react-helmet-async';
 import LeftMenu from 'app/components/LeftMenu';
 import Map from 'app/components/Map';
 
+import { useSelector } from 'react-redux';
+import { usePlaceSlice } from 'store/place';
+import { placeSelector } from 'store/place/selectors';
+
 export function HomePage() {
+
   return (
     <>
       <Helmet>
