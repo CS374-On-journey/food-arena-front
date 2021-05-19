@@ -23,9 +23,9 @@ const slice = createSlice({
 /**
  * `actions` will be used to trigger change in the state from where ever you want
  */
-export const { actions: homepageActions } = slice;
+export const { actions: userActions } = slice;
 
-export const useHomepageSlice = () => {
+export const useUserSlice = () => {
   useInjectReducer({ key: slice.name, reducer: slice.reducer });
   return { actions: slice.actions };
 };
