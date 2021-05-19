@@ -9,9 +9,6 @@ import { placeSelector } from 'store/place/selectors';
 
 export function HomePage() {
 
-  const { actions } = usePlaceSlice();
-  const places = useSelector(placeSelector);
-
   return (
     <>
       <Helmet>

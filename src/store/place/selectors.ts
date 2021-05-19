@@ -1,11 +1,12 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { PlacesState } from './types';
+import { RootState } from 'types';
+import { initialState } from '.';
 
-export const baseSelector = (state: PlacesState) => state;
+export const baseSelector = (state: RootState) => state.place;
 
 const placeSelector = createSelector(
   baseSelector,
-  placeState => placeState,
+  placeState => placeState?.places,
 );
 
 export { placeSelector };
