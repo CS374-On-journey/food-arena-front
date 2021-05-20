@@ -1,10 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
-import Card from './Card';
-
 import { useSelector } from 'react-redux';
+
 import { usePlaceSlice } from 'store/place';
 import { placeSelector } from 'store/place/selectors';
+
+import Card from './Card';
 
 const Box = styled.div`
     width: 100%;
@@ -15,19 +16,18 @@ const Box = styled.div`
 `;
 
 export default function PlaceCardList() {
-
     const { actions } = usePlaceSlice();
     const places = useSelector(placeSelector);
 
-    console.log(places);
     return (
-        <>
-            <Box>
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-            </Box>
-        </>
+        <Box>
+            {
+                places?.map((item, idx, arr)=>{
+                    return (
+                        <Card key={idx} restaurant={item}/>
+                    )
+                })
+            }
+        </Box>
     );
 }   

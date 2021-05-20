@@ -15,6 +15,7 @@ const MapContainer = styled.div`
 `
 
 export default function Map() {
+    //Token by Heejun
     mapboxgl.accessToken = 'pk.eyJ1IjoiZ21sd25zNTE3NiIsImEiOiJja280ZDZ6aDIwbzdoMnVwZG1lbXY2djd1In0.vSiPLE6d_vKC3iZkXaac7w';
 
     React.useEffect(()=>{

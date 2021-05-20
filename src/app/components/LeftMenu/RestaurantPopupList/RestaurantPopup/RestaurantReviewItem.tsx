@@ -67,9 +67,9 @@ export default function RestaurantReviewItem(props) {
                             freeMode
                         >
                             {
-                                attachment_urls.map((item)=>{
+                                attachment_urls.map((item, idx, arr)=>{
                                     return (
-                                        <SwiperSlide>
+                                        <SwiperSlide key={idx}>
                                             <Photo image={item}/>
                                         </SwiperSlide>
                                     )
