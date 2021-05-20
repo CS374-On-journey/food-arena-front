@@ -309,13 +309,20 @@ export default function RestaurantPopup(props) {
         selected, bottom_header, onSelect, restaurant, z_index, onClose
     } = props
     const {
-        name, picture_urls, travel_time, wait_time, distance, reviews, open_time, close_time, local_time, ai_pick, rating
+        name, picture_urls, travel_time, waiting_time, distance, reviews, open_time, close_time, local_time, ai_pick, rating
     } = restaurant;
 
     //TODO: (HJ) calculate proper time.
-    const isOpened = true;
-    const openMessage = "OPEN / Croweded";
-    const openHint = "~ 10:00PM"
+    const isOpened = open_time <= local_time && local_time <= close_time;
+    let openMessage:string, openHint:string;
+    if(isOpened){
+        openMessage = "OPEN";
+        openHint = `~ ${close_time}`
+    }else{
+        openMessage = "CLOSED";
+        openHint = `~ ${open_time}`
+    }
+    
 
     return (
         <Container selected={selected} z_index={z_index}>
@@ -350,7 +357,7 @@ export default function RestaurantPopup(props) {
                                             </InfoDescContentsHeaderIndicatorsBox>
                                         </InfoDescContentsHeaderBox>
                                         <InfoDescContentsTravelInfoText>
-                                            {distance} m | {travel_time} walk | {wait_time} wait
+                                            {distance} m | {travel_time} min walk | {waiting_time} min wait
                                         </InfoDescContentsTravelInfoText>
                                         <InfoDescContentsOpenInfoBox>
                                             <InfoDescContentsOpenInfoText isOpened={isOpened}>{openMessage}</InfoDescContentsOpenInfoText>

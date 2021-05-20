@@ -67,7 +67,7 @@ for(let i=0; i<10; i++){
             waiting_time: Math.round(Math.random()*300+60), // minute
             open_time: '09:00',
             close_time: '22:00',
-            local_time: '20:00',
+            local_time: `${Math.round(Math.random()*23)+1}:00`,
             tags: ['steak', 'luxery'],
             rating: Math.random()*5,
             ai_pick: Math.random() > 0.5,
