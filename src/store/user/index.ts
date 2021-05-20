@@ -5,17 +5,22 @@ import { useInjectReducer } from 'utils/redux-injectors';
 
 // The initial state of the Homepage
 export const initialState: UserState = {
-  username: 'Initial username for my state',
+  isSignedIn: false,
+  user: {
+    uid: '',
+    displayName: '',
+    photoURL: '',
+  }
+  
 };
 
 const slice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    changeUsername(state, action: PayloadAction<string>) {
-      // Here we say lets change the username in my homepage state when changeUsername actions fires
-      // Type-safe: It will expect `string` when firing the action. ✅
-      state.username = action.payload;
+    doLogin(state, action: PayloadAction<UserState>) {
+      state.isSignedIn = true;
+      state.user = action.payload.user;
     },
   },
 });
