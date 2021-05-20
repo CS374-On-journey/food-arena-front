@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
+import numeral from 'numeral';
 
 const Box = styled.div`
     display:flex;
@@ -46,7 +47,7 @@ export default function StarsIndicator(props) {
                 )
             }
             <Blank/>
-            { show_number ? rating : null }
+            { show_number ? numeral(rating).format('0.0') : null }
         </Box>
         </>
     )

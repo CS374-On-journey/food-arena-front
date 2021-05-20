@@ -4,15 +4,24 @@ import styled from 'styled-components/macro';
 import './icon-close.svg'
 
 const Icon = styled.div`
-    width: 100%;
-    height: 100%;
-    background: url('icon-close.svg');
+    width: 24px;
+    height: 24px;
+    background: white;
+    mask-image: url('./icon-close.svg');
+    & > svg {
+        fill:white;
+    }
 `
 
 const Button = styled.button`
     width: 100%;
     height: 100%;
-    background: none;
+    background: rgba(0,0,0,0.33);
+    display: flex;
+    border: none;
+    border-radius: 100px;
+    justify-content: center;
+    align-items: center;
 `
 
 export default function CloseButton(props) {

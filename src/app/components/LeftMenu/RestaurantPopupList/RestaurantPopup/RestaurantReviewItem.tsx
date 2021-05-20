@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/swiper.scss';
 import "swiper/components/pagination/pagination.min.css"
-import './index.css';
+//import './index.css';
 
 import StarsIndicator from 'app/components/Indicators/StarsIndicator'
 
@@ -13,8 +13,8 @@ interface PhotoProps {
 }
 
 const Photo = styled.div<PhotoProps>`
-    width: 90px;
-    height: 90px;
+    width: 100%;
+    height: 100%;
     border-radius: 5px;
     background-image: url(${props => props.image});
     background-size: cover;
@@ -42,8 +42,8 @@ const ContentText = styled.div`
 `
 
 const ContentAttatchmentsBox = styled.div`
-    margin-left: -20px;
-    margin-right: -20px;
+    height: 87px;
+    margin: 10px -20px 0 -20px;
 `
 
 export default function RestaurantReviewItem(props) {
@@ -63,13 +63,13 @@ export default function RestaurantReviewItem(props) {
                     <ContentAttatchmentsBox>
                         <Swiper
                             spaceBetween={3}
-                            slidesPerView={2}
+                            slidesPerView={3}
                             freeMode
                         >
                             {
-                                attachment_urls.map((item)=>{
+                                attachment_urls.map((item, idx, arr)=>{
                                     return (
-                                        <SwiperSlide>
+                                        <SwiperSlide key={idx}>
                                             <Photo image={item}/>
                                         </SwiperSlide>
                                     )
