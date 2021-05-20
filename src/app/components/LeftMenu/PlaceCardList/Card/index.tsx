@@ -29,12 +29,14 @@ const Box = styled.div<BoxPropsType>`
     display: flex;
     flex-direction: column;
     background: white;
-    box-shadow: 0px 0px 40px 25px rgba(0, 0, 0, 0.16);
+    //box-shadow: 0px 0px 40px 25px rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.33);
     border-radius: 20px;
     border: ${props=> (props.is_focused && props.is_opened) ? 
-        '3px solid #ff3060fa' : (props.is_opened ? '3px solid #CF00F1be': 'none'
+        '3px solid #ff3060fa' : (props.is_opened ? '3px solid #CF00F1be': '0px solid white'
         )};
     margin-bottom: 15px;
+    transition: border 0.1s cubic-bezier(0.5, 0.0, 0.0, 0.5);
 `;
 
 const Header = styled.div`

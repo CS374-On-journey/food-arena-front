@@ -14,7 +14,8 @@ const SearchBox = styled.div`
     width: 100%;
     display: flex;
     background: white;
-    box-shadow: 0px 0px 40px 25px rgba(0, 0, 0, 0.16);
+    //box-shadow: 0px 0px 40px 25px rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.33);
     border-radius: 0 0 15px 15px;
     align-content: center;
 `;
