@@ -23,11 +23,38 @@ const Box = styled.div`
     display: flex;
     flex-direction: column;
     background: white;
-    box-shadow: 0px 0px 40px 25px rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.33);
     border-radius: 20px;
 `;
 
+type HeaderPicturePropType = {
+    selected: boolean;
+    background_url: string;
+    bottom_header: boolean;
+}
+
+const Picture = styled.div<HeaderPicturePropType>`
+    &::before{
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(${props => props.selected ? '0px' : '3px'});
+        pointer-events: none; /* make the pseudo class click-through */
+        border-radius: ${props=> props.bottom_header ? '0 0 15px 15px' : '15px 15px 0 0'};
+        transition: backdrop-filter 0.05s ease-out;
+    }
+
+    width: 100%;
+    height: 100%;
+    background-image: url(${props => props.background_url});
+    background-size: cover;
+    background-position: center;
+    border-radius: ${props=> props.bottom_header ? '0 0 15px 15px' : '15px 15px 0 0'};
+`
+
 type HeaderBoxPropType = {
+    selected: boolean;
     background_url: string;
 }
 
@@ -44,6 +71,7 @@ const TopHeaderBox = styled.div<HeaderBoxPropType>`
 interface TopHeaderTitlePropsType {
     is_selected: boolean,
 }
+
 const TopHeaderTitle = styled.div<TopHeaderTitlePropsType>`
     color: #F4F4F4;
     font-size: 18px;
@@ -52,7 +80,8 @@ const TopHeaderTitle = styled.div<TopHeaderTitlePropsType>`
     width: 100%;
     margin-left: 36px;
     margin-right: 36px;
-    text-shadow: 0 0 3px black;
+    text-shadow: 0 0 2px black;
+    transition: top 0.3s cubic-bezier(1.0, 0.0, 0.0, 1.0);
 `
 
 const CloseButtonBox = styled.div`
@@ -274,7 +303,8 @@ export default function RestaurantPopup(props) {
             <Box >
                 {
                     bottom_header ? (
-                        <BottomHeaderBox background_url={picture_urls[0]} onClick={onSelect ? onSelect : null}> 
+                        <BottomHeaderBox selected={submenu_selected} background_url={''} onClick={onSelect ? onSelect : null}> 
+                            <Picture bottom_header={true} selected={submenu_selected} background_url={picture_urls[0]}/>
                             <BottomHeaderTitle>{name}</BottomHeaderTitle>
                             <BottomHeaderCloseButtonBox>
                                 <CloseButton onMouseDown={onClose ? onClose : null}/>
@@ -282,7 +312,8 @@ export default function RestaurantPopup(props) {
                         </BottomHeaderBox>
                     ) : (
                         <>
-                            <TopHeaderBox background_url={picture_urls[0]} onClick={onSelect ? onSelect : null}>
+                            <TopHeaderBox selected={submenu_selected} background_url={''} onClick={onSelect ? onSelect : null}>
+                                <Picture bottom_header={false} selected={submenu_selected} background_url={picture_urls[0]}/>
                                 <TopHeaderTitle is_selected={submenu_selected}>{name}</TopHeaderTitle>
                                 <TopHeaderCloseButtonBox>
                                     <CloseButton onClick={onClose ? onClose : null}/>

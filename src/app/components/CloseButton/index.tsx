@@ -22,6 +22,13 @@ const Button = styled.button`
     border-radius: 100px;
     justify-content: center;
     align-items: center;
+    transition: background 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    &:hover {
+        background: #ff1f3dab;
+    }
+    &:active {
+        background: #ff1f3d;
+    }
 `
 
 export default function CloseButton(props) {
