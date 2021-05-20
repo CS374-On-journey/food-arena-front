@@ -1,4 +1,8 @@
 export interface UserState {
-  username: string;
-  
+  isSignedIn: boolean;
+  user: {
+    uid: string;
+    displayName: string;
+    photoURL: string;
+  }
 }
