@@ -310,7 +310,7 @@ export default function RestaurantPopup(props) {
     } = props
     const {
         name, picture_urls, travel_time, wait_time, distance, reviews, open_time, close_time, local_time, ai_pick, rating
-    } = default_restaurant;
+    } = restaurant;
 
     //TODO: (HJ) calculate proper time.
     const isOpened = true;
@@ -361,7 +361,7 @@ export default function RestaurantPopup(props) {
                             </InfoBox>
 
                             <RestaurantReviewBox>
-                                <RestaurantReviewList reviews={Math.random() > 0.5 ? reviews : null}/>
+                                <RestaurantReviewList reviews={reviews}/>
                             </RestaurantReviewBox>
 
                             <ActionButtonsBox>

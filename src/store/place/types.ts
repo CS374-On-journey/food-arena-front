@@ -35,9 +35,11 @@ export interface IPlace {
   rating: number;
   ai_pick: boolean;
   ai_score: number;
-  picture: string[];
+  picture_urls: string[];
   reviews: IReview[];
   menus: IMenu[];
+  submenu_opened: boolean;
+  submenu_selected: boolean;
 }
 
 export interface PlacesState {

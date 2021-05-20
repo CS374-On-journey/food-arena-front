@@ -2,6 +2,11 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { useDispatch, useSelector } from 'react-redux';
+
+import { usePlaceSlice } from 'store/place';
+import { placeSelector } from 'store/place/selectors';
+
 import 'swiper/swiper.scss';
 import "swiper/components/pagination/pagination.min.css"
 import './index.css';
@@ -82,7 +87,6 @@ const BottomContent = styled.div`
 
 export default function Card(props) {
     const restaurant:IPlace = props.restaurant
-    console.log('card', restaurant)
     const {
         name, 
         address, 
@@ -91,11 +95,19 @@ export default function Card(props) {
         tags,
         open_time,
         close_time,
-        picture,
+        picture_urls,
         reviews,
+        id,
     } = restaurant;
+
+    const dispatch = useDispatch()
+    const { actions } = usePlaceSlice();
+    const { closeRestaurant, openRestaurant, focusRestaurant } = actions;
+    
     return (
-        <Box>
+        <Box onClick={()=>{
+            dispatch(openRestaurant(id));
+        }}>
             <Header>
                 <TagList>
                     {
@@ -118,7 +130,7 @@ export default function Card(props) {
                 freeMode
             >
                 {
-                    picture.map((item, idx, arr)=>{
+                    picture_urls.map((item, idx, arr)=>{
                         return (
                             <SwiperSlide key={idx}>
                                 <Photo image={item}/>
