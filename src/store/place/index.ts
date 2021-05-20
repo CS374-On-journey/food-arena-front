@@ -41,7 +41,6 @@ function random_picture() {
             'http://t1.daumcdn.net/liveboard/realfood/ae1ba57635dc409e9bf6d970f4578780.JPG',
             'https://t1.daumcdn.net/liveboard/interstella-story/af605d13c3894dc8bc0a20407baf54e9.JPG',
             'https://www.sisaweekly.com/news/photo/202005/31622_47966_2831.jpg',
-            'https://lh3.googleusercontent.com/proxy/eELDUI5yTzHVFnJ1-wb3veU_S_nKsOG2E-nijvQUm2w31XhvdK15lAAw5KML5w1IRFrgoZtPNehrYmwFI3w6CW5JeZ1BtGjaSFD3Am5-WP4QE3eomicyKQdajniFWRE',
         ]))
     }
     return buf
@@ -50,7 +49,7 @@ function random_picture() {
 function random_location() {
     return {
         longitude: Math.random()*0.1-74.0,
-        latitude: Math.random()*1.2+40.7,
+        latitude: Math.random()*0.08+40.7,
         readable: '4 Park Ave, New York'
     }
 }
@@ -119,7 +118,7 @@ const slice = createSlice({
         closeRestaurant(state: PlacesState, action: PayloadAction<number>) 
         {
             const id = action.payload;
-            console.log('close restaurant', id);
+            //console.log('close restaurant', id);
 
             let closed_idx = -1;
             for(let i =0; i<state.places.length; i++)
@@ -155,7 +154,7 @@ const slice = createSlice({
         openRestaurant(state: PlacesState, action: PayloadAction<number>) 
         {
             const id = action.payload;
-            console.log('open restaurant', id);
+            //console.log('open restaurant', id);
             for(let i =0; i<state.places.length; i++){
                 let item = state.places[i];
                 if( item.id == id ){
@@ -171,7 +170,7 @@ const slice = createSlice({
         focusRestaurant(state: PlacesState, action: PayloadAction<number>) 
         {
             const id = action.payload;
-            console.log('focus restaurant', id);
+            //console.log('focus restaurant', id);
             let focused = false;
             for(let i = 0; i<state.places.length; i++)
             {

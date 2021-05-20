@@ -12,8 +12,8 @@ export function HomePage() {
   return (
     <>
       <Helmet>
-        <title>Home Page</title>
-        <meta name="description" content="A Boilerplate application homepage" />
+        <title>Places</title>
+        <meta name="description" content="Find THE FOOD!" />
       </Helmet>
       <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
       <div>
