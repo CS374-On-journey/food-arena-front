@@ -36,7 +36,7 @@ export default function RestaurantPopupList(props) {
                 'author':string,
                 'content':string,
                 'rating':double,
-                'attatchment_urls':[string,],
+                'attachment_urls':[string,],
             }
         ],
         'menus':[

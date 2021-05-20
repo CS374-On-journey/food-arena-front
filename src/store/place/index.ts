@@ -56,7 +56,8 @@ function random_location() {
 }
 
 let generated_places = new Array()
-for(let i=0; i<10; i++){
+for(let i=0; i<10; i++)
+{
     generated_places.push(
         {
             id: i+1,
@@ -78,25 +79,25 @@ for(let i=0; i<10; i++){
                     author: random_human(),
                     content: 'The Wolfgang Steak is one of the three biggest steaks in New York! It felt really different from Peter Ruger. Peter Ruger was the soft feeling of a carefully raised cow, while the Wolfgang was the feeling of a wildly raised cow. The flesh was a bit tough and strong.',
                     rating: Math.random()*5,
-                    attatchment_urls: []
+                    attachment_urls: []
                 },
                 {
                     author: random_human(),
                     content: 'The Wolfgang Steak is one of the three biggest steaks in New York! It felt really different from Peter Ruger. Peter Ruger was the soft feeling of a carefully raised cow, while the Wolfgang was the feeling.',
                     rating: Math.random()*5,
-                    attatchment_urls: random_picture(),
+                    attachment_urls: random_picture(),
                 },
                 {
                     author: random_human(),
                     content: 'The Wolfgang Steak is one of the three biggest steaks in New York! It felt really different from Peter Ruger. Peter Ruger was the soft feeling of a carefully raised cow, while the Wolfgang was the feeling of a wildly raised cow. The flesh was a bit tough and strong.',
                     rating: Math.random()*5,
-                    attatchment_urls: []
+                    attachment_urls: []
                 },
                 {
                     author: random_human(),
                     content: 'The Wolfgang Steak is one of the three biggest steaks in New York! It felt really different from Peter Ruger. Peter Ruger was the soft feeling of a carefully raised cow, while the Wolfgang was the feeling of a wildly raised cow. The flesh was a bit tough and strong.',
                     rating: Math.random()*5,
-                    attatchment_urls: []
+                    attachment_urls: []
                 }
             ],
             menus: [],
@@ -131,11 +132,9 @@ const slice = createSlice({
                     item.submenu_opened = false;
                     item.submenu_selected = false;
                 }
-                else if(item.submenu_opened){
-                    if(closed_idx >= 0){
-                        item.submenu_selected = true;
-                        closed_idx = -1;
-                    }
+                else if(item.submenu_opened && closed_idx >= 0){
+                    item.submenu_selected = true;
+                    closed_idx = -1;
                 }
             }
 
@@ -173,14 +172,19 @@ const slice = createSlice({
         {
             const id = action.payload;
             console.log('focus restaurant', id);
-            for(let i = 0; i<state.places.length; i++){
+            let focused = false;
+            for(let i = 0; i<state.places.length; i++)
+            {
                 let item = state.places[i];
-                if( item.id == id ){
-                    item.submenu_opened = true;
+                if( item.id == id && item.submenu_opened){
                     item.submenu_selected = true;
-                }else if( item.submenu_selected ){
-                    item.submenu_selected = false;
+                    focused = true;
                 }
+            }
+            for(let i = 0; focused && i < state.places.length; i++)
+            {
+                let item = state.places[i];
+                if( item.id !== id ) item.submenu_selected = false;
             }
             return state;
         },

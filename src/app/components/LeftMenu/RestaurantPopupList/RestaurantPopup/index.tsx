@@ -6,66 +6,6 @@ import AiPickIndicator from 'app/components/Indicators/AiPickIndicator';
 import StarsIndicator from 'app/components/Indicators/StarsIndicator';
 import CloseButton from 'app/components/CloseButton';
 
-const default_restaurant = {
-    name: "Wolfgang's Steakhouse",
-    picture_urls: [
-        'https://media.timeout.com/images/103504187/630/472/image.jpg',
-        'https://resizer.otstatic.com/v2/photos/wide-huge/1/30102456.jpg',
-        'https://mp-seoul-image-production-s3.mangoplate.com/192731/p1erzbe2v6e9ig.jpg?fit=around|512:512&crop=512:512;*,*&output-format=jpg&output-quality=80',
-        'https://qul.imgix.net/030160f4-7998-4d7f-88e3-ba0e92929220/558553_sld.jpg',
-    ],
-    travel_time: '30min',
-    wait_time: '1hr',
-    open_time: null,
-    close_time: null,
-    local_time: null,
-    distance: 300,
-    ai_pick: true,
-    rating: 4.8,
-    reviews: [
-        {
-            author:'Yeari Kim', 
-            content:'The Wolfgang Steak is one of the three biggest steaks in New York! '+
-                    'It felt really different from Peter Ruger. Peter Ruger was the soft '+
-                    'feeling of a carefully raised cow, while the Wolfgang was the feeling '+
-                    'of a wildly raised cow. The flesh was a bit tough and strong. ...',
-            rating:4.8,
-            attachment_urls:[],
-        },
-        {
-            author:'Sophia Kim', 
-            content:'The Wolfgang Steak is one of the three biggest steaks in New York! '+
-                    'It felt really different from Peter Ruger. Peter Ruger was the soft '+
-                    'feeling of a carefully raised cow, while the Wolfgang was the feeling.',
-            rating:3.2,
-            attachment_urls:[
-                'https://media.timeout.com/images/103504187/630/472/image.jpg',
-                'https://resizer.otstatic.com/v2/photos/wide-huge/1/30102456.jpg',
-                'https://mp-seoul-image-production-s3.mangoplate.com/192731/p1erzbe2v6e9ig.jpg?fit=around|512:512&crop=512:512;*,*&output-format=jpg&output-quality=80',
-                'https://qul.imgix.net/030160f4-7998-4d7f-88e3-ba0e92929220/558553_sld.jpg',
-            ],
-        },
-        {
-            author:'Mario David', 
-            content:'The Wolfgang Steak is one of the three biggest steaks in New York! '+
-                    'It felt really different from Peter Ruger. Peter Ruger was the soft '+
-                    'feeling of a carefully raised cow, while the Wolfgang was the feeling '+
-                    'of a wildly raised cow. The flesh was a bit tough and strong. ...',
-            rating:4.2,
-            attachment_urls:[],
-        },
-        {
-            author:'Doge Coin', 
-            content:'The Wolfgang Steak is one of the three biggest steaks in New York! '+
-                    'It felt really different from Peter Ruger. Peter Ruger was the soft '+
-                    'feeling of a carefully raised cow, while the Wolfgang was the feeling '+
-                    'of a wildly raised cow. The flesh was a bit tough and strong. ...',
-            rating:1.8,
-            attachment_urls:[],
-        },
-    ]
-}
-
 type ContainerPropType = {
     selected: boolean;
     z_index: number;
@@ -101,14 +41,18 @@ const TopHeaderBox = styled.div<HeaderBoxPropType>`
     top:0;
 `
 
-const TopHeaderTitle = styled.div`
+interface TopHeaderTitlePropsType {
+    is_selected: boolean,
+}
+const TopHeaderTitle = styled.div<TopHeaderTitlePropsType>`
     color: #F4F4F4;
     font-size: 18px;
     position: absolute;
-    top: 70px;
+    top: ${props=> props.is_selected ? '70px' : '12px'};
     width: 100%;
     margin-left: 36px;
     margin-right: 36px;
+    text-shadow: 0 0 3px black;
 `
 
 const CloseButtonBox = styled.div`
@@ -249,6 +193,7 @@ const BottomHeaderTitle = styled.div`
     color: #F4F4F4;
     font-size: 18px;
     position: absolute;
+    text-shadow: 0 0 3px black;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -285,7 +230,7 @@ SearchedRestaurant := {
         'author':string,
         'content':string,
         'rating':double,
-        'attatchment_urls':[string,],
+        'attachment_urls':[string,],
         }
     ],
     'menus':[
@@ -309,7 +254,7 @@ export default function RestaurantPopup(props) {
         selected, bottom_header, onSelect, restaurant, z_index, onClose
     } = props
     const {
-        name, picture_urls, travel_time, waiting_time, distance, reviews, open_time, close_time, local_time, ai_pick, rating
+        name, picture_urls, travel_time, waiting_time, distance, reviews, open_time, close_time, local_time, ai_pick, rating, submenu_selected
     } = restaurant;
 
     //TODO: (HJ) calculate proper time.
@@ -326,10 +271,10 @@ export default function RestaurantPopup(props) {
 
     return (
         <Container selected={selected} z_index={z_index}>
-            <Box onMouseUp={onSelect ? onSelect : null}>
+            <Box >
                 {
                     bottom_header ? (
-                        <BottomHeaderBox background_url={picture_urls[0]}>
+                        <BottomHeaderBox background_url={picture_urls[0]} onClick={onSelect ? onSelect : null}> 
                             <BottomHeaderTitle>{name}</BottomHeaderTitle>
                             <BottomHeaderCloseButtonBox>
                                 <CloseButton onMouseDown={onClose ? onClose : null}/>
@@ -337,8 +282,8 @@ export default function RestaurantPopup(props) {
                         </BottomHeaderBox>
                     ) : (
                         <>
-                            <TopHeaderBox background_url={picture_urls[0]}>
-                                <TopHeaderTitle>{name}</TopHeaderTitle>
+                            <TopHeaderBox background_url={picture_urls[0]} onClick={onSelect ? onSelect : null}>
+                                <TopHeaderTitle is_selected={submenu_selected}>{name}</TopHeaderTitle>
                                 <TopHeaderCloseButtonBox>
                                     <CloseButton onClick={onClose ? onClose : null}/>
                                 </TopHeaderCloseButtonBox>

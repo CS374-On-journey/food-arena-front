@@ -19,13 +19,21 @@ interface PhotoProps {
     image: string;
 }
 
-const Box = styled.div`
+interface BoxPropsType {
+    is_focused: boolean | undefined;
+    is_opened: boolean | undefined;
+}
+
+const Box = styled.div<BoxPropsType>`
     width: 100%;
     display: flex;
     flex-direction: column;
     background: white;
     box-shadow: 0px 0px 40px 25px rgba(0, 0, 0, 0.16);
     border-radius: 20px;
+    border: ${props=> (props.is_focused && props.is_opened) ? 
+        '3px solid #ff3060fa' : (props.is_opened ? '3px solid #CF00F1be': 'none'
+        )};
     margin-bottom: 15px;
 `;
 
@@ -57,9 +65,15 @@ const SubTitle = styled.h4`
     font-size: 10pt;
 `;
 
-const Photo = styled.div<PhotoProps>`
-    width: 145px;
+const SwiperBox = styled.div`
+    width: calc(100%);
     height: 90px;
+    margin: 10px 0 0 0 ;
+`
+
+const Photo = styled.div<PhotoProps>`
+    width: 100%;
+    height: 100%;
     border-radius: 5px;
     background-image: url(${props => props.image});
     background-size: cover;
@@ -98,6 +112,8 @@ export default function Card(props) {
         picture_urls,
         reviews,
         id,
+        submenu_opened,
+        submenu_selected,
     } = restaurant;
 
     const dispatch = useDispatch()
@@ -106,8 +122,15 @@ export default function Card(props) {
     
     return (
         <Box onClick={()=>{
-            dispatch(openRestaurant(id));
-        }}>
+            if(submenu_opened && submenu_selected){
+                dispatch(closeRestaurant(id))
+            }else if(submenu_opened){
+                dispatch(focusRestaurant(id))
+            }else{
+                dispatch(openRestaurant(id))
+                dispatch(focusRestaurant(id))
+            }
+        }} is_focused={submenu_selected} is_opened={submenu_opened}>
             <Header>
                 <TagList>
                     {
@@ -124,21 +147,26 @@ export default function Card(props) {
             </Header>
             <Title>{name}</Title>
             <SubTitle>{address.readable} /  {open_time} ~ {close_time}</SubTitle>
-            <Swiper
-                spaceBetween={15}
-                slidesPerView={2}
-                freeMode
-            >
-                {
-                    picture_urls.map((item, idx, arr)=>{
-                        return (
-                            <SwiperSlide key={idx}>
-                                <Photo image={item}/>
-                            </SwiperSlide>
-                        );
-                    })
-                }
-            </Swiper>
+            {
+            picture_urls && picture_urls.length > 0 ? 
+                <SwiperBox>
+                    <Swiper
+                        spaceBetween={5}
+                        slidesPerView={2.5}
+                        freeMode
+                    >
+                        {
+                            picture_urls.map((item, idx, arr)=>{
+                                return (
+                                    <SwiperSlide key={idx}>
+                                        <Photo image={item}/>
+                                    </SwiperSlide>
+                                );
+                            })
+                        }
+                    </Swiper>
+                </SwiperBox> : null 
+            }
             <Bottom>
                 <BottomContent>
                     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">

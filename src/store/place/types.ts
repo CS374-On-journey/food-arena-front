@@ -2,7 +2,7 @@ export interface IReview {
   author: string;
   content: string;
   rating: number;
-  attatchment_urls: string[];
+  attachment_urls: string[];
 }
 
 export interface IMenu {
