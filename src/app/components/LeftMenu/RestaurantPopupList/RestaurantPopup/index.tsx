@@ -1,6 +1,12 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
 
+import { useSelector, useDispatch } from 'react-redux';
+
+import { usePlaceSlice } from 'store/place';
+import { selectedPlaceSelector, menuViewerOpenedSelector } from 'store/place/selectors';
+import { IPlace } from 'store/place/types';
+
 import RestaurantReviewList from './RestaurantReviewList';
 import AiPickIndicator from 'app/components/Indicators/AiPickIndicator';
 import StarsIndicator from 'app/components/Indicators/StarsIndicator';
@@ -173,8 +179,15 @@ const MenuButton = styled.button`
     left: calc(300px - 55px);
     border: 0;
     border-radius: 0;
-    background: #FF3061;
     color: white;
+    transition: background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    background: #FF3061;
+    &:hover{
+        background-color: #ff164c;
+    }
+    &:active{
+        background-color: #ff517a;
+    }
 `
 
 const RestaurantReviewBox = styled.div`
@@ -238,46 +251,6 @@ const BottomHeaderCloseButtonBox = styled(CloseButtonBox)`
     margin: 4px;
 `
 
-/*
-SearchedRestaurant := {
-    'id': string || int,
-    'name':string,
-    'address':{ 'longitude':double, 'latitude':double, 'human_readable':string},
-    'picture_urls':[string,],
-    'distance':double,
-    'travel_time':timespan,
-    'wait_time':timespan,
-    'open_time':datetime,
-    'close_time':datetime,
-    'local_time':datetime,
-    'tags':[string,],
-    'ai_pick':boolean,
-    'ai_score':double,
-    'rating':double,
-    'reviews':[
-        {
-        'author':string,
-        'content':string,
-        'rating':double,
-        'attachment_urls':[string,],
-        }
-    ],
-    'menus':[
-        Menu := {
-        'id':string,
-        'title':string,
-        'picture_url':string,
-        'description':string,
-        'type':string,
-        'local_title':string,
-        'local_price':string,
-        'local_quantity':string,
-        'children': [Menu,],
-        }
-    ]
-    } 
-*/
-
 export default function RestaurantPopup(props) {
     const {
         selected, bottom_header, onSelect, restaurant, z_index, onClose
@@ -285,8 +258,7 @@ export default function RestaurantPopup(props) {
     const {
         name, picture_urls, travel_time, waiting_time, distance, reviews, open_time, close_time, local_time, ai_pick, rating, submenu_selected
     } = restaurant;
-
-    //TODO: (HJ) calculate proper time.
+    
     const isOpened = open_time <= local_time && local_time <= close_time;
     let openMessage:string, openHint:string;
     if(isOpened){
@@ -296,7 +268,10 @@ export default function RestaurantPopup(props) {
         openMessage = "CLOSED";
         openHint = `~ ${open_time}`
     }
-    
+
+    const dispatch = useDispatch();
+    const { actions } = usePlaceSlice();
+    const menu_opened = useSelector(menuViewerOpenedSelector);
 
     return (
         <Container selected={selected} z_index={z_index}>
@@ -321,7 +296,7 @@ export default function RestaurantPopup(props) {
                             </TopHeaderBox>
 
                             <InfoBox>
-                                <MenuButton>Menu</MenuButton>
+                                <MenuButton onClick={()=>{dispatch(actions.toggleMenu())}}>{menu_opened?'Close Menu':'Menu'}</MenuButton>
                                 <InfoDescBox>
                                     <InfoDescContentsBox>
                                         <InfoDescContentsHeaderBox>
