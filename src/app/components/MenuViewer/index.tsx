@@ -159,8 +159,8 @@ export default function MenuViewer(props) {
                                 document.body.style.pointerEvents='';
                             }
                             setWinPos([
-                                Math.max(0, Math.min(wx+mouseX-mx, window.innerWidth-770)), 
-                                Math.max(0, Math.min(wy+mouseY-my, window.innerHeight-510))
+                                Math.max(-770+120, Math.min(wx+mouseX-mx, window.innerWidth-120)), 
+                                Math.max(0, Math.min(wy+mouseY-my, window.innerHeight-65))
                             ])
                         }, 10)
                         setTimer(interval)
