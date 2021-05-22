@@ -14,7 +14,7 @@ module.exports = {
   overrides: [
     {
       files: ['**/*.ts?(x)'],
-      rules: { 'prettier/prettier': ['warn', prettierOptions] },
+      rules: { 'prettier/prettier': ['off', prettierOptions] },
     },
   ],
 };
