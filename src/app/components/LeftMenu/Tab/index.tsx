@@ -4,6 +4,10 @@ import { PartyButton, PlaceButton } from './MenuButton';
 import { SearchButton } from './SearchButton';
 import { SearchInput } from './SearchInput';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { useGlobalSlice } from 'store/global';
+import { tabSelector } from 'store/global/selectors';
+
 const Box = styled.div`
     width: 100%;
     display: flex;
@@ -22,11 +26,14 @@ const SearchBox = styled.div`
 
 export default function Tab() {
 
-    const [menu, setMenu] = React.useState(0);
     const [searchContent, setSearchContent] = React.useState('');
 
+    const currentTab = useSelector(tabSelector);
+    const dispatch = useDispatch();
+    const { actions } = useGlobalSlice();
+
     const changeMenu = (menu) => {
-        setMenu(menu);
+        dispatch(actions.changeTab({tab: menu}));
         setSearchContent('');
     }
 
@@ -34,8 +41,8 @@ export default function Tab() {
         <>
         <Box>
             <PlaceButton 
-                selected={menu === 0}
-                onClick={() => changeMenu(0)}
+                selected={currentTab === 'place'}
+                onClick={() => changeMenu('place')}
             >
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16" fill="none">
                 <path d="M6 0.5C3.0975 0.5 0.75 2.8475 0.75 5.75C0.75 9.6875 6 15.5 6 15.5C6 15.5 11.25 9.6875 11.25 5.75C11.25 2.8475 8.9025 0.5 6 0.5ZM6 7.625C4.965 7.625 4.125 6.785 4.125 5.75C4.125 4.715 4.965 3.875 6 3.875C7.035 3.875 7.875 4.715 7.875 5.75C7.875 6.785 7.035 7.625 6 7.625Z" fill="#F4F4F4"/>
@@ -43,8 +50,8 @@ export default function Tab() {
                 Place
             </PlaceButton>
             <PartyButton
-                selected={menu === 1}
-                onClick={() => changeMenu(1)}
+                selected={currentTab === 'party'}
+                onClick={() => changeMenu('party')}
             >
             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
                 <g clipPath="url(#clip0)">
