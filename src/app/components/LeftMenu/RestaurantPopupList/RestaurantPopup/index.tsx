@@ -10,6 +10,7 @@ import { IPlace } from 'store/place/types';
 import RestaurantReviewList from './RestaurantReviewList';
 import AiPickIndicator from 'app/components/Indicators/AiPickIndicator';
 import StarsIndicator from 'app/components/Indicators/StarsIndicator';
+import PartyIndicator from 'app/components/Indicators/PartyIndicator';
 import CloseButton from 'app/components/CloseButton';
 
 type ContainerPropType = {
@@ -83,7 +84,7 @@ const TopHeaderTitle = styled.div<TopHeaderTitlePropsType>`
     font-size: 18px;
     position: absolute;
     top: ${props=> props.is_selected ? '70px' : '12px'};
-    width: 100%;
+    width: calc(100% - 72px);
     margin-left: 36px;
     margin-right: 36px;
     text-shadow: 0 0 2px black;
@@ -218,6 +219,9 @@ const ActionButtonsPartiesButton = styled.button`
     border:none;
     border-radius: 0;
     border-bottom-right-radius:20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 
 const BottomHeaderBox = styled.div<HeaderBoxPropType>`
@@ -324,10 +328,12 @@ export default function RestaurantPopup(props) {
 
                             <ActionButtonsBox>
                                 <ActionButtonsRouteButton>
-
+                                    
                                 </ActionButtonsRouteButton>
                                 <ActionButtonsPartiesButton>
-
+                                    <div style={{position:'relative', left:'-5px'}}>
+                                        <PartyIndicator current={2} maximum={4} fill='#FFF'/>
+                                    </div>
                                 </ActionButtonsPartiesButton>
                             </ActionButtonsBox>
                         </>
