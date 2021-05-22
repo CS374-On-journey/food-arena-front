@@ -6,6 +6,7 @@ import { usePartySlice } from 'store/party';
 import { partySelector } from 'store/party/selectors';
 
 import Card from './Card';
+import PartyRegisteraion from 'app/components/Modals/PartyRegisteraion';
 
 const Box = styled.div`
     width: 100%;
@@ -15,20 +16,33 @@ const Box = styled.div`
     background: transparent;
 `;
 
-export default function PlaceCardList() {
+export default function PartyCardList() {
 
     const { actions } = usePartySlice();
     const parties = useSelector(partySelector);
+
+    const [isPartyRegisteraionOn, setIsPartyRegisteraionOn] = React.useState(false)
+    const [selectedId, setSelectedId] = React.useState(null);
+
+    const openModal = (id) => {
+        setSelectedId(id);
+        setIsPartyRegisteraionOn(true)
+    }
 
     return (
         <Box>
             {
                 parties?.map((item, idx, arr)=>{
                     return (
-                        <Card key={idx} party={item}/>
+                        <Card key={idx} party={item} openModal={openModal}/>
                     )
                 })
             }
+            <PartyRegisteraion
+                selectedId={selectedId}
+                isPartyRegisteraionOn={isPartyRegisteraionOn}
+                setIsPartyRegisteraionOn={setIsPartyRegisteraionOn}
+            />
         </Box>
     );
 }   

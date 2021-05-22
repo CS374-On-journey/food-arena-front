@@ -10,10 +10,12 @@ export interface IParty {
   meeting_date: string,
   due_date: string,
   tags: string[],
+  menu_text: string,
   description: string,
   registered_people: number,
   max_people: number,
-  ban_rules: string[];
+  ban_rules: string[],
+  picture_urls: string[],
 }
 
 export interface PartiesState {
