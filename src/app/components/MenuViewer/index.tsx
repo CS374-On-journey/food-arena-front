@@ -4,7 +4,7 @@ import styled from 'styled-components/macro';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { usePlaceSlice } from 'store/place';
-import { selectedPlaceSelector } from 'store/place/selectors';
+import { selectedPlaceSelector, menuViewerOpenedSelector } from 'store/place/selectors';
 import { IPlace } from 'store/place/types';
 
 import MenuTree from './MenuTree';
@@ -14,8 +14,8 @@ const Box = styled.div`
     position: absolute;
     left:720px;
     top:280px;
-    width:600px;
-    height:420px;
+    width:770px;
+    height:510px;
     background-color: white;
     border-radius: 20px;
     box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.33);
@@ -37,7 +37,18 @@ const TitleContentBox = styled.div`
 const TitleBackButton = styled.button`
     width: 36px;
     height: 36px;
-    background:transparent;
+    background: url('./icon-expand.svg');
+    background-size: 24px 24px;
+    background-position: center;
+    border: none;
+    border-radius: 1000px;
+    transition: background 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    &:hover {
+        background-color: #00000014;
+    }
+    &:active {
+        background-color: #0000003b;
+    }
 `
 
 const TitleText = styled.div`
@@ -83,28 +94,50 @@ const ContentDescBox = styled.div`
 `
 
 export default function MenuViewer(props) {
-    const {actions} = usePlaceSlice();
-    const place = useSelector(selectedPlaceSelector) as IPlace;
+    const [menu, setMenu] = React.useState<any>(undefined);
+    const [rid, setRid] = React.useState(-1);
 
+    const {actions} = usePlaceSlice();
+    const dispatch = useDispatch();
+    const place = useSelector(selectedPlaceSelector) as IPlace;
+    const opened = useSelector(menuViewerOpenedSelector) as boolean;
+    
     const restuarant = place;
+    if(restuarant){
+        if(restuarant.id != rid)
+        {
+            setRid(restuarant.id);
+            setMenu(undefined);
+        }
+    }else{
+        if(-1 != rid)
+        {
+            setRid(-1);
+            setMenu(undefined);
+        }
+    }
+
+    if(!opened) return (<></>)
 
     return (
         <Box>
             <TitleBox>
                 <TitleContentBox>
-                    <TitleBackButton/>
-                    <TitleText>{restuarant ? restuarant.name : 'Select Restaurant'}</TitleText>
+                    <TitleBackButton onClick={()=>{dispatch(actions.closeMenu())}}/>
+                    <TitleText>{restuarant ? restuarant.name : 'Please Select Restaurant'}</TitleText>
                 </TitleContentBox>
                 <TitleSpliter/>
             </TitleBox>
 
             <ContentBox>
                 <ContentTreeBox>
-                    <MenuTree restaurant={restuarant}/>
+                    <MenuTree restaurant={restuarant} onSelected={(menu)=>{
+                        setMenu(menu)
+                    }}/>
                 </ContentTreeBox>
                 <ContentSpliter/>
                 <ContentDescBox>
-                    <MenuDescViewer menu={1}/>
+                    <MenuDescViewer menu={menu}/>
                 </ContentDescBox>
             </ContentBox>
         </Box>

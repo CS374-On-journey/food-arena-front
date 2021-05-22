@@ -77,11 +77,18 @@ function random_menu(depth=10) {
                         `break down the muscle tissue, resulting in more tender and flavourful beef.`,
         type: '',
         local_title: title,
-        local_price: Math.round(Math.random()*10000000),
-        local_currency: 'won',
-        local_quantity: Math.round(Math.random()*1000),
+        local_price: Math.random()*100,
+        local_currency: '$',
+        local_quantity: Math.random()*1000,
         local_quantity_unit: 'g',
+
+        local_format_quantity: '0',
+        local_format_price_per_unit: '0.00',
+        local_format_price: '0.0',
+
         children: Math.random() > 0.8 ? random_menus(depth-1) : [],
+        isExpanded:false,
+        label: null,
     }
     return menu;
 }
@@ -151,8 +158,14 @@ for(let i=0; i<10; i++)
 }
     
 export const initialState: PlacesState = {
-    places: generated_places
+    places: generated_places,
+    menu_viewer_opened: false,
 };
+
+interface UpdateMenuPayloadType {
+    id: number,
+    data: IMenu[],
+}
 
 const slice = createSlice({
     name: 'place',
@@ -231,6 +244,39 @@ const slice = createSlice({
             }
             return state;
         },
+
+        updateMenu(state: PlacesState, action: PayloadAction<UpdateMenuPayloadType>)
+        {
+            const payload = action.payload as UpdateMenuPayloadType;
+            for(let i=0; i<state.places.length; i++)
+            {
+                let item = state.places[i];
+                if(item.id == payload.id){
+                    item.menus = payload.data;
+                    break;
+                }
+            }
+            return state;
+        },
+
+        openMenu(state: PlacesState)
+        {
+            state.menu_viewer_opened = true;
+            return state;
+        },
+
+        closeMenu(state: PlacesState)
+        {
+            state.menu_viewer_opened = false;
+            return state;
+        },
+
+        toggleMenu(state: PlacesState)
+        {
+            console.log('asdfasdf')
+            state.menu_viewer_opened = !state.menu_viewer_opened;
+            return state;
+        }
     },
 });
 

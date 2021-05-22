@@ -26,4 +26,9 @@ const selectedPlaceSelector = createSelector(
   }
 )
 
-export { placeSelector, selectedPlaceSelector };
+const menuViewerOpenedSelector = createSelector(
+  baseSelector,
+  s => s?.menu_viewer_opened,
+)
+
+export { placeSelector, selectedPlaceSelector, menuViewerOpenedSelector };
