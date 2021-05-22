@@ -2,8 +2,8 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import { useSelector } from 'react-redux';
 
-import { usePlaceSlice } from 'store/place';
-import { placeSelector } from 'store/place/selectors';
+import { usePartySlice } from 'store/party';
+import { partySelector } from 'store/party/selectors';
 
 import Card from './Card';
 
@@ -16,18 +16,19 @@ const Box = styled.div`
 `;
 
 export default function PlaceCardList() {
-    const { actions } = usePlaceSlice();
-    const places = useSelector(placeSelector);
+
+    const { actions } = usePartySlice();
+    const parties = useSelector(partySelector);
 
     return (
         <Box>
-            {/* {
-                places?.map((item, idx, arr)=>{
+            {
+                parties?.map((item, idx, arr)=>{
                     return (
-                        <Card key={idx} restaurant={item}/>
+                        <Card key={idx} party={item}/>
                     )
                 })
-            } */}
+            }
         </Box>
     );
 }   
