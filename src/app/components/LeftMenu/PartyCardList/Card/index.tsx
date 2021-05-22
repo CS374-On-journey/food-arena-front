@@ -31,6 +31,11 @@ const RightWrapper = styled.div`
     width: 70px;
     background-color: #FF3061;
     border-radius: 0 20px 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 15px;
 `;
 
 const Header = styled.div`
@@ -61,6 +66,14 @@ const SubTitle = styled.h4`
     font-size: 10pt;
 `;
 
+const LeftTime = styled.h4`
+    font-weight: 400;
+    font-size: 10pt;
+    text-align: center;
+    color: white;
+    margin: 0;
+    margin-top: 10px;
+`;
 
 const BottomContent = styled.div`
     font-size: 12px;
@@ -109,9 +122,9 @@ export default function Card(props) {
             <SubTitle>{restaurant}</SubTitle>
             <BottomContent>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-<path d="M7.99325 1.3335C4.31325 1.3335 1.33325 4.32016 1.33325 8.00016C1.33325 11.6802 4.31325 14.6668 7.99325 14.6668C11.6799 14.6668 14.6666 11.6802 14.6666 8.00016C14.6666 4.32016 11.6799 1.3335 7.99325 1.3335ZM7.99992 13.3335C5.05325 13.3335 2.66659 10.9468 2.66659 8.00016C2.66659 5.0535 5.05325 2.66683 7.99992 2.66683C10.9466 2.66683 13.3333 5.0535 13.3333 8.00016C13.3333 10.9468 10.9466 13.3335 7.99992 13.3335Z" fill="black"/>
-<path d="M8.33325 4.6665H7.33325V8.6665L10.8333 10.7665L11.3333 9.9465L8.33325 8.1665V4.6665Z" fill="black"/>
-</svg>
+                <path d="M7.99325 1.3335C4.31325 1.3335 1.33325 4.32016 1.33325 8.00016C1.33325 11.6802 4.31325 14.6668 7.99325 14.6668C11.6799 14.6668 14.6666 11.6802 14.6666 8.00016C14.6666 4.32016 11.6799 1.3335 7.99325 1.3335ZM7.99992 13.3335C5.05325 13.3335 2.66659 10.9468 2.66659 8.00016C2.66659 5.0535 5.05325 2.66683 7.99992 2.66683C10.9466 2.66683 13.3333 5.0535 13.3333 8.00016C13.3333 10.9468 10.9466 13.3335 7.99992 13.3335Z" fill="black"/>
+                <path d="M8.33325 4.6665H7.33325V8.6665L10.8333 10.7665L11.3333 9.9465L8.33325 8.1665V4.6665Z" fill="black"/>
+            </svg>
                     {meeting_date}
                 </BottomContent>
                 <BottomContent>
@@ -129,7 +142,12 @@ export default function Card(props) {
                 </BottomContent>
                 </LeftWrapper>
                 <RightWrapper>
-                    
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="26" viewBox="0 0 24 20" fill="none">
+                        <path d="M9 4L7.6 5.4L10.2 8H0V10H10.2L7.6 12.6L9 14L14 9L9 4ZM18 16H10V18H18C19.1 18 20 17.1 20 16V2C20 0.9 19.1 0 18 0H10V2H18V16Z" fill="white"/>
+                    </svg>
+                    <LeftTime>
+                    13:59<br/>left
+                    </LeftTime>
                 </RightWrapper>
         </Box>
     );
