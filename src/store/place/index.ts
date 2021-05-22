@@ -4,7 +4,7 @@ import { createSlice } from 'utils/@reduxjs/toolkit'; // Importing from `utils` 
 
 import { useInjectReducer } from 'utils/redux-injectors';
 
-import { IPlace, PlacesState } from './types';
+import { IPlace, IMenu, PlacesState } from './types';
 
 // The initial state of the Homepage
 function choice<T>(arr:Array<T>){
@@ -54,6 +54,50 @@ function random_location() {
     }
 }
 
+function random_menu(depth=10) {
+    let title = choice([
+        'Rib Steak', 'Hambuger', 'Palbochea', '1955 Burger', 'Cheese Burger', 'Spagetti', 'Waffer', 'Waffle', 'Doolly', 'Dobby', 'Fried Dobby', 'French Fried',
+        'Cheese Stick', 'Chicken Wrap', 'Beef Wrap', 'Wolf Chick', 'Wolf Soup', 'Cheese Soup', 'Mushiroom Soup', 'Greek Salad', 'Tomato Soup', 'Fried Tomato', 'Koshari',
+        'Torttia', 'Lotteria', 'King Jonghyeon', 'Wow Chicken', 'Matchoking', 'Spicy Matchoking', 'Bburingkle', 'Lamb Steak', 'Lamb Lag', 'Pork Chop', 'Pork Soup'
+    ])
+    let menu : IMenu = {
+        id: Math.round(Math.random() * 987654321),
+        title: title,
+        picture_url: random_picture()[0],
+        description:    `When it comes to steaks, for me, nothing beats the Americans. A small piece of well-marbled Japanese wagyu is wonderful as `+
+                        `part of a teppanyaki or shabu shabu meal. And I can understand the need to exercise my jaws to enjoy the robust flavour of `+
+                        `grass-fed South American beef. But if it is a hunky 300g slab of steak I'm hankering for, my choice will certainly be an USDA`+
+                        ` ribeye - tender and with just the right balance of fat and muscle. And it seems many diners here agree with me, because yet another `+
+                        `American steak restaurant has made its way here - Wolfgang's Steakhouse, which opened at the new InterContinental hotel in Robertson`+
+                        ` Quay two weeks ago. It adds to other chains such as Morton's, Ruth's Chris and Cut that already have Singapore outlets. There has`+
+                        ` been some confusion that the Wolfgang behind the restaurant is Wolfgang Puck, who is behind Cut in Marina Bay Sands. But it is`+
+                        ` actually Mr Wolfgang Zwiener, who started his chain of restaurants in New York with his son Peter and other partners more than`+
+                        ` 13 years ago. Unlike Cut, which offers premium beef from various parts of the world, Wolfgang's focuses on USDA Prime beef. It `+
+                        `also distinguishes itself from the competition by dry-ageing the beef for 28 days - a process that allows enzymes in the meat to `+
+                        `break down the muscle tissue, resulting in more tender and flavourful beef.`,
+        type: '',
+        local_title: title,
+        local_price: Math.round(Math.random()*10000000),
+        local_currency: 'won',
+        local_quantity: Math.round(Math.random()*1000),
+        local_quantity_unit: 'g',
+        children: Math.random() > 0.8 ? random_menus(depth-1) : [],
+    }
+    return menu;
+}
+
+function random_menus(depth=10) {
+    if(depth <0) return []
+
+    let ret = new Array<IMenu>();
+
+    for(let i=0; i<10; i++){
+        ret.push(random_menu(depth));
+    }
+    
+    return ret;
+}
+
 let generated_places = new Array()
 for(let i=0; i<10; i++)
 {
@@ -99,7 +143,7 @@ for(let i=0; i<10; i++)
                     attachment_urls: []
                 }
             ],
-            menus: [],
+            menus: random_menus(),
             submenu_opened: false,
             submenu_selected: false,
         }

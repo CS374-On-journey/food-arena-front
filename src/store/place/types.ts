@@ -12,8 +12,10 @@ export interface IMenu {
   description: string;
   type: string;
   local_title: string;
-  local_price: string;
-  local_quantity: string;
+  local_price: number;
+  local_currency: string;
+  local_quantity: number;
+  local_quantity_unit: string;
   children: IMenu[];
 }
 
