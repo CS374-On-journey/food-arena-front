@@ -3,7 +3,12 @@ import styled from 'styled-components/macro';
 
 import Tab from './Tab';
 import PlaceCardList from './PlaceCardList';
+import PartyCardList from './PartyCardList';
 import RestaurantPopupList from './RestaurantPopupList';
+
+import { useSelector } from 'react-redux';
+import { useGlobalSlice } from 'store/global';
+import { tabSelector } from 'store/global/selectors';
 
 const Box = styled.div`
     background: transparent;
@@ -33,15 +38,27 @@ const PopupBox = styled.div`
 
 export default function LeftMenu() {
 
+    const currentTab = useSelector(tabSelector);
+
     return (
         <>
         <Box>
              <Tab/>
-             <PlaceCardList/>
+             {
+                currentTab === 'place' ? 
+                (
+                    <PlaceCardList/>
+                ) : currentTab === 'party' ?
+                (
+                    <PartyCardList/>
+                ) : null
+            }
         </Box>
-        <PopupBox>
-            <RestaurantPopupList/>
-        </PopupBox>
+        { currentTab === 'place' ? (
+            <PopupBox>
+                <RestaurantPopupList/>
+            </PopupBox>
+        ) : null}        
         </>
     );
 }   
