@@ -42,7 +42,6 @@ export default function Map() {
             let loc = [item.address.longitude, item.address.latitude];
             loc_sum = [loc_sum[0]+loc[0], loc_sum[1]+loc[1]];
             let marker = new mapboxgl.Marker().setLngLat(loc).addTo(map)
-            console.log('add', loc)
         }
 
         map.setZoom(12)
