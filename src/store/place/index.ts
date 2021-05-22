@@ -273,7 +273,6 @@ const slice = createSlice({
 
         toggleMenu(state: PlacesState)
         {
-            console.log('asdfasdf')
             state.menu_viewer_opened = !state.menu_viewer_opened;
             return state;
         }
