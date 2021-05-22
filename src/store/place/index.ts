@@ -5,7 +5,7 @@ import { createSlice } from 'utils/@reduxjs/toolkit'; // Importing from `utils` 
 
 import { useInjectReducer } from 'utils/redux-injectors';
 import places from "./restaurants.json";
-import { IPlace, PlacesState } from './types';
+import { IPlace, IMenu, PlacesState } from './types';
 
 let generated_places = new Array()
 for(let i=0; i<4; i++)
@@ -52,8 +52,14 @@ for(let i=0; i<4; i++)
 }
     
 export const initialState: PlacesState = {
-    places: generated_places
+    places: generated_places,
+    menu_viewer_opened: false,
 };
+
+interface UpdateMenuPayloadType {
+    id: number,
+    data: IMenu[],
+}
 
 const slice = createSlice({
     name: 'place',
