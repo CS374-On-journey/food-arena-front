@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import LeftMenu from 'app/components/LeftMenu';
 import Map from 'app/components/Map';
+import MenuViewer from 'app/components/MenuViewer';
 import ProfileButton from 'app/components/TopButtons/profilebutton';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -46,6 +47,7 @@ export function HomePage() {
             const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithPopup(googleAuthProvider);
         }}/>
+        <MenuViewer/>
         <FirebaseAuthConsumer>
           {({ isSignedIn, user }) => {
             dispatch(actions.doLogin({

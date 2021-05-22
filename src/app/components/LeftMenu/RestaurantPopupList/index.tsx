@@ -10,50 +10,11 @@ import { IPlace } from 'store/place/types'
 import RestaurantPopup from './RestaurantPopup'
 
 const Box = styled.div`
-width: 100%;
-height: 100%;
+    width: 100%;
+    height: 100%;
 `
 
 export default function RestaurantPopupList(props) {
-    /*
-    SearchedRestaurant := {
-        'id': string || int,
-        'name':string,
-        'address':{ 'longitude':double, 'latitude':double, 'human_readable':string},
-        'picture_urls':[string,],
-        'distance':double,
-        'travel_time':timespan,
-        'wait_time':timespan,
-        'open_time':datetime,
-        'close_time':datetime,
-        'local_time':datetime,
-        'tags':[string,],
-        'ai_pick':boolean,
-        'ai_score':double,
-        'rating':double,
-        'reviews':[
-            {
-                'author':string,
-                'content':string,
-                'rating':double,
-                'attachment_urls':[string,],
-            }
-        ],
-        'menus':[
-            Menu := {
-                'id':string,
-                'title':string,
-                'picture_url':string,
-                'description':string,
-                'type':string,
-                'local_title':string,
-                'local_price':string,
-                'local_quantity':string,
-                'children': [Menu,],
-            }
-        ]
-    } 
-    */
     //redux
     const dispatch = useDispatch()
     const { actions } = usePlaceSlice();
@@ -80,7 +41,7 @@ export default function RestaurantPopupList(props) {
             opened_restaurants.map((item, idx)=>
             {
                 return (
-                    <RestaurantPopup 
+                <RestaurantPopup 
                     key={idx}
                     restaurant={item} 
                     selected={idx===selected_idx} 
