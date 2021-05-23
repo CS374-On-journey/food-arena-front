@@ -40,9 +40,22 @@ const selectPartiesByRestaurantId = (id) => createSelector(
       let item = parties[i];
       if(item.restaurant_id == id) ret.push(item);
     }
-    console.log('parties select', ret, id, s);
     return ret;
   }
 )
 
-export { partySelector, selectPartyByRestaurantId, selectPartiesByRestaurantId };
+const selectRegisteredParties = createSelector(
+  baseSelector,
+  s => {
+    let parties = s?.parties as IParty[];
+    let ret = new Array<IParty>();
+    for(let i = 0; i< parties?.length; i++)
+    {
+      let item = parties[i];
+      if(item.is_registered) ret.push(item);
+    }
+    return ret;
+  }
+)
+
+export { partySelector, selectPartyByRestaurantId, selectPartiesByRestaurantId, selectRegisteredParties };

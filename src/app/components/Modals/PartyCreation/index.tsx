@@ -249,7 +249,7 @@ export default function PartyCreation({
             }}
           >
             <Block marginBottom="scale200" />
-            <Label2>Max Peoples</Label2>
+            <Label2>Max People</Label2>
             <Block marginBottom="scale200" />
             <Input
               value={maxPeople}
@@ -394,7 +394,30 @@ export default function PartyCreation({
             }
             if(count < 2){
               Swal.fire('Maxium people must be more than 1. If you want to eat alone, how about to use navigation feature?')
+              return;
             }
+            const isNull = x=>x==null||x==undefined||x==''||x==0||((x instanceof String) && (x as string).trim().length <= 0);
+            if(isNull(description)){
+              Swal.fire('Please fill up "Short explanation"')
+              return
+            }
+            if(isNull(menu)){
+              Swal.fire('Please fill up "What we eat"')
+              return
+            }
+            if(isNull(title)){
+              Swal.fire('Please fill up "Title"')
+              return
+            }
+            if(isNull(maxPeople)){
+              Swal.fire('Please check the "Max People"')
+              return
+            }
+            if(isNull(count)){
+              Swal.fire('Please check the "Max People"')
+              return
+            }
+
             dispatch(actions.createParty({
               ban_rules: ['a', 'b', 'c'],
               description: description,
