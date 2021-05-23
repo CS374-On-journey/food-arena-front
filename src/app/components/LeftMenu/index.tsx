@@ -18,7 +18,7 @@ const Box = styled.div`
     width: 350px;
     height: 100vh;
     overflow: scroll;
-    z-index: 10000000;
+    z-index: 10;
     &::-webkit-scrollbar {
         display: none; /* Chrome, Safari, Opera*/
     }

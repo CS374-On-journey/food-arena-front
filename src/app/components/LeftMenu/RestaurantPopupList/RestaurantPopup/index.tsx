@@ -25,7 +25,7 @@ type ContainerPropType = {
 const Container = styled.div<ContainerPropType>`
     height: 50px;
     position: relative;
-    z-index: ${props => props.z_index+1000};
+    z-index: ${props => props.z_index+100};
 `
 
 const Box = styled.div`

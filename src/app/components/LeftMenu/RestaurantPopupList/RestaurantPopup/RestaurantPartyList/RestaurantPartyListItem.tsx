@@ -2,6 +2,7 @@ import * as React from 'react';
 import { IParty } from 'store/party/types';
 import styled from 'styled-components/macro';
 
+import PartyCreation from 'app/components/Modals/PartyCreation';
 import PartyRegisteraion from 'app/components/Modals/PartyRegisteraion';
 import PeopleIcon from './PeopleIcon';
 
