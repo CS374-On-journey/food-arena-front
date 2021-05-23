@@ -121,7 +121,7 @@ export default function RestaurantPartyList(props:PropsType) {
                 {
                 parties && parties.length > 0 ?
                 parties.map((item, idx, arr) => {
-                    return (<RestaurantPartyListItem party={item}/>)
+                    return (<RestaurantPartyListItem party={item} onClose={onClose}/>)
                 })
                 :<ListEmptyText>Please Create New Party!</ListEmptyText>}
             </ListBox>
@@ -135,7 +135,7 @@ export default function RestaurantPartyList(props:PropsType) {
             <PartyCreation
                 restaurantId={restaurant.id}
                 isPartyCreationOn={isPartyCreationOn}
-                setIsPartyCreationOn={setIsPartyCreationOn}
+                setIsPartyCreationOn={(x)=>{setIsPartyCreationOn(false); onClose()}}
             />
         </Box>
     )

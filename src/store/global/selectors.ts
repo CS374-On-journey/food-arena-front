@@ -6,8 +6,17 @@ export const baseSelector = (state: RootState) => state.global;
 
 const tabSelector = createSelector(
   baseSelector,
-  placeState => placeState?.tab,
+  s => s?.tab,
 );
 
+const partyRegisterationOnSelector = createSelector(
+  baseSelector,
+  s => s?.partyRegisterationOn,
+)
 
-export { tabSelector };
+const partyRegisterationTargetIdSelector = createSelector(
+  baseSelector,
+  s => s?.partyRegisterationTargetId,
+)
+
+export { tabSelector, partyRegisterationOnSelector, partyRegisterationTargetIdSelector };

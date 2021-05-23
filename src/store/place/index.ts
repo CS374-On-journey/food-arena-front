@@ -1,5 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
 import { buffers } from 'redux-saga';
+import { useMapSlice } from 'store/map';
 import { createSlice } from 'utils/@reduxjs/toolkit'; // Importing from `utils` makes them more type-safe ✅
 
 import { useInjectReducer } from 'utils/redux-injectors';
@@ -236,12 +238,15 @@ const slice = createSlice({
             const id = action.payload;
             //console.log('focus restaurant', id);
             let focused = false;
+            let focused_item;
             for(let i = 0; i<state.places.length; i++)
             {
                 let item = state.places[i];
                 if( item.id == id && item.submenu_opened){
                     item.submenu_selected = true;
                     focused = true;
+                    focused_item = item;
+                    break;
                 }
             }
             for(let i = 0; focused && i < state.places.length; i++)
@@ -249,6 +254,7 @@ const slice = createSlice({
                 let item = state.places[i];
                 if( item.id !== id ) item.submenu_selected = false;
             }
+            
             return state;
         },
 

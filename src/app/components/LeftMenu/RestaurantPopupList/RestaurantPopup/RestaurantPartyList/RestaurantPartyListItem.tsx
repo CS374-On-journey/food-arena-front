@@ -53,10 +53,11 @@ const DetailButton = styled.div`
 
 interface PropsType {
     party: IParty;
+    onClose: any;
 }
 
 export default function RestaurantPartyListItem(props : PropsType) {
-    const { party } = props;
+    const { party, onClose } = props;
 
     const [isPartyRegisteraionOn, setIsPartyRegisteraionOn] = React.useState(false);
 
@@ -86,7 +87,7 @@ export default function RestaurantPartyListItem(props : PropsType) {
             <PartyRegisteraion
                 selectedId={party?.id}
                 isPartyRegisteraionOn={isPartyRegisteraionOn}
-                setIsPartyRegisteraionOn={setIsPartyRegisteraionOn}
+                setIsPartyRegisteraionOn={x=>{setIsPartyRegisteraionOn(x); onClose()}}
             />
         </Box>
     )

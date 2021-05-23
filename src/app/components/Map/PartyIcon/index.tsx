@@ -2,8 +2,17 @@ import * as React from 'react';
 import { IPlace } from 'store/place/types';
 import styled from 'styled-components/macro';
 
-import { placeAction, usePlaceSlice } from 'store/place/index';
+import { usePlaceSlice } from 'store/place/index';
+import { useMapSlice } from 'store/map/index';
+
 import { useDispatch } from 'react-redux';
+import { IParty } from 'store/party/types';
+
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+
+import PartyRegisteraion from '../../Modals/PartyRegisteraion';
+import { useGlobalSlice } from 'store/global';
 
 interface BoxPropsType {
     image_url:string,
@@ -43,16 +52,19 @@ const Blur = styled.div<BlurPropsType>`
 `
 
 interface PropsType {
+    party: IParty,
     restaurant: IPlace,
     viewport: any,
 }
 
 export default function RestaurantIcon(props:PropsType) {
-    const {restaurant} = props
+    const { party } = props
+    const { restaurant } = props
     const { zoom } = props.viewport
 
     const dispatch = useDispatch();
-    const {actions} = usePlaceSlice();
+    const {actions} = useMapSlice();
+    const {actions:globalActions} = useGlobalSlice();
 
     let size = 80;
     let bsize = 0;
@@ -81,14 +93,22 @@ export default function RestaurantIcon(props:PropsType) {
         <Box 
             size={size} image_url={restaurant.picture_urls[0]}
             onClick={()=>{
-                if(restaurant.submenu_selected){
-                    dispatch(placeAction.closeRestaurant(restaurant.id))
-                }else{
-                    dispatch(placeAction.openRestaurant(restaurant.id))
-                    dispatch(placeAction.focusRestaurant(restaurant.id))
-                }
+                dispatch(actions.setCenter({longitude:restaurant.address.longitude, latitude:restaurant.address.latitude}))
+                dispatch(globalActions.setPartyRegisterationTargetId(party.id))
+                dispatch(globalActions.setPartyRegisterationOn(true))
             }}
         >
+            { size > 50 ? 
+                <CircularProgressbar 
+                    value={party.registered_people / party.max_people * 100}
+                    styles={buildStyles({
+                        strokeLinecap:'butt',
+                        trailColor: 'white',
+                        pathTransition: 'none',
+                        pathColor: ['#FE3061', '#AFE32D', '#F4A71B'][party.id%3],
+                    })}
+                /> 
+            : null}
             <Blur size={bsize}/>
         </Box>
     )

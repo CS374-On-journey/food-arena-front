@@ -5,15 +5,28 @@ import { useInjectReducer } from 'utils/redux-injectors';
 
 // The initial state of the Homepage
 export const initialState: GlobalState = {
-  tab: 'place'
+  tab: 'place',
+  partyRegisterationOn: false,
+  partyRegisterationTargetId: 0,
 };
 
 const slice = createSlice({
   name: 'global',
   initialState,
   reducers: {
-    changeTab(state, action: PayloadAction<GlobalState>) {
-      state.tab = action.payload.tab;
+    changeTab(state, action: PayloadAction<string>) {
+      state.tab = action.payload;
+      return state;
+    },
+
+    setPartyRegisterationOn(state, action: PayloadAction<boolean>) {
+      state.partyRegisterationOn = action.payload;
+      return state;
+    },
+
+    setPartyRegisterationTargetId(state, action: PayloadAction<number>) {
+      state.partyRegisterationTargetId = action.payload;
+      return state;
     },
   },
 });

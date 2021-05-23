@@ -3,14 +3,15 @@ import styled from 'styled-components/macro';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { IParty } from 'store/party/types';
+
+import { IPlace } from 'store/place/types';
 import { selectRestaurantById } from 'store/place/selectors';
 import { usePlaceSlice } from 'store/place';
 
+import { useMapSlice } from 'store/map';
+
 import './index.css';
-
-import {IParty} from 'store/party/types';
-import { IPlace } from 'store/place/types';
-
 
 const Box = styled.div`
     width: 100%;
@@ -104,13 +105,18 @@ export default function Card(props) {
     } = party;
 
     const dispatch = useDispatch()
-    const { actions } = usePlaceSlice();
-    const { closeRestaurant, openRestaurant, focusRestaurant } = actions;
     
     const restaurant = useSelector(selectRestaurantById(restaurant_id)) as IPlace;
 
+    const { actions:mapActions } = useMapSlice();
+
     return (
-        <Box>
+        <Box onClick={()=>{
+            dispatch(mapActions.setCenter({
+                longitude:restaurant.address.longitude, 
+                latitude:restaurant.address.latitude
+            }))
+        }}>
             <LeftWrapper>
             <Header>
                 <TagList>
