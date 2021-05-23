@@ -5,7 +5,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { usePlaceSlice } from 'store/place';
-import { placeSelector } from 'store/place/selectors';
+import { placeSelector, selectedPlaceSelector } from 'store/place/selectors';
+
+import { useMapSlice } from 'store/map/index';
 
 import 'swiper/swiper.scss';
 import "swiper/components/pagination/pagination.min.css"
@@ -120,8 +122,11 @@ export default function Card(props) {
     } = restaurant;
 
     const dispatch = useDispatch()
-    const { actions } = usePlaceSlice();
-    const { closeRestaurant, openRestaurant, focusRestaurant } = actions;
+
+    const { actions:placeActions } = usePlaceSlice();
+    const { closeRestaurant, openRestaurant, focusRestaurant } = placeActions;
+
+    const { actions:mapActions } = useMapSlice();
     
     return (
         <Box onClick={()=>{
