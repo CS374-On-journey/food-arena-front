@@ -13,11 +13,20 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { GlobalStyle } from 'styles/global-styles';
 
 import { HomePage } from './pages/HomePage/Loadable';
+import { ChatPage } from './pages/ChatPage/Loadable';
 import { NotFoundPage } from './pages/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { useUserSlice } from 'store/user';
+import { isLogined } from 'store/user/selectors';
+
 export function App() {
+  
   const { i18n } = useTranslation();
+
+  const { actions } = useUserSlice();
+  const isLogin = useSelector(isLogined);
   return (
     <BrowserRouter>
       <Helmet
@@ -30,6 +39,9 @@ export function App() {
 
       <Switch>
         <Route exact path="/" component={HomePage} />
+        { isLogin ? (
+          <Route exact path="/chat" component={ChatPage} />
+        ) : null}
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
