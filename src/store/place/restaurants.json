@@ -19,6 +19,8 @@
         ],
         "rating":4.5,
         "ai_score":4.7,
+        "travel_time":10,
+        "distance":500,
         "review":[
           {
             "author":"Minji Lee",

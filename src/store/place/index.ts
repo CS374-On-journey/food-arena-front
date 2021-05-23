@@ -131,8 +131,68 @@ function get_menus(index) {
         }
         ret.push(menu);
     }
-    
     return ret;
+}
+
+export let managed_ids = new Array<number>();
+function generate_id(){
+    const id = Math.round(Math.random()*10000) + 11;
+    managed_ids.push(id)
+    return id;
+}
+
+function generate_random_places(places){
+    for(let i=0; i<10; i++)
+    {
+        places.push(
+            {
+                id: generate_id(),
+                name: random_name(),
+                address: random_location(),
+                distance: Math.round(Math.random()*500+500), // meter
+                travel_time: Math.round(Math.random()*60+5), // minute
+                waiting_time: Math.round(Math.random()*300+60), // minute
+                open_time: '09:00',
+                close_time: '22:00',
+                local_time: `${Math.round(Math.random()*23)+1}:00`,
+                tags: ['steak', 'luxery'],
+                rating: Math.random()*5,
+                ai_pick: Math.random() > 0.5,
+                ai_score: Math.random()*5,
+                picture_urls: random_picture(),
+                reviews: [
+                    {
+                        author: random_human(),
+                        content: 'The Wolfgang Steak is one of the three biggest steaks in New York! It felt really different from Peter Ruger. Peter Ruger was the soft feeling of a carefully raised cow, while the Wolfgang was the feeling of a wildly raised cow. The flesh was a bit tough and strong.',
+                        rating: Math.random()*5,
+                        attachment_urls: []
+                    },
+                    {
+                        author: random_human(),
+                        content: 'The Wolfgang Steak is one of the three biggest steaks in New York! It felt really different from Peter Ruger. Peter Ruger was the soft feeling of a carefully raised cow, while the Wolfgang was the feeling.',
+                        rating: Math.random()*5,
+                        attachment_urls: random_picture(),
+                    },
+                    {
+                        author: random_human(),
+                        content: 'The Wolfgang Steak is one of the three biggest steaks in New York! It felt really different from Peter Ruger. Peter Ruger was the soft feeling of a carefully raised cow, while the Wolfgang was the feeling of a wildly raised cow. The flesh was a bit tough and strong.',
+                        rating: Math.random()*5,
+                        attachment_urls: []
+                    },
+                    {
+                        author: random_human(),
+                        content: 'The Wolfgang Steak is one of the three biggest steaks in New York! It felt really different from Peter Ruger. Peter Ruger was the soft feeling of a carefully raised cow, while the Wolfgang was the feeling of a wildly raised cow. The flesh was a bit tough and strong.',
+                        rating: Math.random()*5,
+                        attachment_urls: []
+                    }
+                ],
+                menus: random_menus(),
+                submenu_opened: false,
+                submenu_selected: false,
+            }
+        )
+    }
+    return places
 }
 
 let generated_places = new Array()
@@ -147,15 +207,15 @@ for(let i=0; i<2; i++)
                 latitude: (<any>places).places.restaurants[i].address.latitude,
                 readable: (<any>places).places.address
             },
-            distance: Math.round(Math.random()*500+500), // meter
-            travel_time: Math.round(Math.random()*60+5), // minute
+            distance: (<any>places).places.restaurants[i].distance, // meter
+            travel_time: (<any>places).places.restaurants[i].travel_time, // minute
             waiting_time: (<any>places).places.restaurants[i].waiting_time, // minute
             open_time: '09:00',
             close_time: '22:00',
             local_time: `${Math.round(Math.random()*23)+1}:00`,
             tags: (<any>places).places.restaurants[i].tags,
             rating: (<any>places).places.restaurants[i].rating,
-            ai_pick: Math.random() > 0.5,
+            ai_pick: (<any>places).places.restaurants[i].ai_score > 4.0,
             ai_score: (<any>places).places.restaurants[i].ai_score,
             picture_urls: (<any>places).places.restaurants[i].picture_urls,
             reviews: [
