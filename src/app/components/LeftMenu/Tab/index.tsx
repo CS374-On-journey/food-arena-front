@@ -33,7 +33,7 @@ export default function Tab() {
     const { actions } = useGlobalSlice();
 
     const changeMenu = (menu) => {
-        dispatch(actions.changeTab({tab: menu}));
+        dispatch(actions.changeTab(menu));
         setSearchContent('');
     }
 

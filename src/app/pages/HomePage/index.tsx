@@ -7,6 +7,8 @@ import ProfileButton from 'app/components/TopButtons/profilebutton';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { useUserSlice } from 'store/user';
+import { useGlobalSlice} from 'store/global';
+import { partyRegisterationOnSelector, partyRegisterationTargetIdSelector } from 'store/global/selectors'
 
 import firebase from 'firebase/app';
 import "firebase/auth";
@@ -14,6 +16,8 @@ import {
   FirebaseAuthProvider,
   FirebaseAuthConsumer,
 } from "@react-firebase/auth";
+import { useMapSlice } from 'store/map';
+import PartyRegisteraion from 'app/components/Modals/PartyRegisteraion';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCqmhY1Hd_2JSKNeFyV7EIN5YGKde9eZMA",
@@ -31,6 +35,12 @@ firebase.initializeApp(firebaseConfig);
 export function HomePage() {
 
   const { actions } = useUserSlice();
+  const { actions:mapActions } = useMapSlice();
+  const { actions:globalActions } = useGlobalSlice();
+
+  const partyRegisterationTargetId = useSelector(partyRegisterationTargetIdSelector);
+  const partyRegisterationOn = useSelector(partyRegisterationOnSelector);
+
   const dispatch = useDispatch();
 
   return (
@@ -57,6 +67,11 @@ export function HomePage() {
           }}
         </FirebaseAuthConsumer>
       </div>
+      <PartyRegisteraion
+        isPartyRegisteraionOn={partyRegisterationOn}
+        selectedId = {partyRegisterationTargetId}
+        setIsPartyRegisteraionOn = {(x)=>{dispatch(globalActions.setPartyRegisterationOn(x))}}
+      />
     </FirebaseAuthProvider>
   );
 }

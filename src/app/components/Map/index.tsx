@@ -13,7 +13,7 @@ import { placeSelector, selectedPlaceSelector, selectRestaurantById } from 'stor
 import { IPlace } from 'store/place/types';
 
 import { usePartySlice } from 'store/party';
-import { partySelector } from 'store/party/selectors';
+import { partySelector, selectPartyByRestaurantId } from 'store/party/selectors';
 
 import { useGlobalSlice } from 'store/global';
 import { tabSelector } from 'store/global/selectors';
@@ -22,6 +22,7 @@ import { ILocation } from 'store/map/types';
 import { IParty } from 'store/party/types';
 
 import RestaurantIcon from './RestaurantIcon'
+import PartyIcon from './PartyIcon';
 
 const Box = styled.div`
     width: 100vw;
@@ -74,24 +75,41 @@ export default function Map() {
             //ADD MARKER
             markers.push({
                 loc: loc,
-                elem: (<RestaurantIcon/>),
+                elem: (<RestaurantIcon restaurant={item} viewport={mapViewport}/>),
             })
         }
     }
     else
     {
+        let rids = new Array<number>();
         for(let i =0; i<parties.length; i++){
             let item = parties[i]
             let restaurant = places.filter((i, idx, arr)=>i.id==item.restaurant_id)[0];
-            if(restaurant){
-                let loc = [restaurant.address.longitude, restaurant.address.latitude];
-
-                //ADD MARKER
-                markers.push({
-                    loc: loc,
-                    elem: (<RestaurantIcon/>),
-                })
+            if(restaurant && rids.filter((i, idx, arr)=>i==restaurant.id).length == 0)
+            {
+                rids.push(restaurant.id)
             }
+        }
+
+        for(let i=0; i<rids.length; i++)
+        {
+            let restaurant = places.filter((item, idx, arr)=>item.id==rids[i])[0];
+            let party;
+            if(parties && parties.length > 0) party = parties[0];
+            for(let i = 0; i< parties?.length; i++)
+            {
+                let item = parties[i];
+                if(item.restaurant_id == restaurant.id && item.registered_people < item.max_people){
+                    party=item;
+                    break;
+                }
+            }
+            let loc = [restaurant.address.longitude, restaurant.address.latitude];
+            //ADD MARKER
+            markers.push({
+                loc: loc,
+                elem: (<PartyIcon party={party} restaurant={restaurant} viewport={mapViewport}/>),
+            })
         }
     }
     if(viewTab != currentTab){
@@ -158,7 +176,6 @@ export default function Map() {
         maxPitch: 85,
     }
 
-    console.log('adsf', markers)
     return (
         <Box>
             <MapGL
