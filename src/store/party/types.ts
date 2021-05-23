@@ -2,6 +2,7 @@ export interface IParty {
   id: number;
   title: string;
   restaurant_id: number;
+  is_registered: boolean;
 
   meeting_date: string,
   due_date: string,

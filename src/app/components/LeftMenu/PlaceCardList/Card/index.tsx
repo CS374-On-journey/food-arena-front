@@ -172,7 +172,7 @@ export default function Card(props) {
             }
             <Bottom>
                 <BottomContent>
-                    <PartyIndicator current={2} maximum={4} />
+                    <PartyIndicator restaurant_id={restaurant.id} />
                 </BottomContent>
                 <BottomContent>
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">

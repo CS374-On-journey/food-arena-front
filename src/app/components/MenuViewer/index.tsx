@@ -17,7 +17,7 @@ const Box = styled.div`
     background-color: white;
     border-radius: 20px;
     box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.33);
-    z-index: 99999999;
+    z-index: 200;
 `
 
 const TitleBox = styled.div`
