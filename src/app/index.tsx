@@ -13,7 +13,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { GlobalStyle } from 'styles/global-styles';
 
 import { HomePage } from './pages/HomePage/Loadable';
-import { MyPage } from './pages/MyPage/Loadable';
+import { ChatPage } from './pages/ChatPage/Loadable';
 import { NotFoundPage } from './pages/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
 
@@ -40,7 +40,7 @@ export function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         { isLogin ? (
-          <Route exact path="/mypage" component={MyPage} />
+          <Route exact path="/chat" component={ChatPage} />
         ) : null}
         <Route component={NotFoundPage} />
       </Switch>

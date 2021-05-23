@@ -52,7 +52,7 @@ export function HomePage() {
         <LeftMenu/>
         <ProfileButton onClick={() => {
           if(isLogin) {
-            history.push('/mypage');
+            history.push('/chat');
           } else {
             const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithPopup(googleAuthProvider);

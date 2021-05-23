@@ -4,7 +4,7 @@
 
 import { lazyLoad } from 'utils/loadable';
 
-export const MyPage = lazyLoad(
+export const ChatPage = lazyLoad(
   () => import('./index'),
-  module => module.MyPage,
+  module => module.ChatPage,
 );
