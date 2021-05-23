@@ -3,6 +3,7 @@ import { buffers } from 'redux-saga';
 import { createSlice } from 'utils/@reduxjs/toolkit'; // Importing from `utils` makes them more type-safe ✅
 
 import { useInjectReducer } from 'utils/redux-injectors';
+import places from "./restaurants.json";
 
 import { IPlace, IMenu, PlacesState } from './types';
 
@@ -105,52 +106,73 @@ function random_menus(depth=10) {
     return ret;
 }
 
+function get_menus(index) {
+    let ret = new Array<IMenu>();
+
+    for(let i=0; i<3; i++){
+        let menu : IMenu = {
+            id: (<any>places).places.restaurants[i].menus[0].id,
+            title:(<any>places).places.restaurants[i].menus[0].title,
+            picture_url:(<any>places).places.restaurants[i].menus[0].picture_url,
+            description: (<any>places).places.restaurants[i].menus[0].description,
+            type: '',
+            local_title: (<any>places).places.restaurants[i].menus[0].title,
+            local_price: Math.random()*100,
+            local_currency: '$',
+            local_quantity: Math.random()*1000,
+            local_quantity_unit: 'g',
+
+            local_format_quantity: '0',
+            local_format_price_per_unit: '0.00',
+            local_format_price: '0.0',
+            children: [],
+            isExpanded:false,
+            label: null,
+        }
+        ret.push(menu);
+    }
+    
+    return ret;
+}
+
 let generated_places = new Array()
-for(let i=0; i<10; i++)
+for(let i=0; i<2; i++)
 {
     generated_places.push(
         {
             id: i+1,
-            name: random_name(),
-            address: random_location(),
+            name: (<any>places).places.restaurants[i].name,
+            address: {
+                longitude: (<any>places).places.restaurants[i].address.longitude,
+                latitude: (<any>places).places.restaurants[i].address.latitude,
+                readable: (<any>places).places.address
+            },
             distance: Math.round(Math.random()*500+500), // meter
             travel_time: Math.round(Math.random()*60+5), // minute
-            waiting_time: Math.round(Math.random()*300+60), // minute
+            waiting_time: (<any>places).places.restaurants[i].waiting_time, // minute
             open_time: '09:00',
             close_time: '22:00',
             local_time: `${Math.round(Math.random()*23)+1}:00`,
-            tags: ['steak', 'luxery'],
-            rating: Math.random()*5,
+            tags: (<any>places).places.restaurants[i].tags,
+            rating: (<any>places).places.restaurants[i].rating,
             ai_pick: Math.random() > 0.5,
-            ai_score: Math.random()*5,
-            picture_urls: random_picture(),
+            ai_score: (<any>places).places.restaurants[i].ai_score,
+            picture_urls: (<any>places).places.restaurants[i].picture_urls,
             reviews: [
                 {
-                    author: random_human(),
-                    content: 'The Wolfgang Steak is one of the three biggest steaks in New York! It felt really different from Peter Ruger. Peter Ruger was the soft feeling of a carefully raised cow, while the Wolfgang was the feeling of a wildly raised cow. The flesh was a bit tough and strong.',
-                    rating: Math.random()*5,
+                    author: (<any>places).places.restaurants[i].reviews[0].author,
+                    content: (<any>places).places.restaurants[i].reviews[0].content,
+                    rating: (<any>places).places.restaurants[i].reviews[0].rating,
                     attachment_urls: []
                 },
                 {
-                    author: random_human(),
-                    content: 'The Wolfgang Steak is one of the three biggest steaks in New York! It felt really different from Peter Ruger. Peter Ruger was the soft feeling of a carefully raised cow, while the Wolfgang was the feeling.',
-                    rating: Math.random()*5,
-                    attachment_urls: random_picture(),
-                },
-                {
-                    author: random_human(),
-                    content: 'The Wolfgang Steak is one of the three biggest steaks in New York! It felt really different from Peter Ruger. Peter Ruger was the soft feeling of a carefully raised cow, while the Wolfgang was the feeling of a wildly raised cow. The flesh was a bit tough and strong.',
-                    rating: Math.random()*5,
-                    attachment_urls: []
-                },
-                {
-                    author: random_human(),
-                    content: 'The Wolfgang Steak is one of the three biggest steaks in New York! It felt really different from Peter Ruger. Peter Ruger was the soft feeling of a carefully raised cow, while the Wolfgang was the feeling of a wildly raised cow. The flesh was a bit tough and strong.',
-                    rating: Math.random()*5,
+                    author: (<any>places).places.restaurants[i].reviews[1].author,
+                    content: (<any>places).places.restaurants[i].reviews[1].content,
+                    rating: (<any>places).places.restaurants[i].reviews[1].rating,
                     attachment_urls: []
                 }
             ],
-            menus: random_menus(),
+            menus: get_menus(i),
             submenu_opened: false,
             submenu_selected: false,
         }
