@@ -9,7 +9,7 @@ import { IPlace } from 'store/place/types';
 import { usePartySlice } from 'store/party/index';
 import { partySelector } from 'store/party/selectors';
 
-
+import RestaurantPartyList from './RestaurantPartyList';
 import RestaurantReviewList from './RestaurantReviewList';
 import AiPickIndicator from 'app/components/Indicators/AiPickIndicator';
 import StarsIndicator from 'app/components/Indicators/StarsIndicator';
@@ -259,6 +259,12 @@ const BottomHeaderCloseButtonBox = styled(CloseButtonBox)`
     margin: 4px;
 `
 
+const PartyListBox = styled.div`
+    position: fixed;
+    left: 710px;
+    top: 500px;
+`
+
 export default function RestaurantPopup(props) {
     const {
         selected, bottom_header, onSelect, restaurant, z_index, onClose
@@ -280,8 +286,8 @@ export default function RestaurantPopup(props) {
     const dispatch = useDispatch();
     const { actions } = usePlaceSlice();
     const menu_opened = useSelector(menuViewerOpenedSelector);
-    
-    
+
+    const [isPartyListOpened, setIsPartyListOpened] = React.useState(false);
 
     return (
         <Container selected={selected} z_index={z_index}>
@@ -336,12 +342,22 @@ export default function RestaurantPopup(props) {
                                 <ActionButtonsRouteButton>
                                     
                                 </ActionButtonsRouteButton>
-                                <ActionButtonsPartiesButton>
+                                <ActionButtonsPartiesButton onClick={
+                                    ()=>{
+                                        setIsPartyListOpened(!isPartyListOpened);
+                                    }
+                                }>
                                     <div style={{position:'relative', left:'-5px'}}>
-                                        <PartyIndicator current={2} maximum={4} fill='#FFF'/>
+                                        <PartyIndicator restaurant_id={restaurant.id} fill='#FFF'/>
                                     </div>
                                 </ActionButtonsPartiesButton>
                             </ActionButtonsBox>
+
+                            { isPartyListOpened && selected ?
+                                <PartyListBox>
+                                    <RestaurantPartyList restaurant={restaurant} onClose={()=>{setIsPartyListOpened(false)}}/>
+                                </PartyListBox>
+                            : null}
                         </>
                     )
                 }

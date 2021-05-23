@@ -18,8 +18,9 @@ function random_title() {
 }
 
 let generated_parties = new Array()
-for(let i=0; i<10; i++)
+for(let i=0; i<100; i++)
 {
+    let maxPeople = Math.round(Math.random()*5) + 2;
     generated_parties.push(
         {
             id: i+1,
@@ -31,16 +32,18 @@ for(let i=0; i<10; i++)
             tags: ['steak', 'luxery'],
             description: '설명',
             menu_text: '밥',
-            registered_people: 4,
-            max_people: 4,
+            registered_people: Math.min(Math.round(Math.random()*maxPeople), maxPeople),
+            max_people: maxPeople,
             ban_rules: [
-                '금지사항 1',
-                '금지사항 2',
-                '금지사항 3',
+                '금지사항 1: No Smoking',
+                '금지사항 2: No Alchole',
+                '금지사항 3: No Vegetarian. We will eat meats :3',
             ],
         }
     )
 }
+
+console.log('created parites', generated_parties)
     
 export const initialState: PartiesState = {
     parties: generated_parties
