@@ -28,7 +28,7 @@ export function ChatInfo({
 
   return (
     <>
-      <Box>
+      <Box className="fadeInUp">
         <div style={{display: 'flex'}}>
             <Avatar
               name='food_photo'

@@ -28,12 +28,13 @@ export function ChatListItem({
     photo_url,
     title,
     restaurant,
-    selected
+    selected,
+    onClick
 }) {
 
   return (
     <>
-      <Box selected={selected}>
+      <Box selected={selected} onClick={onClick}>
         <Avatar
           name='food_photo'
           size="scale1400"

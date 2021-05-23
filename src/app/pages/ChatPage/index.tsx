@@ -32,6 +32,8 @@ export function ChatPage() {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
 
+  const [selectedChat, setSelectedChat] = React.useState<string | null>(null);
+
   return (
     <>
       <Helmet>
@@ -39,7 +41,7 @@ export function ChatPage() {
         <meta name="description" content="Find THE FOOD!" />
       </Helmet>
       <div style={{display: 'flex'}}>
-        <ChatList>
+        <ChatList className="fadeInUp">
           <div style={{height: '75px', display: 'flex', alignItems: 'center'}}>
             <Avatar
               name={user?.displayName as string}
@@ -53,28 +55,32 @@ export function ChatPage() {
             photo_url='https://media.timeout.com/images/103504187/630/472/image.jpg'
             title='테스트'
             restaurant='adad'
-            selected={true}
+            selected={selectedChat === '1'}
+            onClick={() => setSelectedChat('1')}
           />
           <ChatListItem 
             photo_url='https://media.timeout.com/images/103504187/630/472/image.jpg'
             title='테스트'
             restaurant='adad'
-            selected={false}
+            selected={selectedChat === '2'}
+            onClick={() => setSelectedChat('2')}
           />
           <ChatListItem 
             photo_url='https://media.timeout.com/images/103504187/630/472/image.jpg'
             title='테스트'
             restaurant='adad'
-            selected={false}
+            selected={selectedChat === '3'}
+            onClick={() => setSelectedChat('3')}
           />
           <ChatListItem 
             photo_url='https://media.timeout.com/images/103504187/630/472/image.jpg'
             title='테스트'
             restaurant='adad'
-            selected={false}
+            selected={selectedChat === '4'}
+            onClick={() => setSelectedChat('4')}
           />
         </ChatList>
-        <ChatViewer/>
+        <ChatViewer />
       </div>
     </>
   );
