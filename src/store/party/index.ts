@@ -44,7 +44,7 @@ for(let i=0; i<100; i++)
     )
 }
 
-console.log('created parites', generated_parties)
+//console.log('created parites', generated_parties)
     
 export const initialState: PartiesState = {
     parties: generated_parties
@@ -61,7 +61,6 @@ const slice = createSlice({
             party.is_registered = true;
             party.registered_people = 1;
             s.parties.push(party)
-            console.log('create party', s, a);
         },
 
         joinParty(s:PartiesState, a:PayloadAction<number>){

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
-import mapboxgl from 'mapbox-gl';
+//import mapboxgl from 'mapbox-gl'
+import MapGL, {Marker} from 'react-map-gl';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -17,14 +18,14 @@ import { partySelector } from 'store/party/selectors';
 import { useGlobalSlice } from 'store/global';
 import { tabSelector } from 'store/global/selectors';
 
-import RestaurantIcon from './RestaurantIcon'
 import { ILocation } from 'store/map/types';
 import { IParty } from 'store/party/types';
+
+import RestaurantIcon from './RestaurantIcon'
 
 const Box = styled.div`
     width: 100vw;
     height: 100vh;
-    background: #545454;
     position: fixed;
 `
 
@@ -34,16 +35,19 @@ const MapContainer = styled.div`
 `
 
 //Token by Heejun
-mapboxgl.accessToken = 'pk.eyJ1IjoiZ21sd25zNTE3NiIsImEiOiJja280ZDZ6aDIwbzdoMnVwZG1lbXY2djd1In0.vSiPLE6d_vKC3iZkXaac7w';
+const MAP_TOKEN = 'pk.eyJ1IjoiZ21sd25zNTE3NiIsImEiOiJja280ZDZ6aDIwbzdoMnVwZG1lbXY2djd1In0.vSiPLE6d_vKC3iZkXaac7w';
 const MAP_ELEMENT_ID = "__mapboxgl_container__"
-let map;
-let map_markers = new Array<mapboxgl.Marker>();
+//mapboxgl.accessToken = MAP_TOKEN
 
 export default function Map() {
-    const [mapInited, setMapInited] = React.useState(false);
     const [viewCenter, setViewCenter] = React.useState<ILocation|null>({latitude:0, longitude:0});
     const [viewTab, setViewTab] = React.useState('');
     const [viewPlace, setViewPlace] = React.useState<IPlace|null>(null);
+    const [mapViewport, setMapViewport] = React.useState({
+        latitude:0,
+        longitude:0,
+        zoom:12,
+    })
 
     const dispatch = useDispatch();
 
@@ -59,104 +63,123 @@ export default function Map() {
 
     const {actions:partyActions} = usePartySlice();
     const parties = useSelector(partySelector) as IParty[];
-
-    React.useEffect(()=>{
-        console.log('map box gl init')
-        
-        map = new mapboxgl.Map({
-            container: MAP_ELEMENT_ID,
-            style: 'mapbox://styles/mapbox/streets-v11'
-        })
-
-        setViewCenter({latitude:0, longitude:0});
-        setViewTab('')
-        setMapInited(true);
-    },[])
-
-    if(mapInited)
+    
+    let markers = new Array<any>();
+    if(currentTab == 'place')
     {
-        if(viewTab != currentTab){
-            for(let i=0; i<map_markers.length; i++)
-            {
-                let item = map_markers[i];
-                item.remove();
-            }
-
-            if(currentTab == 'place')
-            {
-                for(let i =0; i<places.length; i++){
-                    let item = places[i]
-                    let loc = [item.address.longitude, item.address.latitude];
-
-                    let marker = new mapboxgl.Marker()
-                    marker.setLngLat(loc as [number, number]).addTo(map)
-
-                    map_markers.push(marker)
-                }
-            }
-            else
-            {
-                for(let i =0; i<parties.length; i++){
-                    let item = parties[i]
-                    let restaurant = places.filter((i, idx, arr)=>i.id==item.restaurant_id)[0];
-                    if(restaurant){
-                        let loc = [restaurant.address.longitude, restaurant.address.latitude];
-
-                        let marker = new mapboxgl.Marker()
-                        marker.setLngLat(loc as [number, number]).addTo(map)
-
-                        map_markers.push(marker)
-                    }
-                }
-            }
-
-            setViewTab(currentTab as string);
-        }
-        
-        if(viewPlace?.id != selectedPlace?.id)
-        {
-            if(selectedPlace)
-            {
-                let loc = {longitude:selectedPlace.address.longitude, latitude:selectedPlace.address.latitude}
-                dispatch(mapActions.setCenter(loc))
-            }
-            else
-            {
-                dispatch(mapActions.setCenter(null))
-            }
-            setViewPlace(selectedPlace);
-        }
-        
-        if(viewCenter != requestedCenter)
-        {
-            if(requestedCenter)
-            {
-                let loc = requestedCenter as ILocation;
-                map.setZoom(15)
-                map.setCenter([loc.longitude - 0.003, loc.latitude])
-            }
-            else
-            {
-                let loc_sum = [0.0, 0.0]
-                for(let i =0; i<map_markers.length; i++){
-                    let item = map_markers[i]
-                    let loc = [item.getLngLat().lng, item.getLngLat().lat];
-                    loc_sum = [loc_sum[0]+loc[0], loc_sum[1]+loc[1]];
-                }
-                loc_sum = [
-                    loc_sum[0]/map_markers.length - 0.025, 
-                    loc_sum[1]/map_markers.length
-                ]
-                map.setZoom(12)
-                map.setCenter(loc_sum)
-            }
-            setViewCenter(requestedCenter as ILocation|null);
+        for(let i =0; i<places.length; i++){
+            let item = places[i]
+            let loc = [item.address.longitude, item.address.latitude];
+            
+            //ADD MARKER
+            markers.push({
+                loc: loc,
+                elem: (<RestaurantIcon/>),
+            })
         }
     }
+    else
+    {
+        for(let i =0; i<parties.length; i++){
+            let item = parties[i]
+            let restaurant = places.filter((i, idx, arr)=>i.id==item.restaurant_id)[0];
+            if(restaurant){
+                let loc = [restaurant.address.longitude, restaurant.address.latitude];
 
+                //ADD MARKER
+                markers.push({
+                    loc: loc,
+                    elem: (<RestaurantIcon/>),
+                })
+            }
+        }
+    }
+    if(viewTab != currentTab){
+
+        setViewTab(currentTab as string);
+    }
+    
+    if(viewPlace?.id != selectedPlace?.id)
+    {
+        if(selectedPlace)
+        {
+            let loc = {longitude:selectedPlace.address.longitude, latitude:selectedPlace.address.latitude}
+            dispatch(mapActions.setCenter(loc))
+        }
+        else
+        {
+            dispatch(mapActions.setCenter(null))
+        }
+        setViewPlace(selectedPlace);
+    }
+    
+    if(viewCenter != requestedCenter)
+    {
+        if(requestedCenter)
+        {
+            let loc = requestedCenter as ILocation;
+            setMapViewport({
+                latitude:loc.latitude,
+                longitude:loc.longitude - 0.003,
+                zoom:15,
+            })
+        }
+        else if(markers.length > 0)
+        {
+            let loc_sum = [0.0, 0.0]
+            for(let i =0; i<markers.length; i++){
+                let loc = markers[i].loc
+                loc_sum = [loc_sum[0]+loc[0], loc_sum[1]+loc[1]];
+            }
+            loc_sum = [
+                loc_sum[0]/markers.length - 0.025, 
+                loc_sum[1]/markers.length
+            ]
+            setMapViewport({
+                latitude:loc_sum[1],
+                longitude:loc_sum[0] - 0.003,
+                zoom:12,
+            })
+        }
+        setViewCenter(requestedCenter as ILocation|null);
+    }
+
+    const settings ={
+        dragPan: true,
+        dragRotate: true,
+        scrollZoom: true,
+        touchZoom: true,
+        touchRotate: true,
+        keyboard: true,
+        doubleClickZoom: true,
+        minZoom: 0,
+        maxZoom: 20,
+        minPitch: 0,
+        maxPitch: 85,
+    }
+
+    console.log('adsf', markers)
     return (
         <Box>
-            <MapContainer id={MAP_ELEMENT_ID}/>
+            <MapGL
+            {...mapViewport}
+            {...settings}
+                width="100vw"
+                height="100vh"
+                mapboxApiAccessToken={MAP_TOKEN}
+                mapStyle='mapbox://styles/mapbox/streets-v11'
+                onViewportChange={nextViewport => setMapViewport(nextViewport)}
+            >
+                {
+                    markers.map((item, idx, arr)=>{
+                        return (
+                            <Marker longitude={item.loc[0]} latitude={item.loc[1]} key={idx}>
+                                {item.elem}
+                            </Marker>
+                        )
+                    })
+                }
+            </MapGL>
         </Box>
     );
-}   
+}
