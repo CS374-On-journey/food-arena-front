@@ -1,6 +1,11 @@
 import * as React from "react";
 import styled from 'styled-components/macro';
 import PropTypes from 'prop-types';
+import Swal from 'sweetalert2';
+
+import { IParty } from 'store/party/types';
+import { selectRestaurantById } from 'store/place/selectors';
+import { usePartySlice } from 'store/party/index';
 
 import {
   Modal,
@@ -31,6 +36,7 @@ import { Input } from "baseui/input";
 import { FormControl } from 'baseui/form-control';
 import { DatePicker } from "baseui/datepicker";
 import { TimePicker } from 'baseui/timepicker';
+import { useDispatch, useSelector } from "react-redux";
 
 interface PhotoProps {
   image: string;
@@ -62,9 +68,14 @@ const BottomContent = styled.div`
 `;
 
 export default function PartyCreation({
+    restaurantId,
     isPartyCreationOn,
     setIsPartyCreationOn,
-}) {
+}) 
+{
+  const {actions} = usePartySlice();
+  const dispatch = useDispatch();
+  const restaurant = useSelector(selectRestaurantById(restaurantId));
 
   const [checked, setChecked] = React.useState(false);
   const [title, setTitle] = React.useState('');
@@ -90,7 +101,7 @@ export default function PartyCreation({
       overrides={{
         Root: {
           style: ({ $theme }) => ({
-            zIndex: 9999999999,
+            zIndex: 500,
           })
         },
         Dialog: {
@@ -146,12 +157,12 @@ export default function PartyCreation({
                     overrides: {
                       Body: {
                         style: ({ $theme }) => ({
-                          zIndex: 99999999999
+                          zIndex: 500
                         })
                       },
                       Inner: {
                         style: ({ $theme }) => ({
-                          zIndex: 99999999999
+                          zIndex: 500
                       })
                     },
                   }
@@ -162,12 +173,12 @@ export default function PartyCreation({
                   overrides: {
                     Body: {
                       style: ({ $theme }) => ({
-                        zIndex: 99999999999
+                        zIndex: 500
                       })
                     },
                     Inner: {
                       style: ({ $theme }) => ({
-                        zIndex: 99999999999
+                        zIndex: 500
                     })
                   },
                 }
@@ -196,7 +207,7 @@ export default function PartyCreation({
                             overrides: {
                               Body: {
                                 style: ({ $theme }) => ({
-                                  zIndex: 99999999999
+                                  zIndex: 500
                                 })
                               }
                             }
@@ -238,7 +249,7 @@ export default function PartyCreation({
             }}
           >
             <Block marginBottom="scale200" />
-            <Label2>Max Peoples</Label2>
+            <Label2>Max People</Label2>
             <Block marginBottom="scale200" />
             <Input
               value={maxPeople}
@@ -271,12 +282,12 @@ export default function PartyCreation({
                     overrides: {
                       Body: {
                         style: ({ $theme }) => ({
-                          zIndex: 99999999999
+                          zIndex: 500
                         })
                       },
                       Inner: {
                         style: ({ $theme }) => ({
-                          zIndex: 99999999999
+                          zIndex: 500
                       })
                     },
                   }
@@ -287,12 +298,12 @@ export default function PartyCreation({
                   overrides: {
                     Body: {
                       style: ({ $theme }) => ({
-                        zIndex: 99999999999
+                        zIndex: 500
                       })
                     },
                     Inner: {
                       style: ({ $theme }) => ({
-                        zIndex: 99999999999
+                        zIndex: 500
                     })
                   },
                 }
@@ -320,7 +331,7 @@ export default function PartyCreation({
                             overrides: {
                               Body: {
                                 style: ({ $theme }) => ({
-                                  zIndex: 99999999999
+                                  zIndex: 500
                                 })
                               }
                             }
@@ -375,7 +386,54 @@ export default function PartyCreation({
         <Button 
           kind={KIND.primary}
           disabled={!checked}
-          onClick={() => setIsPartyCreationOn(false)}
+          onClick={() => {
+            let count = Number.parseInt(maxPeople);
+            if(count > 8){
+              Swal.fire('Maximum people must be less than or equal to 8 people')
+              return
+            }
+            if(count < 2){
+              Swal.fire('Maxium people must be more than 1. If you want to eat alone, how about to use navigation feature?')
+              return;
+            }
+            const isNull = x=>x==null||x==undefined||x==''||x==0||((x instanceof String) && (x as string).trim().length <= 0);
+            if(isNull(description)){
+              Swal.fire('Please fill up "Short explanation"')
+              return
+            }
+            if(isNull(menu)){
+              Swal.fire('Please fill up "What we eat"')
+              return
+            }
+            if(isNull(title)){
+              Swal.fire('Please fill up "Title"')
+              return
+            }
+            if(isNull(maxPeople)){
+              Swal.fire('Please check the "Max People"')
+              return
+            }
+            if(isNull(count)){
+              Swal.fire('Please check the "Max People"')
+              return
+            }
+
+            dispatch(actions.createParty({
+              ban_rules: ['a', 'b', 'c'],
+              description: description,
+              due_date: dueDate.toLocaleString(),
+              id: 1,
+              is_registered: true,
+              max_people: count,
+              meeting_date: meetingDate.toLocaleString(),
+              menu_text: menu,
+              registered_people: 1,
+              restaurant_id: restaurantId, 
+              tags: restaurant ? restaurant?.tags : [],
+              title: title,
+            }))
+            setIsPartyCreationOn(false)
+          }}
           overrides={{
             BaseButton: {
               style: ({ $theme }) => ({

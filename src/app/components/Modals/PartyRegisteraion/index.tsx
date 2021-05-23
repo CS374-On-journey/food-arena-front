@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from 'styled-components/macro';
-import PropTypes from 'prop-types';
+import Swal from 'sweetalert2'
 
 import {
     Modal,
@@ -23,14 +23,16 @@ import {
 } from "baseui";
 import {Block} from 'baseui/block';
 import {Button, KIND} from 'baseui/button';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { partySelector } from 'store/party/selectors';
+import { usePartySlice } from 'store/party/index';
 import { selectRestaurantById } from 'store/place/selectors';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.scss';
 import "swiper/components/pagination/pagination.min.css"
 import { IPlace } from "store/place/types";
+import { IParty } from "store/party/types";
 
 interface PhotoProps {
     image: string;
@@ -86,6 +88,8 @@ export default function PartyRegisteraion({
     isPartyRegisteraionOn,
     setIsPartyRegisteraionOn,
 }) {
+    const { actions } = usePartySlice();
+    const dispatch = useDispatch();
     const parties = useSelector(partySelector);
     const selectedParty = parties?.find(party => party.id === selectedId);
     const [checked, setChecked] = React.useState(false);
@@ -107,7 +111,7 @@ export default function PartyRegisteraion({
             overrides={{
                 Root: {
                     style: ({ $theme }) => ({
-                        zIndex: 9999999999,
+                        zIndex: 500,
                     })
                 },
                 Dialog: {
@@ -205,7 +209,17 @@ export default function PartyRegisteraion({
                         <Button 
                             kind={KIND.primary}
                             disabled={!checked}
-                            onClick={() => setIsPartyRegisteraionOn(false)}
+                            onClick={() => {
+                                let party = selectedParty as IParty;
+                                if(party.registered_people >= party.max_people){
+                                    Swal.fire('This party is already full!')
+                                }else if(party.is_registered){
+                                    Swal.fire('You already in that party, please check your profile page.')
+                                }else{
+                                    dispatch(actions.joinParty(selectedId));
+                                }
+                                setIsPartyRegisteraionOn(false)
+                            }}
                             overrides={{
                                 BaseButton: {
                                     style: ({ $theme }) => ({
