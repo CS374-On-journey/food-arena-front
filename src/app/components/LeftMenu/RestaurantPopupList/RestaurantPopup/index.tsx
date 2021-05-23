@@ -6,12 +6,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { usePlaceSlice } from 'store/place';
 import { selectedPlaceSelector, menuViewerOpenedSelector } from 'store/place/selectors';
 import { IPlace } from 'store/place/types';
+import { usePartySlice } from 'store/party/index';
+import { partySelector } from 'store/party/selectors';
+
 
 import RestaurantReviewList from './RestaurantReviewList';
 import AiPickIndicator from 'app/components/Indicators/AiPickIndicator';
 import StarsIndicator from 'app/components/Indicators/StarsIndicator';
 import PartyIndicator from 'app/components/Indicators/PartyIndicator';
 import CloseButton from 'app/components/CloseButton';
+import { IParty } from 'store/party/types';
 
 type ContainerPropType = {
     selected: boolean;
@@ -276,6 +280,8 @@ export default function RestaurantPopup(props) {
     const dispatch = useDispatch();
     const { actions } = usePlaceSlice();
     const menu_opened = useSelector(menuViewerOpenedSelector);
+    
+    
 
     return (
         <Container selected={selected} z_index={z_index}>

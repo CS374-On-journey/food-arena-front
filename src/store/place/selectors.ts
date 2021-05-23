@@ -1,5 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { P } from 'app/pages/NotFoundPage/P';
+import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 import { createSelectorHook } from 'react-redux';
 import { RootState } from 'types';
 import { initialState } from '.';
@@ -31,4 +32,16 @@ const menuViewerOpenedSelector = createSelector(
   s => s?.menu_viewer_opened,
 )
 
-export { placeSelector, selectedPlaceSelector, menuViewerOpenedSelector };
+const selectRestaurantById = (id) => createSelector(
+  baseSelector,
+  s => {
+    let places = s?.places as IPlace[];
+    for(let i = 0; i< places.length; i++)
+    {
+      let item = places[i];
+      if(item.id == id) return item;
+    }
+  }
+)
+
+export { placeSelector, selectedPlaceSelector, menuViewerOpenedSelector, selectRestaurantById };

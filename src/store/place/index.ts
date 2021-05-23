@@ -105,12 +105,19 @@ function random_menus(depth=10) {
     return ret;
 }
 
+export let managed_ids = new Array<number>();
+function generate_id(){
+    const id = Math.round(Math.random()*10000) + 11;
+    managed_ids.push(id)
+    return id;
+}
+
 let generated_places = new Array()
 for(let i=0; i<10; i++)
 {
     generated_places.push(
         {
-            id: i+1,
+            id: generate_id(),
             name: random_name(),
             address: random_location(),
             distance: Math.round(Math.random()*500+500), // meter
