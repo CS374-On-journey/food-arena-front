@@ -1,8 +1,6 @@
 import * as React from "react";
 import styled from 'styled-components/macro';
 import PropTypes from 'prop-types';
-import ImageList from '@material-ui/core/ImageList';
-import ImageListItem from '@material-ui/core/ImageListItem';
 
 import {
   Modal,
