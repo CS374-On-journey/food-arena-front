@@ -10,6 +10,7 @@ import {Block} from 'baseui/block';
 import { Avatar } from "baseui/avatar";
 import { ChatListItem } from 'app/components/Chat/ChatListItem';
 import { ChatViewer } from 'app/components/Chat/ChatViewer';
+import { selectRegisteredParties } from 'store/party/selectors';
 
 const ChatList = styled.div`
   display: flex;
@@ -31,6 +32,7 @@ export function ChatPage() {
   const { actions } = useUserSlice();
   const dispatch = useDispatch();
   const user = useSelector(getUser);
+  const registeredParties = useSelector(selectRegisteredParties);
 
   const [selectedChat, setSelectedChat] = React.useState<string | null>(null);
 
@@ -51,36 +53,18 @@ export function ChatPage() {
             <Block marginRight="scale500" />
             Chats
           </div>
-          <ChatListItem
-            photo_url='https://media.timeout.com/images/103504187/630/472/image.jpg'
-            title='테스트'
-            restaurant='adad'
-            selected={selectedChat === '1'}
-            onClick={() => setSelectedChat('1')}
-          />
-          <ChatListItem 
-            photo_url='https://media.timeout.com/images/103504187/630/472/image.jpg'
-            title='테스트'
-            restaurant='adad'
-            selected={selectedChat === '2'}
-            onClick={() => setSelectedChat('2')}
-          />
-          <ChatListItem 
-            photo_url='https://media.timeout.com/images/103504187/630/472/image.jpg'
-            title='테스트'
-            restaurant='adad'
-            selected={selectedChat === '3'}
-            onClick={() => setSelectedChat('3')}
-          />
-          <ChatListItem 
-            photo_url='https://media.timeout.com/images/103504187/630/472/image.jpg'
-            title='테스트'
-            restaurant='adad'
-            selected={selectedChat === '4'}
-            onClick={() => setSelectedChat('4')}
-          />
+          { registeredParties.map(party => {
+            return (
+            <ChatListItem
+              title={party.title}
+              restaurant_id={party.restaurant_id}
+              selected={selectedChat === party.id.toString()}
+              onClick={() => setSelectedChat(party.id.toString())}
+            />
+            )
+          })}
         </ChatList>
-        <ChatViewer />
+        <ChatViewer selectedParty={registeredParties.find(party => party.id.toString() === selectedChat)}/>
       </div>
     </>
   );

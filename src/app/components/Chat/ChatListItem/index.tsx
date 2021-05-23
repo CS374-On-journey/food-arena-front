@@ -3,6 +3,9 @@ import styled from 'styled-components/macro';
 
 import {Block} from 'baseui/block';
 import { Avatar } from "baseui/avatar";
+import { useSelector } from 'react-redux';
+import { selectRestaurantById } from 'store/place/selectors';
+import { IPlace } from 'store/place/types';
 
 interface IChatListItem {
     selected: boolean
@@ -25,12 +28,13 @@ const Box = styled.div<IChatListItem>`
 `;
 
 export function ChatListItem({
-    photo_url,
     title,
-    restaurant,
+    restaurant_id,
     selected,
     onClick
 }) {
+
+  const restaurant = useSelector(selectRestaurantById(restaurant_id)) as IPlace;
 
   return (
     <>
@@ -38,11 +42,11 @@ export function ChatListItem({
         <Avatar
           name='food_photo'
           size="scale1400"
-          src={photo_url}
+          src={restaurant.picture_urls[0]}
         />
         <div style={{display: 'flex', flexDirection: 'column', marginLeft: '15px'}}>
           <div><b>{title}</b></div>
-          <div>{restaurant}</div>
+          <div>{restaurant.name}</div>
         </div>
       </Box>
     </>

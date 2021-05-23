@@ -30,11 +30,15 @@ export function ChatInfo({
     <>
       <Box className="fadeInUp">
         <div style={{display: 'flex'}}>
+          { photo_url === '' ? (
+            null
+          ) : (
             <Avatar
               name='food_photo'
               size="scale1200"
               src={photo_url}
             />
+          )}
             <div style={{display: 'flex', flexDirection: 'column', marginLeft: '15px'}}>
               <div><b>{title}</b></div>
               <div>{restaurant}</div>

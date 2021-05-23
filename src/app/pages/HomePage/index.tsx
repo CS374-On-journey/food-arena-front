@@ -13,6 +13,7 @@ import { useHistory } from 'react-router-dom';
 
 import firebase from 'firebase/app';
 import "firebase/auth";
+import "firebase/database";
 import {
   FirebaseAuthProvider,
   FirebaseAuthConsumer,
@@ -30,6 +31,7 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+export const db = firebase.database();
 
 export function HomePage() {
 
