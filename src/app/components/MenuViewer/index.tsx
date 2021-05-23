@@ -141,7 +141,7 @@ export default function MenuViewer(props) {
     if(!opened) return (<></>)
 
     return (
-        <Box style={{top:winPos[1], left:winPos[0]}}>
+        <Box className="fadeInUp" style={{top:winPos[1], left:winPos[0]}}>
             <TitleBox>
                 <TitleContentBox>
                     <TitleBackButton onClick={()=>{dispatch(actions.closeMenu())}}/>
