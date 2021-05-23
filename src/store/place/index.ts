@@ -7,6 +7,35 @@ import { useInjectReducer } from 'utils/redux-injectors';
 import places from "./restaurants.json";
 import { IPlace, IMenu, PlacesState } from './types';
 
+function get_menus(index) {
+    let ret = new Array<IMenu>();
+
+    for(let i=0; i<3; i++){
+        let menu : IMenu = {
+            id: (<any>places).places.restaurants[i].menus[0].id,
+            title:(<any>places).places.restaurants[i].menus[0].title,
+            picture_url:(<any>places).places.restaurants[i].menus[0].picture_url,
+            description: (<any>places).places.restaurants[i].menus[0].description,
+            type: '',
+            local_title: (<any>places).places.restaurants[i].menus[0].title,
+            local_price: Math.random()*100,
+            local_currency: '$',
+            local_quantity: Math.random()*1000,
+            local_quantity_unit: 'g',
+
+            local_format_quantity: '0',
+            local_format_price_per_unit: '0.00',
+            local_format_price: '0.0',
+            children: [],
+            isExpanded:false,
+            label: null,
+        }
+        ret.push(menu);
+    }
+    
+    return ret;
+}
+
 let generated_places = new Array()
 for(let i=0; i<4; i++)
 {
@@ -44,7 +73,7 @@ for(let i=0; i<4; i++)
                     attachment_urls: []
                 }
             ],
-            menus: (<any>places).places.restaurants[i].reviews[1].menus,
+            menus: get_menus(i),
             submenu_opened: false,
             submenu_selected: false,
         }

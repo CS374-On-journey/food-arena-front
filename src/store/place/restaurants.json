@@ -30,6 +30,20 @@
             "content":"Moderate. But very affordable.",
             "rating":4.0
           }
+        ],
+        "menu":[
+          {
+            "id":0,
+            "title":"Shrimp Fries and Udon",
+            "picture_url":"https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fxiydu%2Fbtq5ue7PCns%2FNNx5Sgk3J7kOXmtvmpTSCK%2Fimg.png",
+            "description":"Udon is a thick noodle made from wheat flour, used in Japanese cuisine. This menu is served with shrimp fries."
+          },
+          {
+            "id":1,
+            "title":"Shrimp Fries and Soba",
+            "picture_url":"https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcN1R8C%2Fbtq5w6gFj5f%2FbinrRQVrJoJUXKIYoTTHE1%2Fimg.png",
+            "description":"Soba is a thin Japanese noodle made from buckwheat. The noodles are served chilled with a dipping sauce."
+          }
         ]
       },
       {
@@ -66,6 +80,20 @@
             "content":"Amazing place! Worth the money. It’s a show, and the food was really god and high quality.",
             "rating":5.0
           }
+        ],
+        "menu":[
+          {
+            "id":3,
+            "title":"Bansenshukai Course",
+            "picture_url":"https://ninjaakasaka.com/wp-content/uploads/caviar-01.png",
+            "description":"1. Japanese Sweet Monaka\n2.Ohmi Sawaihime Wagyu Beef Sashimi\n3.Chef’s Special Fish of the Season"
+          },
+          {
+            "id":4,
+            "title":"Jyubei Course",
+            "picture_url":"https://ninjaakasaka.com/wp-content/uploads/Pea-souffle.png",
+            "description":"1.Ohmi Sawaihime Wagyu Beef Sashimi\n2..Chef’s Special Fish of the Season\n3.Ohmi Sawaihime Wagyu Beef Steak"
+          }
         ]
       },
       {
@@ -91,6 +119,20 @@
             "author":"Jun Lee",
             "content":"Nice.",
             "rating":4.0
+          }
+        ],
+        "menu":[
+          {
+            "id":7,
+            "title":"Donkotsu Ramen",
+            "picture_url":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Shoyu_Ramen.jpg/500px-Shoyu_Ramen.jpg",
+            "description":"Wheat noodle served with meat and flavored with pork bone."
+          },
+          {
+            "id":8,
+            "title":"Miso Ramen",
+            "picture_url":"https://v1.nitrocdn.com/KQYMGOLIdXGmoAcyJsPOrQDKktgCbwtG/assets/static/optimized/rev-6eb96b6/wp-content/uploads/2019/05/Miso-Ramen-II.jpg",
+            "description":"Wheat noodle served with meat and flavored with pork bone and miso(soybean paste)."
           }
         ]
       }
