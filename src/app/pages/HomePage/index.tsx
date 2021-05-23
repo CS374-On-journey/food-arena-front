@@ -7,9 +7,13 @@ import ProfileButton from 'app/components/TopButtons/profilebutton';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { useUserSlice } from 'store/user';
+import { isLogined, getUser } from 'store/user/selectors';
+
+import { useHistory } from 'react-router-dom';
 
 import firebase from 'firebase/app';
 import "firebase/auth";
+import "firebase/database";
 import {
   FirebaseAuthProvider,
   FirebaseAuthConsumer,
@@ -27,11 +31,16 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+export const db = firebase.database();
 
 export function HomePage() {
 
   const { actions } = useUserSlice();
   const dispatch = useDispatch();
+  const isLogin = useSelector(isLogined);
+  const user = useSelector(getUser);
+
+  let history = useHistory();
 
   return (
     <FirebaseAuthProvider {...firebaseConfig} firebase={firebase}>
@@ -44,16 +53,22 @@ export function HomePage() {
         <Map/>
         <LeftMenu/>
         <ProfileButton onClick={() => {
+          if(isLogin) {
+            history.push('/chat');
+          } else {
             const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithPopup(googleAuthProvider);
+          }
         }}/>
         <MenuViewer/>
         <FirebaseAuthConsumer>
           {({ isSignedIn, user }) => {
-            dispatch(actions.doLogin({
-              isSignedIn: isSignedIn,
-              user: user
-            }))
+            if(isSignedIn) {
+              dispatch(actions.doLogin({
+                isSignedIn: isSignedIn,
+                user: user
+              }))
+            }
           }}
         </FirebaseAuthConsumer>
       </div>

@@ -14,8 +14,8 @@ const Icon = styled.div`
 `
 
 const Button = styled.button`
-    width: 100%;
-    height: 100%;
+    width: 40px;
+    height: 40px;
     background: rgba(0,0,0,0.33);
     display: flex;
     border: none;
