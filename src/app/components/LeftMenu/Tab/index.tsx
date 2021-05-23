@@ -24,10 +24,13 @@ const SearchBox = styled.div`
     align-content: center;
 `;
 
-export default function Tab() {
+const [searchContent, setSearchContent] = React.useState('');
 
-    const [searchContent, setSearchContent] = React.useState('');
+export const setCardList= () =>{
+    return searchContent 
+}
 
+export default function Tab() {    
     const currentTab = useSelector(tabSelector);
     const dispatch = useDispatch();
     const { actions } = useGlobalSlice();

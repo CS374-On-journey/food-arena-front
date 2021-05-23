@@ -106,17 +106,20 @@ function random_menus(depth=10) {
     return ret;
 }
 
-function get_menus(index) {
+function get_menus(place) {
     let ret = new Array<IMenu>();
-
-    for(let i=0; i<3; i++){
+    if(place.menus.length==0){
+        return []
+    }
+    
+    for(let i=0; i<place.menus.length; i++){
         let menu : IMenu = {
-            id: (<any>places).places.restaurants[i].menus[0].id,
-            title:(<any>places).places.restaurants[i].menus[0].title,
-            picture_url:(<any>places).places.restaurants[i].menus[0].picture_url,
-            description: (<any>places).places.restaurants[i].menus[0].description,
+            id: i,
+            title: place.menus[i].title,
+            picture_url: place.menus[i].picture_url,
+            description: place.menus[i].description,
             type: '',
-            local_title: (<any>places).places.restaurants[i].menus[0].title,
+            local_title: place.menus[i].title,
             local_price: Math.random()*100,
             local_currency: '$',
             local_quantity: Math.random()*1000,
@@ -125,7 +128,7 @@ function get_menus(index) {
             local_format_quantity: '0',
             local_format_price_per_unit: '0.00',
             local_format_price: '0.0',
-            children: [],
+            children: get_menus(place.children),
             isExpanded:false,
             label: null,
         }
@@ -232,7 +235,7 @@ for(let i=0; i<2; i++)
                     attachment_urls: []
                 }
             ],
-            menus: get_menus(i),
+            menus: get_menus((<any>places).places.restaurants[i]),
             submenu_opened: false,
             submenu_selected: false,
         }
