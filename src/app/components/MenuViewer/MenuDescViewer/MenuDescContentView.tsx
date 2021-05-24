@@ -3,6 +3,8 @@ import { IMenu } from 'store/place/types';
 import styled from 'styled-components/macro';
 import numeral from 'numeral';
 
+import SpecialDocument from 'app/components/SpecialDocument';
+
 const Box = styled.div`
     width:100%;
     height:100%;
@@ -78,7 +80,7 @@ export default function MenuDescContentView(props) {
             <ContentSpliter/>
             <DetailBox>
                 <DetailedText>
-                    {menu.description}
+                    <SpecialDocument text={menu.description}/>
                 </DetailedText>
             </DetailBox>
         </ContentBox>
