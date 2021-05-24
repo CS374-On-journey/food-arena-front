@@ -18,7 +18,7 @@ const Box = styled.div`
 
 export default function PlaceCardList() {
     const { actions } = usePlaceSlice();
-    const { search } = setCardList();
+    const search = setCardList();
     const places = useSelector(placeSelector);
     var before = "";
     var after = "";
