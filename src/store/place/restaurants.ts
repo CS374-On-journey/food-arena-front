@@ -217,7 +217,7 @@ var r3 = {
       title:"Miso Ramen",
       local_title: "Miso Ramen",
       picture_url:"https://v1.nitrocdn.com/KQYMGOLIdXGmoAcyJsPOrQDKktgCbwtG/assets/static/optimized/rev-6eb96b6/wp-content/uploads/2019/05/Miso-Ramen-II.jpg",
-      description: "Wheat noodle served with meat and flavored with pork bone and miso(soybean paste).",
+      description: "Wheat noodle served with meat and flavored with pork bone and miso.",
       type:'',
       local_price:700,
       local_currency: '¥',
@@ -413,7 +413,7 @@ var r6 = {
   ],
   "rating": 4.0,
   "ai_score": 3.8,
-  reviews: [
+  review: [
     {
       "author": "Joo-hyun Kim",
       "content": "The atmosphere inside is good and the staff is kind.Personally, the frying clothes are a little thick.",
