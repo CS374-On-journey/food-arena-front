@@ -16,7 +16,9 @@ import { HomePage } from './pages/HomePage/Loadable';
 import { NotFoundPage } from './pages/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
 
-import { fire } from './Firebase';
+import { useSelector, useDispatch } from 'react-redux';
+import { useUserSlice } from 'store/user';
+import { isLogined } from 'store/user/selectors';
 
 export function App() {
   const { i18n } = useTranslation();
