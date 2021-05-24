@@ -59,7 +59,6 @@ export function HomePage() {
         <title>Places</title>
         <meta name="description" content="Find THE FOOD!" />
       </Helmet>
-      <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
       <div>
         <Map/>
         <LeftMenu/>
