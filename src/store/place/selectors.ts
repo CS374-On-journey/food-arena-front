@@ -4,9 +4,11 @@ import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 import { createSelectorHook } from 'react-redux';
 import { RootState } from 'types';
 import { initialState } from '.';
+import { searchSelector } from 'store/global/selectors';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { IPlace } from './types';
-
+// import { Tab } from "../../app/components/LeftMenu/Tab/"
 export const baseSelector = (state: RootState) => state.place;
 
 const placeSelector = createSelector(
@@ -18,7 +20,6 @@ const selectedPlaceSelector = createSelector(
   baseSelector,
   (state) => {
     if(!state) return undefined;
-
     let places = state.places as IPlace[];
     for(let i=0; i<places.length; i++){
       let item = places[i];
