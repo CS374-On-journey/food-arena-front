@@ -1,13 +1,12 @@
-import {Component} from 'react';
-import { FunctionComponent } from 'react';
 import * as React from 'react';
 import styled from 'styled-components/macro';
 import { PartyButton, PlaceButton } from './MenuButton';
 import { SearchButton } from './SearchButton';
 import { SearchInput } from './SearchInput';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { useGlobalSlice } from 'store/global';
-import { tabSelector, searchSelector } from 'store/global/selectors';
+import { tabSelector } from 'store/global/selectors';
 
 const Box = styled.div`
     width: 100%;
@@ -24,17 +23,18 @@ const SearchBox = styled.div`
     border-radius: 0 0 15px 15px;
     align-content: center;
 `;
- 
+
 export default function Tab() {
 
+    const [searchContent, setSearchContent] = React.useState('');
+
     const currentTab = useSelector(tabSelector);
-    const currentSearch = useSelector(searchSelector);
     const dispatch = useDispatch();
     const { actions } = useGlobalSlice();
 
     const changeMenu = (menu) => {
         dispatch(actions.changeTab(menu));
-        dispatch(actions.changeSearch(""));
+        setSearchContent('');
     }
 
     return (
@@ -69,9 +69,9 @@ export default function Tab() {
         <SearchBox>
             <SearchInput
                 type='text'
-                value={currentSearch}
+                value={searchContent}
                 onChange={(e: React.FormEvent<HTMLInputElement>) => {
-                    dispatch(actions.changeSearch(e.currentTarget.value));
+                    setSearchContent(e.currentTarget.value);
                 }}
                 placeholder='Search'
             />

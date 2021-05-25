@@ -6,7 +6,6 @@ import { useInjectReducer } from 'utils/redux-injectors';
 // The initial state of the Homepage
 export const initialState: GlobalState = {
   tab: 'place',
-  search: "",
   partyRegisterationOn: false,
   partyRegisterationTargetId: 0,
 };
@@ -19,10 +18,7 @@ const slice = createSlice({
       state.tab = action.payload;
       return state;
     },
-    changeSearch(state, action:PayloadAction<string>){
-      state.search = action.payload;
-      return state;
-    },
+
     setPartyRegisterationOn(state, action: PayloadAction<boolean>) {
       state.partyRegisterationOn = action.payload;
       return state;
@@ -44,4 +40,3 @@ export const useGlobalSlice = () => {
   useInjectReducer({ key: slice.name, reducer: slice.reducer });
   return { actions: slice.actions };
 };
-
