@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { buffers } from 'redux-saga';
 import { useMapSlice } from 'store/map';
 import { createSlice } from 'utils/@reduxjs/toolkit'; // Importing from `utils` makes them more type-safe ✅
-
+import { rs } from './restaurants';
 import { useInjectReducer } from 'utils/redux-injectors';
 
 import { IPlace, IMenu, PlacesState } from './types';
@@ -107,10 +107,10 @@ function random_menus(depth=10) {
     return ret;
 }
 
-export let managed_ids = new Array<number>();
-function generate_id(){
+let prev_managed_ids = new Array<number>();
+function prev_generate_id(){
     const id = Math.round(Math.random()*10000) + 11;
-    managed_ids.push(id)
+    prev_managed_ids.push(id)
     return id;
 }
 
@@ -119,7 +119,7 @@ for(let i=0; i<10; i++)
 {
     generated_places.push(
         {
-            id: generate_id(),
+            id: prev_generate_id(),
             name: random_name(),
             address: random_location(),
             distance: Math.round(Math.random()*500+500), // meter
@@ -166,8 +166,17 @@ for(let i=0; i<10; i++)
     )
 }
     
+export let managed_ids = new Array<number>();
+function generate_id(num){
+    // const id = Math.round(Math.random()*10000) + 11;
+    for(var i=1;i<1+num;i++){
+        managed_ids.push(i)
+    }
+}
+generate_id(1);
+
 export const initialState: PlacesState = {
-    places: generated_places,
+    places: rs,
     menu_viewer_opened: false,
 };
 

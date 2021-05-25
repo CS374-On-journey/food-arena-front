@@ -27,6 +27,7 @@ const Box = styled.div`
 `;
 
 const LeftWrapper = styled.div`
+    width:350px;
     padding-bottom: 15px;
 `;
 
