@@ -9,11 +9,6 @@ const tabSelector = createSelector(
   s => s?.tab,
 );
 
-const searchSelector = createSelector(
-  baseSelector,
-  s => s?.search
-)
-
 const partyRegisterationOnSelector = createSelector(
   baseSelector,
   s => s?.partyRegisterationOn,
@@ -24,4 +19,4 @@ const partyRegisterationTargetIdSelector = createSelector(
   s => s?.partyRegisterationTargetId,
 )
 
-export { tabSelector, partyRegisterationOnSelector, partyRegisterationTargetIdSelector,searchSelector };
+export { tabSelector, partyRegisterationOnSelector, partyRegisterationTargetIdSelector };
