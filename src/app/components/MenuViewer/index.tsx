@@ -34,6 +34,7 @@ const TitleContentBox = styled.div`
 `
 
 const TitleBackButton = styled.button`
+    cursor: pointer;
     width: 36px;
     height: 36px;
     background: url('./icon-expand.svg');

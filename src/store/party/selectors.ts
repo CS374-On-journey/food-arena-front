@@ -7,12 +7,12 @@ export const baseSelector = (state: RootState) => {
   return state.party;
 }
 
-const partySelector = createSelector(
+export const partySelector = createSelector(
   baseSelector,
   partyState => partyState?.parties,
 );
 
-const selectPartyByRestaurantId = (id) => createSelector(
+export const selectPartyByRestaurantId = (id) => createSelector(
   baseSelector,
   s => {
     let parties = s?.parties as IParty[];
@@ -30,7 +30,7 @@ const selectPartyByRestaurantId = (id) => createSelector(
   }
 )
 
-const selectPartiesByRestaurantId = (id) => createSelector(
+export const selectPartiesByRestaurantId = (id) => createSelector(
   baseSelector,
   s => {
     let parties = s?.parties as IParty[];
@@ -44,7 +44,7 @@ const selectPartiesByRestaurantId = (id) => createSelector(
   }
 )
 
-const selectRegisteredParties = createSelector(
+export const selectRegisteredParties = createSelector(
   baseSelector,
   s => {
     let parties = s?.parties as IParty[];
@@ -58,4 +58,7 @@ const selectRegisteredParties = createSelector(
   }
 )
 
-export { partySelector, selectPartyByRestaurantId, selectPartiesByRestaurantId, selectRegisteredParties };
+export const selectKeyword = createSelector(
+  baseSelector,
+  s => s?.search_term,
+)

@@ -33,9 +33,13 @@ export default function PartyCardList() {
         <Box>
             {
                 parties?.map((item, idx, arr)=>{
-                    return (
-                        <Card key={idx} party={item} openModal={openModal}/>
-                    )
+                    if(item.visible){
+                            return (
+                            <Card key={idx} party={item} openModal={openModal}/>
+                        )
+                    }else{
+                        return
+                    }
                 })
             }
             <PartyRegisteraion

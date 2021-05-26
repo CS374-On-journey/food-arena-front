@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 
 
 const Button = styled.button`
+    cursor: pointer;
     position: fixed;
     right: 0;
     top: 0;

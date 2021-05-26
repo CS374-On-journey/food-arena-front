@@ -34,6 +34,7 @@ const HeaderTitle = styled.div`
 `
 
 const TitleBackButton = styled.button`
+    cursor: pointer;
     margin-left: 20px;
     width: 36px;
     height: 36px;
@@ -77,6 +78,7 @@ const ListEmptyText = styled.div`
 `
 
 const MakeNewButton = styled.button`
+    cursor: pointer;
     width: 100%;
     height: 55px;
     background: #f1f1f1;

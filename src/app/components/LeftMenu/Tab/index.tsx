@@ -7,6 +7,8 @@ import { SearchInput } from './SearchInput';
 import { useSelector, useDispatch } from 'react-redux';
 import { useGlobalSlice } from 'store/global';
 import { tabSelector } from 'store/global/selectors';
+import { usePartySlice } from 'store/party';
+import { usePlaceSlice } from 'store/place';
 
 const Box = styled.div`
     width: 100%;
@@ -26,11 +28,19 @@ const SearchBox = styled.div`
 
 export default function Tab() {
 
-    const [searchContent, setSearchContent] = React.useState('');
+    const [searchContent, _setSearchContent] = React.useState('');
 
     const currentTab = useSelector(tabSelector);
     const dispatch = useDispatch();
     const { actions } = useGlobalSlice();
+    const { actions:partyActions } = usePartySlice();
+    const { actions:placeActions } = usePlaceSlice();
+
+    const setSearchContent = (x:string) => {
+        dispatch(partyActions.setSearch(x))
+        dispatch(placeActions.setSearch(x))
+        _setSearchContent(x)
+    }
 
     const changeMenu = (menu) => {
         dispatch(actions.changeTab(menu));

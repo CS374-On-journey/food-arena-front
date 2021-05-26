@@ -2,6 +2,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import { buffers } from 'redux-saga';
 import { useMapSlice } from 'store/map';
+import { searchItems } from 'store/search';
 import { createSlice } from 'utils/@reduxjs/toolkit'; // Importing from `utils` makes them more type-safe ✅
 
 import { useInjectReducer } from 'utils/redux-injectors';
@@ -114,7 +115,7 @@ function generate_id(){
     return id;
 }
 
-let generated_places = new Array()
+export let generated_places = new Array()
 for(let i=0; i<10; i++)
 {
     generated_places.push(
@@ -162,12 +163,15 @@ for(let i=0; i<10; i++)
             menus: random_menus(),
             submenu_opened: false,
             submenu_selected: false,
+            visible: true,
+            search_score: 0,
         }
     )
 }
     
 export const initialState: PlacesState = {
     places: generated_places,
+    search_term: '',
     menu_viewer_opened: false,
 };
 
@@ -181,6 +185,11 @@ const slice = createSlice({
     initialState,
     reducers: 
     {
+        setSearch(s:PlacesState, a:PayloadAction<string>){
+            s.search_term = a.payload;
+            searchItems(s.places, a.payload);
+        },
+        
         closeRestaurant(state: PlacesState, action: PayloadAction<number>) 
         {
             const id = action.payload;

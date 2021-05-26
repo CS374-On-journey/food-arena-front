@@ -1,5 +1,4 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { buffers } from 'redux-saga';
 import { createSlice } from 'utils/@reduxjs/toolkit'; // Importing from `utils` makes them more type-safe ✅
 
 import { useInjectReducer } from 'utils/redux-injectors';
@@ -7,6 +6,7 @@ import { useInjectReducer } from 'utils/redux-injectors';
 import { IParty, PartiesState } from './types';
 
 import { managed_ids } from '../place/index';
+import { searchItems } from 'store/search';
 
 function choice<T>(arr:Array<T>){
     return arr[Math.min(arr.length-1, Math.round(Math.random()*arr.length))]
@@ -40,13 +40,14 @@ for(let i=0; i<100; i++)
                 '금지사항 2: No Alchole',
                 '금지사항 3: No Vegetarian. We will eat meats :3',
             ],
+            visible:true,
+            search_score:0,
         }
     )
 }
 
-//console.log('created parites', generated_parties)
-    
 export const initialState: PartiesState = {
+    search_term: '',
     parties: generated_parties
 };
 
@@ -55,6 +56,11 @@ const slice = createSlice({
     initialState,
     reducers: 
     {
+        setSearch(s:PartiesState, a:PayloadAction<string>){
+            s.search_term = a.payload;
+            searchItems(s.parties, a.payload);
+        },
+
         createParty(s:PartiesState, a:PayloadAction<IParty>){
             let party = a.payload;
             party.id = Math.round(Math.random() * 100000) + 1000;

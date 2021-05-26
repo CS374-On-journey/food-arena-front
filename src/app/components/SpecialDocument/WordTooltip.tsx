@@ -50,13 +50,6 @@ const ContentBox = styled.div`
     line-height: 175%;
 `
 
-interface PropsType{
-    isOpen:boolean,
-    setIsOpen:any,
-    content:string,
-    text:string,
-}
-
 let mouseX=0;
 let mouseY=0;
 let mousePressed=false;
@@ -66,6 +59,13 @@ document.addEventListener('mousemove', function(e){
 })
 document.addEventListener('mouseup', ()=>{mousePressed=false})
 document.addEventListener('mousedown', ()=>{mousePressed=true})
+
+interface PropsType{
+    isOpen:boolean,
+    setIsOpen:any,
+    content:string,
+    text:string,
+}
 
 export default function SpecialDocument(props:PropsType) 
 {

@@ -23,9 +23,11 @@ export default function PlaceCardList() {
         <Box>
             {
                 places?.map((item, idx, arr)=>{
-                    return (
-                        <Card key={idx} restaurant={item}/>
-                    )
+                    if(item.visible){
+                        return (
+                            <Card key={idx} restaurant={item}/>
+                        )
+                    }else{ return }
                 })
             }
         </Box>
