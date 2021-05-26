@@ -5,6 +5,7 @@ interface MenuButtonProps {
 }
 
 const MenuButton = styled.div<MenuButtonProps>`
+    cursor: pointer;
     width: 50%;
     padding: 12.5px;
     border-radius: 20px 0 0 0;

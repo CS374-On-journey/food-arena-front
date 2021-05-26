@@ -177,6 +177,7 @@ const InfoDescContentsOpenInfoHintText = styled.div`
 `
 
 const MenuButton = styled.button`
+    cursor: pointer;
     width: 55px;
     height: 90px;
     position: relative;
@@ -208,6 +209,7 @@ const ActionButtonsBox = styled.div`
 `
 
 const ActionButtonsRouteButton = styled.button`
+    cursor: pointer;
     width:50%;
     height:100%;
     background:#FF3061;
@@ -217,6 +219,7 @@ const ActionButtonsRouteButton = styled.button`
 `
 
 const ActionButtonsPartiesButton = styled.button`
+    cursor: pointer;
     width:50%;
     height:100%;
     background:#C4C4C4;

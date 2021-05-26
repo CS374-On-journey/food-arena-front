@@ -40,6 +40,7 @@ const Box = styled.div<BoxPropsType>`
         )};
     margin-bottom: 15px;
     transition: border 0.1s cubic-bezier(0.5, 0.0, 0.0, 0.5);
+    cursor: pointer;
 `;
 
 const Header = styled.div`
