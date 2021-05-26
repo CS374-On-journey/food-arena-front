@@ -177,7 +177,7 @@ export default function Map() {
         minZoom: 0,
         maxZoom: 20,
         minPitch: 0,
-        maxPitch: 85,
+        maxPitch: 45,
     }
 
     return (
