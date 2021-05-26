@@ -46,13 +46,25 @@ export interface IPlace {
   ai_pick: boolean;
   ai_score: number;
   picture_urls: string[];
+  
   reviews: IReview[];
+  
   menus: IMenu[];
+
   submenu_opened: boolean;
   submenu_selected: boolean;
+
+  visible:boolean,
+  search_score: number,
+}
+
+export function isInstanceOfPlace(object:any)
+{
+  return 'address' in object && 'submenu_opened' in object && 'reviews' in object && 'name' in object
 }
 
 export interface PlacesState {
   places: IPlace[],
+  search_term:string,
   menu_viewer_opened: boolean,
 }

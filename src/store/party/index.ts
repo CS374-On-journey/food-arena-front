@@ -1,5 +1,4 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { buffers } from 'redux-saga';
 import { createSlice } from 'utils/@reduxjs/toolkit'; // Importing from `utils` makes them more type-safe ✅
 
 import { useInjectReducer } from 'utils/redux-injectors';
@@ -7,7 +6,8 @@ import { useInjectReducer } from 'utils/redux-injectors';
 import { IParty, PartiesState } from './types';
 
 import { managed_ids } from '../place/index';
-import { nums, parties_data } from './party_data';
+import { searchItems } from 'store/search';
+
 function choice<T>(arr:Array<T>){
     return arr[Math.min(arr.length-1, Math.round(Math.random()*arr.length))]
 }
@@ -18,34 +18,36 @@ function random_title() {
 }
 
 let generated_parties = new Array()
-    for(var i=0;i<nums;i++){
-        var maxPeople = parties_data[i].maxpeople;
-        generated_parties.push(
-            {
-                id: i,
-                title: parties_data[i].title,
-                restaurant_id: parties_data[i].res_id,
-                is_registered: false,
-            
-                meeting_date: '2021. 05. 07 19:00 ~',
-                due_date: '~ 2021. 05. 11 19:00',
-                tags: parties_data[i].tags,
-                description: parties_data[i].description,
-                menu_text: parties_data[i].menu,
-                registered_people: Math.min(Math.floor(Math.random()*(maxPeople-1)), maxPeople-1) + 1,
-                max_people: maxPeople,
-                ban_rules: [
-                    '금지사항 1: No Smoking',
-                    '금지사항 2: No Alchole',
-                    '금지사항 3: No Vegetarian. We will eat meats :3',
-                ]
-            })
+for(let i=0; i<100; i++)
+{
+    let maxPeople = Math.round(Math.random()*6) + 2;
+    generated_parties.push(
+        {
+            id: i+1,
+            title: random_title(),
+            restaurant_id: choice(managed_ids),
+            is_registered: false,
 
+            meeting_date: '2021. 05. 07 19:00 ~',
+            due_date: '~ 2021. 05. 11 19:00',
+            tags: ['steak', 'luxery'],
+            description: '설명',
+            menu_text: '밥',
+            registered_people: Math.min(Math.floor(Math.random()*(maxPeople-1)), maxPeople-1) + 1,
+            max_people: maxPeople,
+            ban_rules: [
+                '금지사항 1: No Smoking',
+                '금지사항 2: No Alchole',
+                '금지사항 3: No Vegetarian. We will eat meats :3',
+            ],
+            visible:true,
+            search_score:0,
+        }
+    )
 }
 
-//console.log('created parites', generated_parties)
-    
 export const initialState: PartiesState = {
+    search_term: '',
     parties: generated_parties
 };
 
@@ -54,6 +56,11 @@ const slice = createSlice({
     initialState,
     reducers: 
     {
+        setSearch(s:PartiesState, a:PayloadAction<string>){
+            s.search_term = a.payload;
+            searchItems(s.parties, a.payload);
+        },
+
         createParty(s:PartiesState, a:PayloadAction<IParty>){
             let party = a.payload;
             party.id = Math.round(Math.random() * 100000) + 1000;

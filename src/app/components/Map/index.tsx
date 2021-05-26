@@ -73,10 +73,12 @@ export default function Map() {
             let loc = [item.address.longitude, item.address.latitude];
             
             //ADD MARKER
-            markers.push({
-                loc: loc,
-                elem: (<RestaurantIcon restaurant={item} viewport={mapViewport}/>),
-            })
+            if(item.visible){
+                markers.push({
+                    loc: loc,
+                    elem: (<RestaurantIcon restaurant={item} viewport={mapViewport}/>),
+                })
+            }
         }
     }
     else
@@ -99,17 +101,19 @@ export default function Map() {
             for(let i = 0; i< parties?.length; i++)
             {
                 let item = parties[i];
-                if(item.restaurant_id == restaurant.id && item.registered_people < item.max_people){
+                if(item.restaurant_id == restaurant.id && item.registered_people < item.max_people && item.visible){
                     party=item;
                     break;
                 }
             }
             let loc = [restaurant.address.longitude, restaurant.address.latitude];
             //ADD MARKER
-            markers.push({
-                loc: loc,
-                elem: (<PartyIcon party={party} restaurant={restaurant} viewport={mapViewport}/>),
-            })
+            if(party && party.visible){
+                markers.push({
+                    loc: loc,
+                    elem: (<PartyIcon party={party} restaurant={restaurant} viewport={mapViewport}/>),
+                })
+            }
         }
     }
     if(viewTab != currentTab){
@@ -173,7 +177,7 @@ export default function Map() {
         minZoom: 0,
         maxZoom: 20,
         minPitch: 0,
-        maxPitch: 85,
+        maxPitch: 45,
     }
 
     return (

@@ -9,7 +9,6 @@ import { IPlace } from 'store/place/types';
 
 import MenuTree from './MenuTree';
 import MenuDescViewer from './MenuDescViewer';
-import { searchSelector } from 'store/global/selectors';
 
 const Box = styled.div`
     position: fixed;
@@ -35,6 +34,7 @@ const TitleContentBox = styled.div`
 `
 
 const TitleBackButton = styled.button`
+    cursor: pointer;
     width: 36px;
     height: 36px;
     background: url('./icon-expand.svg');
@@ -123,7 +123,6 @@ export default function MenuViewer(props) {
     const dispatch = useDispatch();
     const place = useSelector(selectedPlaceSelector) as IPlace;
     const opened = useSelector(menuViewerOpenedSelector) as boolean;
-    const search = useSelector(searchSelector)
     
     const restuarant = place;
     if(restuarant){

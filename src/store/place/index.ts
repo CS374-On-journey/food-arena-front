@@ -2,6 +2,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import { buffers } from 'redux-saga';
 import { useMapSlice } from 'store/map';
+import { searchItems } from 'store/search';
 import { createSlice } from 'utils/@reduxjs/toolkit'; // Importing from `utils` makes them more type-safe ✅
 import { restaurants } from './restaurants';
 import { useInjectReducer } from 'utils/redux-injectors';
@@ -107,19 +108,19 @@ function random_menus(depth=10) {
     return ret;
 }
 
-let prev_managed_ids = new Array<number>();
-function prev_generate_id(){
+export let managed_ids = new Array<number>();
+function generate_id(){
     const id = Math.round(Math.random()*10000) + 11;
-    prev_managed_ids.push(id)
+    managed_ids.push(id)
     return id;
 }
 
-let generated_places = new Array()
+export let generated_places = new Array()
 for(let i=0; i<10; i++)
 {
     generated_places.push(
         {
-            id: prev_generate_id(),
+            id: generate_id(),
             name: random_name(),
             address: random_location(),
             distance: Math.round(Math.random()*500+500), // meter
@@ -162,21 +163,15 @@ for(let i=0; i<10; i++)
             menus: random_menus(),
             submenu_opened: false,
             submenu_selected: false,
+            visible: true,
+            search_score: 0,
         }
     )
 }
     
-export let managed_ids = new Array<number>();
-function generate_id(num){
-    // const id = Math.round(Math.random()*10000) + 11;
-    for(var i=1;i<1+num;i++){
-        managed_ids.push(i)
-    }
-}
-generate_id(1);
-
 export const initialState: PlacesState = {
-    places: restaurants,
+    places: generated_places,
+    search_term: '',
     menu_viewer_opened: false,
 };
 
@@ -190,6 +185,11 @@ const slice = createSlice({
     initialState,
     reducers: 
     {
+        setSearch(s:PlacesState, a:PayloadAction<string>){
+            s.search_term = a.payload;
+            searchItems(s.places, a.payload);
+        },
+        
         closeRestaurant(state: PlacesState, action: PayloadAction<number>) 
         {
             const id = action.payload;

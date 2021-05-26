@@ -20,6 +20,7 @@ interface BoxPropsType {
 }
 
 const Box = styled.div<BoxPropsType>`
+    cursor: pointer;
     position: relative;
     top:${p=>`-${p.size/2.0}px`};
     left:${p=>`-${p.size/2.0}px`};

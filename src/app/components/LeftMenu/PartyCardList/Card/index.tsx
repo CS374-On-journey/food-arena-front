@@ -24,10 +24,10 @@ const Box = styled.div`
     border-radius: 20px;
     margin-bottom: 15px;
     transition: border 0.1s cubic-bezier(0.5, 0.0, 0.0, 0.5);
+    cursor: pointer;
 `;
 
 const LeftWrapper = styled.div`
-    width:350px;
     padding-bottom: 15px;
 `;
 

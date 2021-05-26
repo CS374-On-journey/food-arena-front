@@ -12,6 +12,7 @@ interface IChatListItem {
 }
 
 const Box = styled.div<IChatListItem>`
+  cursor: pointer;
   display: flex;
   align-items: center;
   height: 75px;

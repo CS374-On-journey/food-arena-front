@@ -14,6 +14,7 @@ const Icon = styled.div`
 `
 
 const Button = styled.button`
+    cursor: pointer;
     width: 40px;
     height: 40px;
     background: rgba(0,0,0,0.33);
