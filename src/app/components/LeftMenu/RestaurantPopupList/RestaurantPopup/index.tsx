@@ -216,6 +216,15 @@ const ActionButtonsRouteButton = styled.button`
     border:none;
     border-radius: 0;
     border-bottom-left-radius:20px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+`
+
+const ActionButtonsRouteIcon = styled.div`
+    width: 24px;
+    height:24px;
+    background:url('./icon-goto.svg');
 `
 
 const ActionButtonsPartiesButton = styled.button`
@@ -270,8 +279,9 @@ const PartyListBox = styled.div`
 
 export default function RestaurantPopup(props) {
     const {
-        selected, bottom_header, onSelect, restaurant, z_index, onClose
+        selected, bottom_header, onSelect, z_index, onClose
     } = props
+    const restaurant: IPlace = props.restaurant;
     const {
         name, picture_urls, travel_time, waiting_time, distance, reviews, open_time, close_time, local_time, ai_pick, rating, submenu_selected
     } = restaurant;
@@ -342,8 +352,13 @@ export default function RestaurantPopup(props) {
                             </RestaurantReviewBox>
 
                             <ActionButtonsBox>
-                                <ActionButtonsRouteButton>
-                                    
+                                <ActionButtonsRouteButton onClick={
+                                    ()=>{
+                                        let link = `https://www.google.com/maps/dir//${restaurant.address.latitude},${restaurant.address.longitude}`
+                                        window.open(link, '_blank')
+                                    }
+                                }>
+                                    <ActionButtonsRouteIcon/>
                                 </ActionButtonsRouteButton>
                                 <ActionButtonsPartiesButton onClick={
                                     ()=>{
