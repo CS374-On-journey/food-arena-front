@@ -18,6 +18,16 @@ const Box = styled.div`
     background: transparent;
 `;
 
+function process_string(s){
+    var s_new = ""
+    for(var i=0;i<s.length;i++){
+        if(s[i]!=' '){
+            s_new+=s[i]
+        }
+    }
+    return s_new.toLowerCase()
+}
+
 function score(party, search){
     var score = 0
     if(party.title.toLowerCase().includes(search.toLowerCase())){
@@ -41,7 +51,7 @@ export default function PartyCardList() {
     const search = useSelector(searchSelector);
 
     if(search){
-        parties = parties?.slice().sort((a:IParty, b:IParty): number => {
+        parties = parties?.sort((a:IParty, b:IParty): number => {
             return score(b, search) - score(a, search)
         });
     }

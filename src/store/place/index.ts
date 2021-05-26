@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { buffers } from 'redux-saga';
 import { useMapSlice } from 'store/map';
 import { createSlice } from 'utils/@reduxjs/toolkit'; // Importing from `utils` makes them more type-safe ✅
-import { rs } from './restaurants';
+import { restaurants } from './restaurants';
 import { useInjectReducer } from 'utils/redux-injectors';
 
 import { IPlace, IMenu, PlacesState } from './types';
@@ -176,7 +176,7 @@ function generate_id(num){
 generate_id(1);
 
 export const initialState: PlacesState = {
-    places: rs,
+    places: restaurants,
     menu_viewer_opened: false,
 };
 

@@ -1,5 +1,5 @@
 import { PlacesState, IMenu, IReview, IPlace } from './types';
-export var rs = new Array();
+export var restaurants = new Array();
 
 var r1 = {
   id: 1,
@@ -78,7 +78,7 @@ var r1 = {
   submenu_opened: false,
   submenu_selected: false
 }
-rs.push(r1)
+restaurants.push(r1)
 
 var r2 = {
   id: 2,
@@ -157,7 +157,7 @@ var r2 = {
   submenu_opened: false,
   submenu_selected: false
 }
-rs.push(r2)
+restaurants.push(r2)
 
 var r3 = {
   id: 3,
@@ -236,7 +236,7 @@ var r3 = {
   submenu_opened: false,
   submenu_selected: false
 }
-rs.push(r3)
+restaurants.push(r3)
 
 var r4 = {
   id: 4,
@@ -315,7 +315,7 @@ var r4 = {
   submenu_opened: false,
   submenu_selected: false
 }
-rs.push(r4)
+restaurants.push(r4)
 
 var r5 = {
   id: 5,
@@ -394,7 +394,7 @@ var r5 = {
   submenu_opened: false,
   submenu_selected: false
 }
-rs.push(r5)
+restaurants.push(r5)
 
 var r6 = {
   id: 6,
@@ -473,7 +473,7 @@ var r6 = {
   submenu_opened: false,
   submenu_selected: false
 }
-rs.push(r6)
+restaurants.push(r6)
 
 var r7 = {
   id: 7,
@@ -552,4 +552,4 @@ var r7 = {
   submenu_opened: false,
   submenu_selected: false
 }
-rs.push(r7)
+restaurants.push(r7)
