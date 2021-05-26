@@ -17,9 +17,9 @@ const scoreParty = (x:IParty, key:string[]):number => {
     score += hasKeyString(x.description, key) * 50;
     score += hasKeyString(x.menu_text, key) * 50;
     let place = generated_places.filter((item, idx, arr) => item.id == x.restaurant_id)[0] as IPlace;
+    //console.log( place)
     if(place){
         let place_score = scorePlace(place, key);
-        console.log(place_score, place)
         score += place_score
     }
     return score;
