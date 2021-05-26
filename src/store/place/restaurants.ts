@@ -1,5 +1,5 @@
 import { PlacesState, IMenu, IPlace, IReview } from './types';
-export var restaurants = new Array();
+export var restaurants = new Array<IPlace>();
 
 var r1 = {
   id: 1,
@@ -638,7 +638,7 @@ var r6 = {
   ],
   "rating": 4.0,
   "ai_score": 3.8,
-  review: [
+  reviews: [
     {
       "author": "Joo-hyun Kim",
       "content": "The atmosphere inside is good and the staff is kind.Personally, the frying clothes are a little thick.",
@@ -771,7 +771,7 @@ var r6 = {
   submenu_selected: false,
   visible: true,
   search_score: 0
-}
+} as IPlace
 restaurants.push(r6)
 
 var r7 = {

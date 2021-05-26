@@ -48,10 +48,10 @@ function getTag(tags){
 
 export var nums = 40
 export var parties_data = new Array();
-for(var i=0;i<10;i++){
+for(var i=1;i<=10;i++){
   parties_data.push({
     "title": getTitle(restaurants[i].menus[0].title),
-    "res_id": i*4,
+    "res_id": i,
     "menu":restaurants[i].menus[0].title,
     "description":"We plan to eat "+restaurants[i].menus[0].title+" at "+ restaurants[i].name +".",
     "maxpeople":3,
@@ -59,7 +59,7 @@ for(var i=0;i<10;i++){
   })
   parties_data.push({
     "title": getTitle(restaurants[i].menus[1].title),
-    "res_id": i*4+1,
+    "res_id": i,
     "menu":restaurants[i].menus[1].title,
     "description":"We plan to eat "+restaurants[i].menus[1].title+" at "+ restaurants[i].name +".",
     "maxpeople":4,
@@ -67,7 +67,7 @@ for(var i=0;i<10;i++){
   })
 parties_data.push({
   "title": getTitle(restaurants[i].menus[0].title),
-  "res_id": i*4+2,
+  "res_id": i,
   "menu":restaurants[i].menus[0].title,
   "description":"We plan to eat "+restaurants[i].menus[0].title+" at "+ restaurants[i].name +".",
   "maxpeople":3,
@@ -75,7 +75,7 @@ parties_data.push({
 })
 parties_data.push({
   "title": getTitle(restaurants[i].menus[1].title),
-  "res_id": i*4+3,
+  "res_id": i,
   "menu":restaurants[i].menus[1].title,
   "description":"We plan to eat "+restaurants[i].menus[1].title+" at "+ restaurants[i].name +".",
   "maxpeople":4,
