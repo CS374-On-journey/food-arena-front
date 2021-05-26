@@ -38,7 +38,8 @@ const PopupBox = styled.div`
 
 export default function LeftMenu() {
 
-    const currentTab = useSelector(tabSelector);    
+    const currentTab = useSelector(tabSelector);
+
     return (
         <>
         <Box>
