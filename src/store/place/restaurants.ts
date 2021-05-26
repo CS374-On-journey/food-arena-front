@@ -1,4 +1,4 @@
-import { PlacesState, IMenu, IReview, IPlace } from './types';
+import { PlacesState, IMenu, IPlace, IReview } from './types';
 export var restaurants = new Array();
 
 var r1 = {
@@ -33,7 +33,7 @@ var r1 = {
       content: "Moderate. But very affordable.",
       rating: 4.0,
       attachment_urls: []
-    } as IReview
+    } as IReview,
   ],
   menus :new Array<IMenu>
     ({ 
@@ -47,7 +47,26 @@ var r1 = {
       local_currency: '¥',
       local_quantity: 200,
       local_quantity_unit: 'g',
-      children: [],
+      children: [
+        {
+          id:11,
+          title:"Shrimp Udon",
+          local_title:"Shrimp Udon",
+          picture_url: "https://favy-inbound-singapore.s3.amazonaws.com/uploads/topic_item/image/9421/retina_IMG_6383.JPG",
+          description: "Shrimp Udon is a udon served with fried shrimps.",
+          type:'',
+          local_price:750,
+          local_currency: '¥',
+          local_quantity: 200,
+          local_quantity_unit: 'g',
+          children:[],
+          local_format_quantity: '0',
+          local_format_price_per_unit: '0.00',
+          local_format_price: '0.0',
+          isExpanded:false,
+          label: null
+        } as IMenu
+      ],
       local_format_quantity: '0',
       local_format_price_per_unit: '0.00',
       local_format_price: '0.0',
@@ -65,7 +84,26 @@ var r1 = {
       local_currency: '¥',
       local_quantity: 500,
       local_quantity_unit: 'g',
-      children: [],
+      children: [
+        {
+          id:11,
+          title:"Shrimp Soba",
+          local_title:"Shrimp Soba",
+          picture_url: "https://media-cdn.tripadvisor.com/media/photo-s/0c/d6/06/81/all-star-tendon.jpg",
+          description: "Shrimp Soba is a soba served with fried shrimps.",
+          type:'',
+          local_price:750,
+          local_currency: '¥',
+          local_quantity: 200,
+          local_quantity_unit: 'g',
+          children:[],
+          local_format_quantity: '0',
+          local_format_price_per_unit: '0.00',
+          local_format_price: '0.0',
+          isExpanded:false,
+          label: null
+        } as IMenu
+      ],
       local_format_quantity: '0',
       local_format_price_per_unit: '0.00',
       local_format_price: '0.0',
@@ -76,7 +114,9 @@ var r1 = {
   close_time: '22:00',
   local_time: `${Math.round(Math.random()*23)+1}:00`,
   submenu_opened: false,
-  submenu_selected: false
+  submenu_selected: false,
+  visible: true,
+  search_score: 0
 }
 restaurants.push(r1)
 
@@ -122,11 +162,72 @@ var r2 = {
       picture_url: "https://ninjaakasaka.com/wp-content/uploads/caviar-01.png",
       description:  "1. Japanese Sweet Monaka\n2.Ohmi Sawaihime Wagyu Beef Sashimi\n3.Chef’s Special Fish of the Season",
       type:'',
-      local_price:5000,
+      local_price:18000,
       local_currency: '¥',
       local_quantity: 800,
       local_quantity_unit: 'g',
-      children: [],
+      children: new Array<IMenu>(
+        { 
+          id: 11,
+          title:  "Monaka",
+          local_title:  "Monaka",
+          picture_url: "https://ninjaakasaka.com/wp-content/uploads/caviar-01.png",
+          description:  "Monaka is a Japanese sweet made of azuki bean paste sandwiched between two thin crisp wafers made from mochi.",
+          type:'',
+          local_price:18000,
+          local_currency: '¥',
+          local_quantity: 800,
+          local_quantity_unit: 'g',
+          children: [
+            
+          ],
+          local_format_quantity: '0',
+          local_format_price_per_unit: '0.00',
+          local_format_price: '0.0',
+          isExpanded:false,
+          label: null
+        },
+        { 
+          id: 12,
+          title: "Ohmi Sawaihime Wagyu Beef",
+          local_title:  "Ohmi Sawaihime Wagyu Beef",
+          picture_url: "https://ninjaakasaka.com/wp-content/uploads/caviar-01.png",
+          description: "The main quisine of the course, wagyu steak.",
+          type:'',
+          local_price:18000,
+          local_currency: '¥',
+          local_quantity: 800,
+          local_quantity_unit: 'g',
+          children: [
+            
+          ],
+          local_format_quantity: '0',
+          local_format_price_per_unit: '0.00',
+          local_format_price: '0.0',
+          isExpanded:false,
+          label: null
+        },
+        { 
+          id: 13,
+          title:  "Chef’s Special Fish of the Season",
+          local_title:  "Chef’s Special Fish of the Season",
+          picture_url: "https://ninjaakasaka.com/wp-content/uploads/caviar-01.png",
+          description:  "Fish is different every season.",
+          type:'',
+          local_price:18000,
+          local_currency: '¥',
+          local_quantity: 800,
+          local_quantity_unit: 'g',
+          children: [
+            
+          ],
+          local_format_quantity: '0',
+          local_format_price_per_unit: '0.00',
+          local_format_price: '0.0',
+          isExpanded:false,
+          label: null
+        } 
+      ),
       local_format_quantity: '0',
       local_format_price_per_unit: '0.00',
       local_format_price: '0.0',
@@ -140,11 +241,73 @@ var r2 = {
       picture_url: "https://ninjaakasaka.com/wp-content/uploads/Pea-souffle.png",
       description: "1.Ohmi Sawaihime Wagyu Beef Sashimi\n2..Chef’s Special Fish of the Season\n3.Ohmi Sawaihime Wagyu Beef Steak",
       type:'',
-      local_price:7000,
+      local_price:15000,
       local_currency: '¥',
       local_quantity: 800,
       local_quantity_unit: 'g',
-      children: [],
+      children: new Array<IMenu>(
+        { 
+          id: 21,
+          title:  "Ohmi Sawaihime Wagyu Beef Sashimi",
+          local_title:  "Ohmi Sawaihime Wagyu Beef Sashimi",
+          picture_url: "https://ninjaakasaka.com/wp-content/uploads/Pea-souffle.png",
+          description:  "Raw wagyu sashimi with vegetables.",
+          type:'',
+          local_price:15000,
+          local_currency: '¥',
+          local_quantity: 800,
+          local_quantity_unit: 'g',
+          children: [
+            
+          ],
+          local_format_quantity: '0',
+          local_format_price_per_unit: '0.00',
+          local_format_price: '0.0',
+          isExpanded:false,
+          label: null
+        },
+        
+        { 
+          id: 23,
+          title: "Ohmi Sawaihime Wagyu Beef",
+          local_title:  "Ohmi Sawaihime Wagyu Beef",
+          picture_url: "https://ninjaakasaka.com/wp-content/uploads/Pea-souffle.png",
+          description: "The main quisine of the course, wagyu steak.",
+          type:'',
+          local_price:15000,
+          local_currency: '¥',
+          local_quantity: 800,
+          local_quantity_unit: 'g',
+          children: [
+            
+          ],
+          local_format_quantity: '0',
+          local_format_price_per_unit: '0.00',
+          local_format_price: '0.0',
+          isExpanded:false,
+          label: null
+        },
+        { 
+          id: 22,
+          title:  "Chef’s Special Fish of the Season",
+          local_title:  "Chef’s Special Fish of the Season",
+          picture_url: "https://ninjaakasaka.com/wp-content/uploads/Pea-souffle.png",
+          description:  "Fish is different every season.",
+          type:'',
+          local_price:15000,
+          local_currency: '¥',
+          local_quantity: 800,
+          local_quantity_unit: 'g',
+          children: [
+            
+          ],
+          local_format_quantity: '0',
+          local_format_price_per_unit: '0.00',
+          local_format_price: '0.0',
+          isExpanded:false,
+          label: null
+        } 
+      ),
       local_format_quantity: '0',
       local_format_price_per_unit: '0.00',
       local_format_price: '0.0',
@@ -155,7 +318,9 @@ var r2 = {
   close_time: '22:00',
   local_time: `${Math.round(Math.random()*23)+1}:00`,
   submenu_opened: false,
-  submenu_selected: false
+  submenu_selected: false,
+  visible: true,
+  search_score: 0
 }
 restaurants.push(r2)
 
@@ -193,9 +358,19 @@ var r3 = {
       attachment_urls: []
     } as IReview
   ],
-  menus :new Array<IMenu>
-    ({ 
-      id: 7,
+  menus:new Array<IMenu>({
+    id: 7,
+    title:"Ramen",
+    local_title:"Ramen",
+    picture_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Shoyu_Ramen.jpg/500px-Shoyu_Ramen.jpg",
+    description: "Wheat noodle served with meat and flavored with pork bone.",
+    type:'',
+    local_price:600,
+    local_currency: '¥',
+    local_quantity: 300,
+    local_quantity_unit: 'g',
+    children: new Array<IMenu>({
+      id: 71,
       title:"Donkotsu Ramen",
       local_title:"Donkotsu Ramen",
       picture_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Shoyu_Ramen.jpg/500px-Shoyu_Ramen.jpg",
@@ -213,7 +388,7 @@ var r3 = {
       label: null
     },
     { 
-      id: 2,
+      id: 72,
       title:"Miso Ramen",
       local_title: "Miso Ramen",
       picture_url:"https://v1.nitrocdn.com/KQYMGOLIdXGmoAcyJsPOrQDKktgCbwtG/assets/static/optimized/rev-6eb96b6/wp-content/uploads/2019/05/Miso-Ramen-II.jpg",
@@ -230,11 +405,19 @@ var r3 = {
       isExpanded:false,
       label: null
     }),
+    local_format_quantity: '0',
+    local_format_price_per_unit: '0.00',
+    local_format_price: '0.0',
+    isExpanded:false,
+    label: null
+  }),
   open_time: '09:00',
   close_time: '22:00',
   local_time: `${Math.round(Math.random()*23)+1}:00`,
   submenu_opened: false,
-  submenu_selected: false
+  submenu_selected: false,
+  visible: true,
+  search_score: 0
 }
 restaurants.push(r3)
 
@@ -313,7 +496,9 @@ var r4 = {
   close_time: '22:00',
   local_time: `${Math.round(Math.random()*23)+1}:00`,
   submenu_opened: false,
-  submenu_selected: false
+  submenu_selected: false,
+  visible: true,
+  search_score: 0
 }
 restaurants.push(r4)
 
@@ -346,7 +531,7 @@ var r5 = {
       "content": "You can taste simple and very delicate Japanese.",
       "rating": 5.0,
       attachment_urls:[]
-    } as IReview
+    }as IReview
   ],
   ai_pick: 4.0 > 4.0,
   travel_time: 20,
@@ -374,14 +559,52 @@ var r5 = {
     "id": 10,
     "title": "Lunch set",
     "picture_url": "https://d2uja84sd90jmv.cloudfront.net/posts/1P0GLC31SiTkkqVpzrgiIg/s.jpg",
-    "description": "Special lunch set with rice, rice, roasted fish.",
+    "description": "Special lunch set with rice, salad, roasted fish.",
     local_title: "Lunch set",
     type:'',
     local_price:1500,
     local_currency: '¥',
     local_quantity: 600,
     local_quantity_unit: 'g',
-    children: [],
+    children: new Array<IMenu>(
+      { 
+        "id": 101,
+        "title": "Salad",
+        "picture_url": "https://d2uja84sd90jmv.cloudfront.net/posts/1P0GLC31SiTkkqVpzrgiIg/s.jpg",
+        "description": "Salad with fresh vegetables",
+        local_title: "Lunch set",
+        type:'',
+        local_price:1500,
+        local_currency: '¥',
+        local_quantity: 600,
+        local_quantity_unit: 'g',
+        children: [],
+        local_format_quantity: '0',
+        local_format_price_per_unit: '0.00',
+        local_format_price: '0.0',
+        isExpanded:false,
+        label: null
+      },
+      { 
+        "id": 102,
+        "title": "Roasted Fish",
+        "picture_url": "https://d2uja84sd90jmv.cloudfront.net/posts/1P0GLC31SiTkkqVpzrgiIg/s.jpg",
+        "description": "Special lunch set with rice, rice, roasted fish.",
+        local_title: "Roasted fish with soy sauce flavor.",
+        type:'',
+        local_price:1500,
+        local_currency: '¥',
+        local_quantity: 600,
+        local_quantity_unit: 'g',
+        children: [],
+        local_format_quantity: '0',
+        local_format_price_per_unit: '0.00',
+        local_format_price: '0.0',
+        isExpanded:false,
+        label: null
+      }
+      
+    ),
     local_format_quantity: '0',
     local_format_price_per_unit: '0.00',
     local_format_price: '0.0',
@@ -392,7 +615,9 @@ var r5 = {
   close_time: '22:00',
   local_time: `${Math.round(Math.random()*23)+1}:00`,
   submenu_opened: false,
-  submenu_selected: false
+  submenu_selected: false,
+  visible: true,
+  search_score: 0
 }
 restaurants.push(r5)
 
@@ -425,7 +650,7 @@ var r6 = {
       "content": "Healthy taste! I'm sure we've tried many different dishes if we go together. I was sad that only two of us ate together. You can make a reservation by phone!",
       "rating": 5.0,
       attachment_urls:[]
-    } as IReview
+    }as IReview
   ],
   ai_pick: 3.8 > 4.0,
   travel_time: 10,
@@ -442,7 +667,43 @@ var r6 = {
       local_currency: '¥',
       local_quantity: 400,
       local_quantity_unit: 'g',
-      children: [],
+      children: new Array<IMenu>
+      ({ 
+        "id": 111,
+        "title": "Curry",
+        "picture_url": "http://www.eat-walk.com/shibuya_mei/img/shibuya_slide_img03.png",
+        "description": "Tender pieces of chicken, carrots, and potatoes cooked in a rich savory curry sauce.",
+        local_title: "Curry",
+        type:'',
+        local_price:1800,
+        local_currency: '¥',
+        local_quantity: 400,
+        local_quantity_unit: 'g',
+        children: [],
+        local_format_quantity: '0',
+        local_format_price_per_unit: '0.00',
+        local_format_price: '0.0',
+        isExpanded:false,
+        label: null
+      },
+      { 
+        "id": 112,
+        "title": "Salad",
+        "picture_url": "http://www.eat-walk.com/shibuya_mei/img/shibuya_slide_img03.png",
+        "description": "Salad with fresh vegetables",
+        local_title:  "Salad",
+        type:'',
+        local_price:1800,
+        local_currency: '¥',
+        local_quantity: 400,
+        local_quantity_unit: 'g',
+        children: [],
+        local_format_quantity: '0',
+        local_format_price_per_unit: '0.00',
+        local_format_price: '0.0',
+        isExpanded:false,
+        label: null
+      }),
       local_format_quantity: '0',
       local_format_price_per_unit: '0.00',
       local_format_price: '0.0',
@@ -460,7 +721,43 @@ var r6 = {
       local_currency: '¥',
       local_quantity: 450,
       local_quantity_unit: 'g',
-      children: [],
+      children: new Array<IMenu>
+      ({ 
+        "id": 121,
+        "title": "Noodle",
+        "picture_url":"http://www.eat-walk.com/shibuya_mei/img/shibuya_slide_img06.png",
+        "description":"Japanese noodle with pork bone flavor",
+        local_title:  "Noodle",
+        type:'',
+        local_price:2000,
+        local_currency: '¥',
+        local_quantity: 450,
+        local_quantity_unit: 'g',
+        children: [],
+        local_format_quantity: '0',
+        local_format_price_per_unit: '0.00',
+        local_format_price: '0.0',
+        isExpanded:false,
+        label: null
+      },
+      { 
+        "id": 122,
+        "title": "Salad",
+        "picture_url":"http://www.eat-walk.com/shibuya_mei/img/shibuya_slide_img06.png",
+        "description":"Salad with fresh vegetables",
+        local_title:  "Set with curry, ricce, salad, and food.",
+        type:'',
+        local_price:2000,
+        local_currency: '¥',
+        local_quantity: 450,
+        local_quantity_unit: 'g',
+        children: [],
+        local_format_quantity: '0',
+        local_format_price_per_unit: '0.00',
+        local_format_price: '0.0',
+        isExpanded:false,
+        label: null
+      }),
       local_format_quantity: '0',
       local_format_price_per_unit: '0.00',
       local_format_price: '0.0',
@@ -471,7 +768,9 @@ var r6 = {
   close_time: '22:00',
   local_time: `${Math.round(Math.random()*23)+1}:00`,
   submenu_opened: false,
-  submenu_selected: false
+  submenu_selected: false,
+  visible: true,
+  search_score: 0
 }
 restaurants.push(r6)
 
@@ -504,7 +803,7 @@ var r7 = {
       "content": "My Sen was introduced in the travel brochure and the review was good. I was going to have a cheap and delicious lunch for lunch, but I couldn't order the lunch menu because it was a red day (public holiday), so I ate it as a 2,000 yen roscatz, which was delicious as a popular restaurant.",
       "rating": 3.0,
       attachment_urls:[]
-    } as IReview
+    }as IReview
   ],
   ai_pick: 3.0 > 4.0,
   travel_time: 15,
@@ -515,13 +814,31 @@ var r7 = {
       "title": "Donkatsu",
       "picture_url": "https://w.namu.la/s/e60fd385992d2c73af9ae623c1f079a199d6d39c64000bab5c8b07d39e85891afaab71e8b945275397f561f977244539196878aad19daa40e2767042aade9baf047dca545280ea53f2ebf76b2abeaad5b9c54d52ce3b6781a8ca36fa58b3cd3343a2b12b50421bd897d5c2b4b46af748",
       "description": "Fried food that is fried after cutting pork and coated in fried clothes.",
-      local_title: "Donkastsu",
+      local_title: "Donkatsu",
       type:'',
       local_price:1000,
       local_currency: '¥',
       local_quantity: 300,
       local_quantity_unit: 'g',
-      children: [],
+      children: new Array<IMenu>
+      ({ 
+        "id": 151,
+        "title": "Cheese Donkatsu",
+        "picture_url": "https://w.namu.la/s/e60fd385992d2c73af9ae623c1f079a199d6d39c64000bab5c8b07d39e85891afaab71e8b945275397f561f977244539196878aad19daa40e2767042aade9baf047dca545280ea53f2ebf76b2abeaad5b9c54d52ce3b6781a8ca36fa58b3cd3343a2b12b50421bd897d5c2b4b46af748",
+        "description":"Fried pork with bread crumb and cheese inside.",
+        local_title: "Cheese Donkatsu",
+        type:'',
+        local_price:2000,
+        local_currency: '¥',
+        local_quantity: 450,
+        local_quantity_unit: 'g',
+        children: [],
+        local_format_quantity: '0',
+        local_format_price_per_unit: '0.00',
+        local_format_price: '0.0',
+        isExpanded:false,
+        label: null
+      }),
       local_format_quantity: '0',
       local_format_price_per_unit: '0.00',
       local_format_price: '0.0',
@@ -550,7 +867,9 @@ var r7 = {
   close_time: '22:00',
   local_time: `${Math.round(Math.random()*23)+1}:00`,
   submenu_opened: false,
-  submenu_selected: false
+  submenu_selected: false,
+  visible: true,
+  search_score: 0
 }
 restaurants.push(r7)
 
@@ -577,7 +896,7 @@ var r8 = {
       "content": "A place as famous as the height of whipped cream on top of pancakes! The whipped cream melts in the mouth in a soft yet friendly way, as if it will be compared to when receiving neat and friendly service from employees. You can order anything other than pancakes without any burden. I stopped by on the weekend night of mid-September and I was able to sit down right away. For those who gave up because of the long line, now's the chance!",
       "rating": 5.0,
       attachment_urls:[]
-    } as IReview,
+    } as IReview, 
     {
       "author": "Yeon-su Choi",
       "content": "The dry, dry taste is normal! Egg Benedict is very friendly, but there is no revisit doctor. Save your money and go to a better place!",
@@ -591,16 +910,35 @@ var r8 = {
   menus :new Array<IMenu>
     ({ 
       "id": 16,
-      "title": "Strawberry Pancakees",
+      "title": "Pancakees",
       "picture_url": "https://www.eggsnthingsjapan.com/wp-content/uploads/StrawberryWhippedCream_MacadamiaNuts_Pancakes-1-428x406.jpg",
-      "description": "Pancakes served with strawberry.",
-      local_title: "Strawberry Pancakees",
+      "description": "Five pancakes with various flavors and fruits.",
+      local_title: "Pancakees",
       type:'',
       local_price:800,
       local_currency: '¥',
       local_quantity: 300,
       local_quantity_unit: 'g',
-      children: [],
+      children: new Array<IMenu>(
+        { 
+          "id": 161,
+          "title": "Strawberry Pancakees",
+          "picture_url": "https://www.eggsnthingsjapan.com/wp-content/uploads/StrawberryWhippedCream_MacadamiaNuts_Pancakes-1-428x406.jpg",
+          "description": "Pancakes served with strawberry.",
+          local_title: "Strawberry Pancakees",
+          type:'',
+          local_price:800,
+          local_currency: '¥',
+          local_quantity: 300,
+          local_quantity_unit: 'g',
+          children: [],
+          local_format_quantity: '0',
+          local_format_price_per_unit: '0.00',
+          local_format_price: '0.0',
+          isExpanded:false,
+          label: null
+        }
+      ),
       local_format_quantity: '0',
       local_format_price_per_unit: '0.00',
       local_format_price: '0.0',
@@ -609,16 +947,33 @@ var r8 = {
     },
     { 
       "id": 17,
-      "title": "Mango Waffle",
+      "title": "Waffle",
       "picture_url": "https://www.eggsnthingsjapan.com/wp-content/uploads/2021GR_WaffleWhipped_Mango_Web-428x406.jpg",
-      "description": "Waffle served with mangos and whipped cream.",
-      local_title: "Mango Waffle",
+      "description": "Waffle served with various vegetables and whipped cream.",
+      local_title: "Waffle",
       type:'',
       local_price:900,
       local_currency: '¥',
       local_quantity: 300,
       local_quantity_unit: 'g',
-      children: [],
+      children: new Array<IMenu>({
+        "id": 17,
+        "title": "Mango Waffle",
+        "picture_url": "https://www.eggsnthingsjapan.com/wp-content/uploads/2021GR_WaffleWhipped_Mango_Web-428x406.jpg",
+        "description": "Waffle served with mangos and whipped cream.",
+        local_title: "Mango Waffle",
+        type:'',
+        local_price:900,
+        local_currency: '¥',
+        local_quantity: 300,
+        local_quantity_unit: 'g',
+        children: [],
+        local_format_quantity: '0',
+        local_format_price_per_unit: '0.00',
+        local_format_price: '0.0',
+        isExpanded:false,
+        label: null
+      }),
       local_format_quantity: '0',
       local_format_price_per_unit: '0.00',
       local_format_price: '0.0',
@@ -629,7 +984,9 @@ var r8 = {
   close_time: '22:00',
   local_time: `${Math.round(Math.random()*23)+1}:00`,
   submenu_opened: false,
-  submenu_selected: false
+  submenu_selected: false,
+  visible: true,
+  search_score: 0
 }
 restaurants.push(r8)
 
@@ -708,7 +1065,9 @@ var r9 = {
   close_time: '22:00',
   local_time: `${Math.round(Math.random()*23)+1}:00`,
   submenu_opened: false,
-  submenu_selected: false
+  submenu_selected: false,
+  visible: true,
+  search_score: 0
 }
 restaurants.push(r9)
 
@@ -787,6 +1146,8 @@ var r10 = {
   close_time: '22:00',
   local_time: `${Math.round(Math.random()*23)+1}:00`,
   submenu_opened: false,
-  submenu_selected: false
-}
+  submenu_selected: false,
+  visible: true,
+  search_score: 0
+} 
 restaurants.push(r10)
