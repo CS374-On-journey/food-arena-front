@@ -431,6 +431,8 @@ export default function PartyCreation({
               restaurant_id: restaurantId, 
               tags: restaurant ? restaurant?.tags : [],
               title: title,
+              search_score: 0,
+              visible: true,
             }))
             setIsPartyCreationOn(false)
           }}

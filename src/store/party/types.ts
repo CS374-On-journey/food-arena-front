@@ -15,8 +15,17 @@ export interface IParty {
   max_people: number,
 
   ban_rules: string[],
+
+  visible:boolean,
+  search_score: number,
+}
+
+export function isInstanceOfParty(object:any)
+{
+  return 'max_peole' in object && 'ban_rules' in object && 'restaurant_id' in object
 }
 
 export interface PartiesState {
+  search_term: string,
   parties: IParty[]
 }
