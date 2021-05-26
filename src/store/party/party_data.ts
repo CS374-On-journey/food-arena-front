@@ -46,86 +46,39 @@ function getTag(tags){
   return [arr[two[0]], arr[two[1]]]
 }
 
-export var nums = 10
-export var parties_data = [
-  {
-    "title": getTitle(restaurants[0].menus[0].title),
-    "res_id": 1,
-    "menu":restaurants[0].menus[0].title,
-    "description":"We plan to eat "+restaurants[0].menus[0].title+" at "+ restaurants[0].name +".",
-    "maxpeople":5,
+export var nums = 40
+export var parties_data = new Array();
+for(var i=0;i<10;i++){
+  parties_data.push({
+    "title": getTitle(restaurants[i].menus[0].title),
+    "res_id": i*4,
+    "menu":restaurants[i].menus[0].title,
+    "description":"We plan to eat "+restaurants[i].menus[0].title+" at "+ restaurants[i].name +".",
+    "maxpeople":3,
     "tags": getTag(restaurants[0].tags)
-  },
-  {
-    "title": getTitle(restaurants[1].menus[0].title),
-    "res_id":2,
-    "menu":restaurants[1].menus[0].title,
-    "description":"We plan to eat "+restaurants[1].menus[0].title+" at "+ restaurants[1].name +".",
+  })
+  parties_data.push({
+    "title": getTitle(restaurants[i].menus[1].title),
+    "res_id": i*4+1,
+    "menu":restaurants[i].menus[1].title,
+    "description":"We plan to eat "+restaurants[i].menus[1].title+" at "+ restaurants[i].name +".",
     "maxpeople":4,
-    "tags":getTag(restaurants[1].tags)
-  },
-  {
-    "title": getTitle(restaurants[1].menus[1].title),
-    "res_id":2,
-    "menu":restaurants[1].menus[1].title,
-    "description":"We plan to eat "+restaurants[1].menus[1].title+" at "+ restaurants[1].name +".",
-    "maxpeople":4,
-    "tags":getTag(restaurants[1].tags)
-  },
-  {
-    "title": getTitle(restaurants[2].menus[0].title),
-    "res_id":3,
-    "menu":"We plan to eat "+restaurants[2].menus[0].title+" at "+ restaurants[2].name +".",
-    "description":"",
-    "maxpeople":4,
-    "tags":getTag(restaurants[2].tags)
-  },
-  {
-    "title": getTitle(restaurants[3].menus[0].title),
-    "res_id": 4,
-    "menu":restaurants[3].menus[0].title,
-    "description":"We plan to eat "+restaurants[3].menus[0].title+" at "+ restaurants[3].name +".",
-    "maxpeople":3,
-    "tags": getTag(restaurants[3].tags)
-  },
-  {
-    "title": getTitle(restaurants[3].menus[1].title),
-    "res_id":4,
-    "menu":"We plan to eat "+restaurants[3].menus[1].title+" at "+ restaurants[3].name +".",
-    "description":"",
-    "maxpeople":4,
-    "tags":getTag(restaurants[3].tags)
-  },
-  {
-    "title": getTitle(restaurants[4].menus[0].title),
-    "res_id":5,
-    "menu":"We plan to eat "+restaurants[4].menus[0].title+" at "+ restaurants[4].name +".",
-    "description":"",
-    "maxpeople":4,
-    "tags":getTag(restaurants[4].tags)
-  },
-  {
-    "title": getTitle(restaurants[5].menus[0].title),
-    "res_id":6,
-    "menu":"We plan to eat "+restaurants[5].menus[0].title+" at "+ restaurants[5].name +".",
-    "description":"",
-    "maxpeople":4,
-    "tags":getTag(restaurants[5].tags)
-  },
-  {
-    "title": getTitle(restaurants[5].menus[1].title),
-    "res_id":6,
-    "menu":"We plan to eat "+restaurants[5].menus[1].title+" at "+ restaurants[5].name +".",
-    "description":"",
-    "maxpeople":3,
-    "tags":getTag(restaurants[5].tags)
-  },
-  {
-    "title": getTitle(restaurants[6].menus[1].title),
-    "res_id":7,
-    "menu":restaurants[6].menus[1].title,
-    "description":"We plan to eat "+restaurants[6].menus[1].title+" at "+ restaurants[6].name +".",
-    "maxpeople":3,
-    "tags":getTag(restaurants[6].tags)
-  }
-]
+    "tags":getTag(restaurants[i].tags)
+  })
+parties_data.push({
+  "title": getTitle(restaurants[i].menus[0].title),
+  "res_id": i*4+2,
+  "menu":restaurants[i].menus[0].title,
+  "description":"We plan to eat "+restaurants[i].menus[0].title+" at "+ restaurants[i].name +".",
+  "maxpeople":3,
+  "tags": getTag(restaurants[0].tags)
+})
+parties_data.push({
+  "title": getTitle(restaurants[i].menus[1].title),
+  "res_id": i*4+3,
+  "menu":restaurants[i].menus[1].title,
+  "description":"We plan to eat "+restaurants[i].menus[1].title+" at "+ restaurants[i].name +".",
+  "maxpeople":4,
+  "tags":getTag(restaurants[i].tags)
+})
+}

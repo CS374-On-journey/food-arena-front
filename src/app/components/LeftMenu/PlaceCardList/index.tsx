@@ -17,6 +17,16 @@ const Box = styled.div`
     background: transparent;
 `;
 
+function process_string(s){
+    var s_new = ""
+    for(var i=0;i<s.length;i++){
+        if(s[i]!=' '){
+            s_new+=s[i]
+        }
+    }
+    return s_new.toLowerCase()
+}
+
 function score(place, search){
     var score = 0
     if(place.name.toLowerCase().includes(search.toLowerCase())){
@@ -38,11 +48,6 @@ export default function PlaceCardList() {
     const { actions } = usePlaceSlice();
     var places = useSelector(placeSelector);
     const search = useSelector(searchSelector);
-    if(search){
-        places = places?.slice().sort((a:IPlace, b:IPlace): number => {
-            return score(b, search) - score(a, search)
-        });
-    }
     return (
         <Box>
             {

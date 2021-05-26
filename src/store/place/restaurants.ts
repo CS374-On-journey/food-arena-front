@@ -553,3 +553,240 @@ var r7 = {
   submenu_selected: false
 }
 restaurants.push(r7)
+
+var r8 = {
+  id: 8,
+  name: "Eggs And Things",
+  waiting_time: 30,
+  address:{
+    "longitude": 139.7060129668032,
+    "latitude": 35.668990638437975,
+    "readable": "4 Chome-30-2 Jingumae, Shibuya City, Tokyo 150-0001 일본"
+  },
+  tags: ["Pancake", "Waffle"],
+  picture_urls: [
+    "https://www.eggsnthingsjapan.com/wp-content/uploads/MacadamiaNuts_Pancakes-428x406.jpg",
+    "https://www.eggsnthingsjapan.com/wp-content/uploads/ButterMilk_Pancakes-428x406.jpg",
+    "https://www.eggsnthingsjapan.com/wp-content/uploads/StrawberryWhippedCream_MacadamiaNuts_Waffle-428x406.jpg"
+  ],
+  "rating": 4.0,
+  "ai_score": 4.2,
+  reviews: [
+    {
+      "author": "Hyun-Oh Kim",
+      "content": "A place as famous as the height of whipped cream on top of pancakes! The whipped cream melts in the mouth in a soft yet friendly way, as if it will be compared to when receiving neat and friendly service from employees. You can order anything other than pancakes without any burden. I stopped by on the weekend night of mid-September and I was able to sit down right away. For those who gave up because of the long line, now's the chance!",
+      "rating": 5.0,
+      attachment_urls:[]
+    } as IReview,
+    {
+      "author": "Yeon-su Choi",
+      "content": "The dry, dry taste is normal! Egg Benedict is very friendly, but there is no revisit doctor. Save your money and go to a better place!",
+      "rating": 3.0,
+      attachment_urls:[]
+    } as IReview
+  ],
+  ai_pick: 4.2 > 4.0,
+  travel_time: 20,
+  distance: 300,
+  menus :new Array<IMenu>
+    ({ 
+      "id": 16,
+      "title": "Strawberry Pancakees",
+      "picture_url": "https://www.eggsnthingsjapan.com/wp-content/uploads/StrawberryWhippedCream_MacadamiaNuts_Pancakes-1-428x406.jpg",
+      "description": "Pancakes served with strawberry.",
+      local_title: "Strawberry Pancakees",
+      type:'',
+      local_price:800,
+      local_currency: '¥',
+      local_quantity: 300,
+      local_quantity_unit: 'g',
+      children: [],
+      local_format_quantity: '0',
+      local_format_price_per_unit: '0.00',
+      local_format_price: '0.0',
+      isExpanded:false,
+      label: null
+    },
+    { 
+      "id": 17,
+      "title": "Mango Waffle",
+      "picture_url": "https://www.eggsnthingsjapan.com/wp-content/uploads/2021GR_WaffleWhipped_Mango_Web-428x406.jpg",
+      "description": "Waffle served with mangos and whipped cream.",
+      local_title: "Mango Waffle",
+      type:'',
+      local_price:900,
+      local_currency: '¥',
+      local_quantity: 300,
+      local_quantity_unit: 'g',
+      children: [],
+      local_format_quantity: '0',
+      local_format_price_per_unit: '0.00',
+      local_format_price: '0.0',
+      isExpanded:false,
+      label: null
+    }),
+  open_time: '09:00',
+  close_time: '22:00',
+  local_time: `${Math.round(Math.random()*23)+1}:00`,
+  submenu_opened: false,
+  submenu_selected: false
+}
+restaurants.push(r8)
+
+var r9 = {
+  id: 9,
+  name: "Sakura Tei",
+  waiting_time: 20,
+  address:{
+    "longitude":139.70828772537254,
+    "latitude": 35.670909480172234, 
+    "readable": "Japan 〒150-0001 Tokyo, Shibuya City, Jingumae, 3 Chome−23−2 地下１階 エヌエスビル"
+  },
+  tags: ["Okonomiyalki","Buffet"],
+  picture_urls: [
+    "https://media.timeout.com/images/105297133/630/472/image.jpg",
+    "https://media.timeout.com/images/105297131/630/472/image.jpg",
+    "https://aroimakmak.com/wp-content/uploads/2016/08/SakuraTei-Interior.jpg",
+  ],
+  "rating": 4.0,
+  "ai_score": 4.2,
+  reviews: [
+    {
+      "author": "Hwee-chan Kim",
+      "content": "First-time eaters of Monjayaki and Okonomiyaki can be quite embarrassing. Once again, the owner does not make it for you, but makes it himself. If you're not confident in cooking, try not to visit.",
+      "rating": 4.0,
+      attachment_urls:[]
+    } as IReview,
+    {
+      "author": "Bokyeong Yoon",
+      "content":"I made a reservation just in case, but it was spacious. There are certainly many foreign tourists. It's a system that you make yourself. It's a shame that I can't put in a lot of ingredients, but I mixed them with two.",
+      "rating": 4.0,
+      attachment_urls:[]
+    } as IReview
+  ],
+  ai_pick: 4.2 > 4.0,
+  travel_time: 10,
+  distance: 150,
+  menus :new Array<IMenu>
+    ({ 
+      "id": 18,
+      "title": "Lunch Okonomiyaki",
+      "picture_url": "https://www.sakuratei.co.jp/wp3/wp-content/themes/habakiri_child/img/lunch/teishoku_banner_optimized.png",
+      "description": "A Japanese dish that mixes flour in katsuobushi water and shreds cabbage and mixes various ingredients according to your taste. The ground cabbage and flour, which are based on Japanese-style jjimim, usually contain ground eggs and yams, and on the outside, about three slices of pork belly are added to the ground. After both sides are baked, you can sprinkle kadarang fish jerky, unique okonomiyaki sauce, and mayonnaise on top.",
+      local_title: "Lunch Okonomiyaki",
+      type:'',
+      local_price:700,
+      local_currency: '¥',
+      local_quantity: 140,
+      local_quantity_unit: 'g',
+      children: [],
+      local_format_quantity: '0',
+      local_format_price_per_unit: '0.00',
+      local_format_price: '0.0',
+      isExpanded:false,
+      label: null
+    },
+    { 
+      "id": 19,
+      "title": "Oknomiyaki Buffet",
+      "picture_url": "https://www.sakuratei.co.jp/wp3/wp-content/themes/habakiri_child/img/tabeho/tabeho_image2020.png",
+      "description": "Unlimited refill okonomiyaki.",
+      local_title: "Oknomiyaki Buffet",
+      type:'',
+      local_price:2500,
+      local_currency: '¥',
+      local_quantity: 300,
+      local_quantity_unit: 'g',
+      children: [],
+      local_format_quantity: '0',
+      local_format_price_per_unit: '0.00',
+      local_format_price: '0.0',
+      isExpanded:false,
+      label: null
+    }),
+  open_time: '11:00',
+  close_time: '22:00',
+  local_time: `${Math.round(Math.random()*23)+1}:00`,
+  submenu_opened: false,
+  submenu_selected: false
+}
+restaurants.push(r9)
+
+var r10 = {
+  id: 10,
+  name: "Gyukatsu Motomura Harajuku",
+  waiting_time: 30,
+  address:{
+    "longitude":139.70721210039147,
+    "latitude": 35.670909480172234, 
+    "readable": "Japan 〒150-0001 Tokyo, Shibuya City, Jingumae, 3 Chome−23−2 地下１階 エヌエスビル"
+  },
+  tags: ["Gyukatsu","Rice"],
+  picture_urls: [
+    "https://www.gyukatsu-motomura.com/wp/wp-content/themes/gyukatsu/images/logo.png",
+    "https://media-cdn.tripadvisor.com/media/photo-s/1a/87/16/1a/caption.jpg",
+    "https://media-cdn.tripadvisor.com/media/photo-s/1a/38/80/ef/caption.jpg"
+  ],
+  "rating": 4.5,
+  "ai_score": 3.8,
+  reviews: [
+    {
+      "author": "Minji Lee",
+      "content": "The staff were very kind. From precautions to instructions on how to eat, to how to eat the sauce, please come out first, and keep checking to see if it's not enough. Thanks to your kindness, I enjoyed it better.",
+      "rating": 5.0,
+      attachment_urls:[]
+    } as IReview,
+    {
+      "author": "Hana Lee",
+      "content":"Kyukatsu restaurant. I think I've been waiting for about 30 minutes. It's a shame that the waiting area isn't good enough. However, it was delicious and the eating process itself was a fun time. The rice with mar was really delicious.",
+      "rating": 4.0,
+      attachment_urls:[]
+    } as IReview
+  ],
+  ai_pick: 4.8 > 4.0,
+  travel_time: 15,
+  distance: 250,
+  menus :new Array<IMenu>
+    ({ 
+      "id": 20,
+      "title": "Gyukatsu",
+      "picture_url":"https://www.gyukatsu-motomura.com/wp/wp-content/themes/gyukatsu/images/menu01.jpg",
+      "description": "It is a food made of beef, not pork, coated in bread crumbs and fried.",
+      local_title: "Gyukatsu",
+      type:'',
+      local_price:1400,
+      local_currency: '¥',
+      local_quantity: 120,
+      local_quantity_unit: 'g',
+      children: [],
+      local_format_quantity: '0',
+      local_format_price_per_unit: '0.00',
+      local_format_price: '0.0',
+      isExpanded:false,
+      label: null
+    },
+    { 
+      "id": 21,
+      "title": "Gyukatsu Double",
+      "picture_url": "https://www.gyukatsu-motomura.com/wp/wp-content/themes/gyukatsu/images/menu03.jpg",
+      "description": "It is a food made of beef, not pork, coated in bread crumbs and fried. Double in size.",
+      local_title: "Salad",
+      type:'',
+      local_price:2100,
+      local_currency: '¥',
+      local_quantity: 250,
+      local_quantity_unit: 'g',
+      children: [],
+      local_format_quantity: '0',
+      local_format_price_per_unit: '0.00',
+      local_format_price: '0.0',
+      isExpanded:false,
+      label: null
+    }),
+  open_time: '11:30',
+  close_time: '22:00',
+  local_time: `${Math.round(Math.random()*23)+1}:00`,
+  submenu_opened: false,
+  submenu_selected: false
+}
+restaurants.push(r10)

@@ -30,11 +30,11 @@ function process_string(s){
 
 function score(party, search){
     var score = 0
-    if(party.title.toLowerCase().includes(search.toLowerCase())){
+    if(process_string(party.title).includes(process_string(search))){
         score += 100
     }
     for(var i=0;i<party.tags.length;i++){
-        if(party.tags[i].toLowerCase().includes(search.toLowerCase())){
+        if(process_string(party.tags[i]).includes(process_string(search))){
             score+=10
         }
     }
@@ -49,12 +49,6 @@ export default function PartyCardList() {
     const { actions } = usePartySlice();
     var parties = useSelector(partySelector);
     const search = useSelector(searchSelector);
-
-    if(search){
-        parties = parties?.sort((a:IParty, b:IParty): number => {
-            return score(b, search) - score(a, search)
-        });
-    }
     const [isPartyRegisteraionOn, setIsPartyRegisteraionOn] = React.useState(false)
     const [selectedId, setSelectedId] = React.useState(null);
 
