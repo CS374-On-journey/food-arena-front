@@ -1,4 +1,5 @@
 import { restaurants } from '../place/restaurants';
+import { IParty } from './types';
 
 var taglist = [
   ["Korean","Spciy"],
@@ -8,7 +9,7 @@ var taglist = [
 ]
 
 function getTitle(name){
-  var ret = ""
+  let ret = ""
   var idx  = Math.floor(Math.random()*5)
   if(idx==0){
     return "Let's eat "+ name + " together!"

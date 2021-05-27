@@ -1,7 +1,7 @@
 import { PlacesState, IMenu, IPlace, IReview } from './types';
 export var restaurants = new Array<IPlace>();
 
-var r1 = {
+let r1 = {
   id: 1,
   name: "Tendon Tenya",
   waiting_time: 0,
@@ -72,7 +72,7 @@ var r1 = {
       local_format_price: '0.0',
       isExpanded:false,
       label: null
-    },
+    } as IMenu,
     { 
       id: 2,
       title: "Soba",
@@ -109,7 +109,7 @@ var r1 = {
       local_format_price: '0.0',
       isExpanded:false,
       label: null
-    }),
+    }as IMenu),
   open_time: '09:00',
   close_time: '22:00',
   local_time: `${Math.round(Math.random()*23)+1}:00`,
@@ -117,10 +117,10 @@ var r1 = {
   submenu_selected: false,
   visible: true,
   search_score: 0
-}
+} as IPlace
 restaurants.push(r1)
 
-var r2 = {
+let r2 = {
   id: 2,
   name:"Ninja Akasaka",
   waiting_time: 20,
@@ -186,7 +186,7 @@ var r2 = {
           local_format_price: '0.0',
           isExpanded:false,
           label: null
-        },
+        } as IMenu,
         { 
           id: 12,
           title: "Ohmi Sawaihime Wagyu Beef",
@@ -206,7 +206,7 @@ var r2 = {
           local_format_price: '0.0',
           isExpanded:false,
           label: null
-        },
+        } as IMenu,
         { 
           id: 13,
           title:  "Chef’s Special Fish of the Season",
@@ -226,14 +226,14 @@ var r2 = {
           local_format_price: '0.0',
           isExpanded:false,
           label: null
-        } 
+        }  as IMenu
       ),
       local_format_quantity: '0',
       local_format_price_per_unit: '0.00',
       local_format_price: '0.0',
       isExpanded:false,
       label: null
-    },
+    } as IMenu,
     { 
       id: 2,
       title:"Jyubei Course",
@@ -265,7 +265,7 @@ var r2 = {
           local_format_price: '0.0',
           isExpanded:false,
           label: null
-        },
+        } as IMenu,
         
         { 
           id: 23,
@@ -286,7 +286,7 @@ var r2 = {
           local_format_price: '0.0',
           isExpanded:false,
           label: null
-        },
+        } as IMenu,
         { 
           id: 22,
           title:  "Chef’s Special Fish of the Season",
@@ -306,14 +306,14 @@ var r2 = {
           local_format_price: '0.0',
           isExpanded:false,
           label: null
-        } 
+        }  as IMenu
       ),
       local_format_quantity: '0',
       local_format_price_per_unit: '0.00',
       local_format_price: '0.0',
       isExpanded:false,
       label: null
-    }),
+    } as IMenu),
   open_time: '09:00',
   close_time: '22:00',
   local_time: `${Math.round(Math.random()*23)+1}:00`,
@@ -321,10 +321,10 @@ var r2 = {
   submenu_selected: false,
   visible: true,
   search_score: 0
-}
+} as IPlace
 restaurants.push(r2)
 
-var r3 = {
+let r3 = {
   id: 3,
   name:"Nogata Hope",
   waiting_time: 0,
@@ -386,7 +386,7 @@ var r3 = {
       local_format_price: '0.0',
       isExpanded:false,
       label: null
-    },
+    }  as IMenu,
     { 
       id: 72,
       title:"Miso Ramen",
@@ -404,13 +404,13 @@ var r3 = {
       local_format_price: '0.0',
       isExpanded:false,
       label: null
-    }),
+    }  as IMenu),
     local_format_quantity: '0',
     local_format_price_per_unit: '0.00',
     local_format_price: '0.0',
     isExpanded:false,
     label: null
-  }),
+  } as IMenu),
   open_time: '09:00',
   close_time: '22:00',
   local_time: `${Math.round(Math.random()*23)+1}:00`,
@@ -418,10 +418,10 @@ var r3 = {
   submenu_selected: false,
   visible: true,
   search_score: 0
-}
+} as IPlace
 restaurants.push(r3)
 
-var r4 = {
+let r4 = {
   id: 4,
   name: "Omotesando Ukaitei",
   waiting_time: 10,
@@ -473,7 +473,7 @@ var r4 = {
       local_format_price: '0.0',
       isExpanded:false,
       label: null
-    },
+    } as IMenu,
     { 
       "id": 8,
       "title": "Sushi",
@@ -491,7 +491,7 @@ var r4 = {
       local_format_price: '0.0',
       isExpanded:false,
       label: null
-    }),
+    } as IMenu),
   open_time: '09:00',
   close_time: '22:00',
   local_time: `${Math.round(Math.random()*23)+1}:00`,
@@ -499,10 +499,10 @@ var r4 = {
   submenu_selected: false,
   visible: true,
   search_score: 0
-}
+} as IPlace
 restaurants.push(r4)
 
-var r5 = {
+let r5 = {
   id: 5,
   name: "Kanetanaka",
   waiting_time: 0,
@@ -554,7 +554,7 @@ var r5 = {
     local_format_price: '0.0',
     isExpanded:false,
     label: null
-  },
+  }as IMenu,
   { 
     "id": 10,
     "title": "Lunch set",
@@ -584,7 +584,7 @@ var r5 = {
         local_format_price: '0.0',
         isExpanded:false,
         label: null
-      },
+      } as IMenu,
       { 
         "id": 102,
         "title": "Roasted Fish",
@@ -602,7 +602,7 @@ var r5 = {
         local_format_price: '0.0',
         isExpanded:false,
         label: null
-      }
+      }as IMenu
       
     ),
     local_format_quantity: '0',
@@ -610,7 +610,7 @@ var r5 = {
     local_format_price: '0.0',
     isExpanded:false,
     label: null
-  }),
+  }as IMenu),
   open_time: '09:00',
   close_time: '22:00',
   local_time: `${Math.round(Math.random()*23)+1}:00`,
@@ -618,10 +618,10 @@ var r5 = {
   submenu_selected: false,
   visible: true,
   search_score: 0
-}
+} as IPlace
 restaurants.push(r5)
 
-var r6 = {
+let r6 = {
   id: 6,
   name: "Menchirashi",
   waiting_time: 0,
@@ -685,7 +685,7 @@ var r6 = {
         local_format_price: '0.0',
         isExpanded:false,
         label: null
-      },
+      } as IMenu,
       { 
         "id": 112,
         "title": "Salad",
@@ -703,13 +703,13 @@ var r6 = {
         local_format_price: '0.0',
         isExpanded:false,
         label: null
-      }),
+      } as IMenu),
       local_format_quantity: '0',
       local_format_price_per_unit: '0.00',
       local_format_price: '0.0',
       isExpanded:false,
       label: null
-    },
+    }as IMenu,
     { 
       "id": 12,
       "title": "B set",
@@ -739,7 +739,7 @@ var r6 = {
         local_format_price: '0.0',
         isExpanded:false,
         label: null
-      },
+      } as IMenu,
       { 
         "id": 122,
         "title": "Salad",
@@ -757,13 +757,13 @@ var r6 = {
         local_format_price: '0.0',
         isExpanded:false,
         label: null
-      }),
+      } as IMenu),
       local_format_quantity: '0',
       local_format_price_per_unit: '0.00',
       local_format_price: '0.0',
       isExpanded:false,
       label: null
-    }),
+    }as IMenu),
   open_time: '09:00',
   close_time: '22:00',
   local_time: `${Math.round(Math.random()*23)+1}:00`,
@@ -771,10 +771,10 @@ var r6 = {
   submenu_selected: false,
   visible: true,
   search_score: 0
-} as IPlace
+} as IPlace 
 restaurants.push(r6)
 
-var r7 = {
+let r7 = {
   id: 7,
   name: "Tonkatsu Maisen Aoyama",
   waiting_time: 20,
@@ -838,7 +838,7 @@ var r7 = {
         local_format_price: '0.0',
         isExpanded:false,
         label: null
-      }),
+      }as IMenu),
       local_format_quantity: '0',
       local_format_price_per_unit: '0.00',
       local_format_price: '0.0',
@@ -862,7 +862,7 @@ var r7 = {
       local_format_price: '0.0',
       isExpanded:false,
       label: null
-    }),
+    }as IMenu),
   open_time: '09:00',
   close_time: '22:00',
   local_time: `${Math.round(Math.random()*23)+1}:00`,
@@ -870,10 +870,10 @@ var r7 = {
   submenu_selected: false,
   visible: true,
   search_score: 0
-}
+} as IPlace
 restaurants.push(r7)
 
-var r8 = {
+let r8 = {
   id: 8,
   name: "Eggs And Things",
   waiting_time: 30,
@@ -937,14 +937,14 @@ var r8 = {
           local_format_price: '0.0',
           isExpanded:false,
           label: null
-        }
+        }as IMenu
       ),
       local_format_quantity: '0',
       local_format_price_per_unit: '0.00',
       local_format_price: '0.0',
       isExpanded:false,
       label: null
-    },
+    } as IMenu,
     { 
       "id": 17,
       "title": "Waffle",
@@ -973,13 +973,13 @@ var r8 = {
         local_format_price: '0.0',
         isExpanded:false,
         label: null
-      }),
+      } as IMenu),
       local_format_quantity: '0',
       local_format_price_per_unit: '0.00',
       local_format_price: '0.0',
       isExpanded:false,
       label: null
-    }),
+    } as IMenu),
   open_time: '09:00',
   close_time: '22:00',
   local_time: `${Math.round(Math.random()*23)+1}:00`,
@@ -987,10 +987,10 @@ var r8 = {
   submenu_selected: false,
   visible: true,
   search_score: 0
-}
+} as IPlace
 restaurants.push(r8)
 
-var r9 = {
+let r9 = {
   id: 9,
   name: "Sakura Tei",
   waiting_time: 20,
@@ -1042,7 +1042,7 @@ var r9 = {
       local_format_price: '0.0',
       isExpanded:false,
       label: null
-    },
+    } as IMenu,
     { 
       "id": 19,
       "title": "Oknomiyaki Buffet",
@@ -1060,7 +1060,7 @@ var r9 = {
       local_format_price: '0.0',
       isExpanded:false,
       label: null
-    }),
+    } as IMenu),
   open_time: '11:00',
   close_time: '22:00',
   local_time: `${Math.round(Math.random()*23)+1}:00`,
@@ -1068,10 +1068,10 @@ var r9 = {
   submenu_selected: false,
   visible: true,
   search_score: 0
-}
+} as IPlace
 restaurants.push(r9)
 
-var r10 = {
+let r10 = {
   id: 10,
   name: "Gyukatsu Motomura Harajuku",
   waiting_time: 30,
@@ -1123,7 +1123,7 @@ var r10 = {
       local_format_price: '0.0',
       isExpanded:false,
       label: null
-    },
+    } as IMenu,
     { 
       "id": 21,
       "title": "Gyukatsu Double",
@@ -1141,13 +1141,13 @@ var r10 = {
       local_format_price: '0.0',
       isExpanded:false,
       label: null
-    }),
+    } as IMenu),
   open_time: '11:30',
   close_time: '22:00',
-  local_time: `${Math.round(Math.random()*23)+1}:00`,
+  local_time: `${22}:00`,
   submenu_opened: false,
   submenu_selected: false,
   visible: true,
   search_score: 0
-} 
+} as IPlace 
 restaurants.push(r10)
