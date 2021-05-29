@@ -358,18 +358,7 @@ let r3 = {
       attachment_urls: []
     } as IReview
   ],
-  menus:new Array<IMenu>({
-    id: 7,
-    title:"Ramen",
-    local_title:"Ramen",
-    picture_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Shoyu_Ramen.jpg/500px-Shoyu_Ramen.jpg",
-    description: "Wheat noodle served with meat and flavored with pork bone.",
-    type:'',
-    local_price:600,
-    local_currency: '¥',
-    local_quantity: 300,
-    local_quantity_unit: 'g',
-    children: new Array<IMenu>({
+  menus: new Array<IMenu>({
       id: 71,
       title:"Donkotsu Ramen",
       local_title:"Donkotsu Ramen",
@@ -405,12 +394,6 @@ let r3 = {
       isExpanded:false,
       label: null
     }  as IMenu),
-    local_format_quantity: '0',
-    local_format_price_per_unit: '0.00',
-    local_format_price: '0.0',
-    isExpanded:false,
-    label: null
-  } as IMenu),
   open_time: '09:00',
   close_time: '22:00',
   local_time: `${22}:00`,
