@@ -69,23 +69,24 @@ export default function RestaurantIcon(props:PropsType) {
 
     let size = 80;
     let bsize = 0;
+    let zmul = 2;
 
-    if(zoom < 6){
+    if(zoom < 6 + zmul){
         size = 8;
         bsize = 3;
-    }else if(zoom < 9){
+    }else if(zoom < 9 + zmul){
         size = 15;
         bsize = 2;
-    }else if(zoom < 10.25){
+    }else if(zoom < 10.25 + zmul){
         size = 24;
         bsize = 1;
-    }else if (zoom < 11.5){
+    }else if (zoom < 11.5 + zmul){
         size=32;
         bsize=0.25;
-    }else if (zoom < 12.5){
+    }else if (zoom < 12.5 + zmul){
         size=55;
         bsize=0;
-    }else if (zoom < 13.5){
+    }else if (zoom < 13.5 + zmul){
         size=64;
         bsize=0;
     }

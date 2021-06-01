@@ -142,8 +142,8 @@ export default function Map() {
             let loc = requestedCenter as ILocation;
             setMapViewport({
                 latitude:loc.latitude,
-                longitude:loc.longitude - 0.003,
-                zoom:15,
+                longitude:loc.longitude - 0.0012,
+                zoom:17,
             })
         }
         else if(markers.length > 0)
@@ -154,13 +154,13 @@ export default function Map() {
                 loc_sum = [loc_sum[0]+loc[0], loc_sum[1]+loc[1]];
             }
             loc_sum = [
-                loc_sum[0]/markers.length - 0.025, 
+                loc_sum[0]/markers.length - 0.002, 
                 loc_sum[1]/markers.length
             ]
             setMapViewport({
                 latitude:loc_sum[1],
-                longitude:loc_sum[0] - 0.003,
-                zoom:12,
+                longitude:loc_sum[0],
+                zoom:15,
             })
         }
         setViewCenter(requestedCenter as ILocation|null);
