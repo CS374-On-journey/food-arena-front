@@ -4,7 +4,7 @@ import { createSlice } from 'utils/@reduxjs/toolkit'; // Importing from `utils` 
 import { useInjectReducer } from 'utils/redux-injectors';
 
 import { IParty, PartiesState } from './types';
-
+import { parties_data, nums } from './party_data'
 import { managed_ids } from '../place/index';
 import { searchItems } from 'store/search';
 
@@ -17,22 +17,22 @@ function random_title() {
         'With Korean friends', "Friday Chicken🍗", "Only French Fries🍟", "Coding Hell Party", "Full night Coding", "Caffe Coding", "Dooby Help Me"])
 }
 
-let generated_parties = new Array()
-for(let i=0; i<100; i++)
+let generated_parties = new Array<IParty>()
+for(let i=0; i<nums; i++)
 {
-    let maxPeople = Math.round(Math.random()*6) + 2;
+    let maxPeople = parties_data[i].maxpeople
     generated_parties.push(
         {
             id: i+1,
-            title: random_title(),
-            restaurant_id: choice(managed_ids),
+            title: parties_data[i].title,
+            restaurant_id: parties_data[i].res_id,
             is_registered: false,
 
             meeting_date: '2021. 05. 07 19:00 ~',
             due_date: '~ 2021. 05. 11 19:00',
-            tags: ['steak', 'luxery'],
-            description: '설명',
-            menu_text: '밥',
+            tags: parties_data[i].tags,
+            description: parties_data[i].description,
+            menu_text: parties_data[i].menu,
             registered_people: Math.min(Math.floor(Math.random()*(maxPeople-1)), maxPeople-1) + 1,
             max_people: maxPeople,
             ban_rules: [

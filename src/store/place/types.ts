@@ -20,9 +20,8 @@ export interface IMenu {
   local_format_price_per_unit: string;
   local_format_quantity:string;
   local_format_price:string;
-
+  
   children: IMenu[];
-
   isExpanded:boolean;
   label: any;
 }

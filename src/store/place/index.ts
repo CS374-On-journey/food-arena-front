@@ -4,7 +4,7 @@ import { buffers } from 'redux-saga';
 import { useMapSlice } from 'store/map';
 import { searchItems } from 'store/search';
 import { createSlice } from 'utils/@reduxjs/toolkit'; // Importing from `utils` makes them more type-safe ✅
-
+import { restaurants } from './restaurants';
 import { useInjectReducer } from 'utils/redux-injectors';
 
 import { IPlace, IMenu, PlacesState } from './types';
@@ -108,10 +108,10 @@ function random_menus(depth=10) {
     return ret;
 }
 
-export let managed_ids = new Array<number>();
+export let managed_ids = new Array<number>(0,1,2,3,4,5,6,7,8,9);
 function generate_id(){
     const id = Math.round(Math.random()*10000) + 11;
-    managed_ids.push(id)
+    // managed_ids.push(id)
     return id;
 }
 
@@ -170,7 +170,7 @@ for(let i=0; i<10; i++)
 }
     
 export const initialState: PlacesState = {
-    places: generated_places,
+    places: restaurants,
     search_term: '',
     menu_viewer_opened: false,
 };
